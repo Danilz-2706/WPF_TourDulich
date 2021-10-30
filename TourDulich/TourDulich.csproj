@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Icon\DT1__UI--icon\Admin.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\bg.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\close-old.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\close.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\completed.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\cost.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\menu-hover.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\menu.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\Moving.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\not yet departed.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\price.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\search.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\staff.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\statistics.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\tour.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\tourist attraction.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\tourist group.png" />
+    <None Remove="Assets\Icon\DT1__UI--icon\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Icon\DT1__UI--icon\Admin.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\bg.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\close-old.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\close.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\completed.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\cost.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\menu-hover.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\menu.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\Moving.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\not yet departed.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\price.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\search.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\staff.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\statistics.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\tour.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\tourist attraction.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\tourist group.png" />
+    <Resource Include="Assets\Icon\DT1__UI--icon\user.png" />
+  </ItemGroup>
+
+</Project>
