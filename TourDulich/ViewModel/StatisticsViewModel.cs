@@ -8,5 +8,6 @@ namespace TourDulich.ViewModel
 {
     class StatisticsViewModel
     {
+        public StatisticsViewModel() { }
     }
 }

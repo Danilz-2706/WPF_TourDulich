@@ -8,5 +8,6 @@ namespace TourDulich.ViewModel
 {
     class TourGroupViewModel
     {
+        public TourGroupViewModel() { }
     }
 }

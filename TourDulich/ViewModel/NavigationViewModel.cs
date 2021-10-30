@@ -69,11 +69,29 @@ namespace TourDulich.ViewModel
                 case "Tour":
                     SelectedViewModel = new TourViewModel();
                     break;
+                case "Tour Group":
+                    SelectedViewModel = new TourGroupViewModel();
+                    break;
+                case "Tourist Attraction":
+                    SelectedViewModel = new TouristAttractionViewModel();
+                    break;
+                case "Price":
+                    SelectedViewModel = new PriceViewModel();
+                    break;
                 case "Cost":
                     SelectedViewModel = new CostViewModel();
                     break;
+                case "User":
+                    SelectedViewModel = new UserViewModel();
+                    break;
+                case "Staff":
+                    SelectedViewModel = new StaffViewModel();
+                    break;
+                case "Statistics":
+                    SelectedViewModel = new StatisticsViewModel();
+                    break;
                 default:
-                    SelectedViewModel = new AdminViewModel();
+                    SelectedViewModel = new TourViewModel();
                     break;
             }
         }

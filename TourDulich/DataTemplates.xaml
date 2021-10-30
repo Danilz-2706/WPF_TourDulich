@@ -12,8 +12,38 @@
         <v:TourView/>
     </DataTemplate>
 
-    <!--Cost Page-->
+    <!--Tour Page-->
+    <DataTemplate DataType="{x:Type vm:TourGroupViewModel}">
+        <v:TourGroupView/>
+    </DataTemplate>
+
+    <!--Tour Page-->
+    <DataTemplate DataType="{x:Type vm:TouristAttractionViewModel}">
+        <v:TouristAttraction/>
+    </DataTemplate>
+
+    <!--Tour Page-->
+    <DataTemplate DataType="{x:Type vm:PriceViewModel}">
+        <v:PriceView/>
+    </DataTemplate>
+
+    <!--Tour Page-->
     <DataTemplate DataType="{x:Type vm:CostViewModel}">
         <v:CostView/>
+    </DataTemplate>
+
+    <!--Tour Page-->
+    <DataTemplate DataType="{x:Type vm:UserViewModel}">
+        <v:UserView/>
+    </DataTemplate>
+
+    <!--Tour Page-->
+    <DataTemplate DataType="{x:Type vm:StaffViewModel}">
+        <v:StaffView/>
+    </DataTemplate>
+
+    <!--Cost Page-->
+    <DataTemplate DataType="{x:Type vm:StatisticsViewModel}">
+        <v:StatisticsView/>
     </DataTemplate>
 </ResourceDictionary>

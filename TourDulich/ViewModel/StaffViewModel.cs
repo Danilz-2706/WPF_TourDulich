@@ -8,5 +8,6 @@ namespace TourDulich.ViewModel
 {
     class StaffViewModel
     {
+        public StaffViewModel() { }
     }
 }

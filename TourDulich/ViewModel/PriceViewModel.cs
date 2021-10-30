@@ -8,5 +8,9 @@ namespace TourDulich.ViewModel
 {
     class PriceViewModel
     {
+        public PriceViewModel()
+        {
+
+        }
     }
 }

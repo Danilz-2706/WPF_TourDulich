@@ -8,5 +8,6 @@ namespace TourDulich.ViewModel
 {
     class TouristAttractionViewModel
     {
+        public TouristAttractionViewModel() { }
     }
 }

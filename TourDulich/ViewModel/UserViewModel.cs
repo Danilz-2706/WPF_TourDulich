@@ -9,5 +9,6 @@ namespace TourDulich.ViewModel
     class UserViewModel
 
     {
+        public UserViewModel() { }
     }
 }
