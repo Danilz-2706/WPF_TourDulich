@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View"
+             xmlns:adminmanager="clr-namespace:TourDulich.View.AdminManager"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="652" d:DesignWidth="947">
     <UserControl.Style>
@@ -21,39 +23,68 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
+        
+        <!--//Font Size/-->
     </UserControl.Style>
-    
-    <Grid Background="Bisque">
+
+    <UserControl.Resources>
+        <Style x:Key="TabItem" TargetType="TabItem">
+            <Setter Property="Width" Value="110"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="0 0 8 0"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="Transparent">
         <!--Content-->
-
         <TabControl>
-            <TabItem Width="50" Height="50" Margin=" 0 0 8 0"></TabItem>
-            <TabItem Width="50" Height="50" Margin=" 0 0 8 0"></TabItem>
-            <TabItem Width="50" Height="50" Margin=" 0 0 8 0"></TabItem>
-            <TabItem Width="50" Height="50"></TabItem>
+            
+            <!--//Tour - manager//-->
+            <TabItem Header="Tour" Style="{StaticResource TabItem}" Name="AdminTour">
+                <Grid>
+                    <adminmanager:TourManager></adminmanager:TourManager>
+
+                </Grid>
+            </TabItem>
+            <!--//Tour Group - manager//-->
+            <TabItem Header="Tour Group" Style="{StaticResource TabItem}">
+                <Grid>
+                    <!--<mn:AdminTourGroupView></mn:AdminTourGroupView>-->
+
+                </Grid>
+            </TabItem>
+            <!--//Tour Attraction - manager//-->
+            <TabItem Header="Tourist Attraction" Style="{StaticResource TabItem}">
+                <!--<mn:AdminTouristAttractionView></mn:AdminTouristAttractionView>-->
+                <adminmanager:TouristAttraction></adminmanager:TouristAttraction>
+            </TabItem>
+            <!--//Price - manager//-->
+            <TabItem Header="Price" Style="{StaticResource TabItem}">
+                <Grid>
+                    <!--<mn:AdminPriceView></mn:AdminPriceView>-->
+                </Grid>
+            </TabItem>
+            <!--//Cost - manager//-->
+            <TabItem Header="Cost" Style="{StaticResource TabItem}">
+                <!--<mn:AdminCostView></mn:AdminCostView>-->
+
+            </TabItem>
+            <!--//Customer - manager//-->
+            <TabItem Header="Customer" Style="{StaticResource TabItem}">
+                <adminmanager:UserManager></adminmanager:UserManager>
+            </TabItem>
+            <!--//Staff - manager//-->
+            <TabItem Header="Staff" Style="{StaticResource TabItem}">
+                <!--<mn:AdminPriceView></mn:AdminPriceView>-->
+
+            </TabItem>
+            <!--//Statistics - manager//-->
+            <TabItem Header="Statistics" Style="{StaticResource TabItem}">
+                <!--<mn:AdminPriceView></mn:AdminPriceView>-->
+
+            </TabItem>
         </TabControl>
-        <ItemsControl ItemsSource="{Binding AdminSourceCollection}"
-                      Height="350"
-                      Width="650"
-                      Margin="0,40,0,0">
+        
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <RadioButton Content="{Binding AdminName}"
-                                 Tag="{Binding AdminImage}"
-                                 Style="{StaticResource GridButtonStyle}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-
-            <!--Uniform Grid-->
-
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="5"
-                                 Rows="3"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-
-        </ItemsControl>
     </Grid>
 </UserControl>
