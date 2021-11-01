@@ -4,8 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="652" d:DesignWidth="947">
+             mc:Ignorable="d"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+              TextElement.FontWeight="Regular"
+              TextElement.FontSize="13"
+              TextOptions.TextFormattingMode="Ideal"
+              TextOptions.TextRenderingMode="Auto"
+              Background="{DynamicResource MaterialDesignPaper}"
+              FontFamily="{DynamicResource MaterialDesignFont}"
+              Height="300" Width="400">
     <UserControl.Style>
         <Style>
             <Style.Triggers>
@@ -22,31 +30,41 @@
             </Style.Triggers>
         </Style>
     </UserControl.Style>
-    <Grid Background="Lime">
+    <Grid >
         <!--Content-->
+        <materialDesign:Card Width="300" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="15 15 15 0"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" >
+                    <TextBox materialDesign:HintAssist.Hint="Username:"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </Grid>
+                <Grid Grid.Row="1" >
+                    <PasswordBox x:Name="FloatingPasswordBox"
+                                 materialDesign:HintAssist.Hint="Password:"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Button
+                          Style="{StaticResource MaterialDesignRaisedLightButton}"
+                          Width="100"
+                          ToolTip="Resource name: MaterialDesignRaisedLightButton">
+                        _Login
+                    </Button>
+                </Grid>
 
-        <ItemsControl ItemsSource="{Binding AdminSourceCollection}"
-                      Height="350"
-                      Width="650"
-                      Margin="0,40,0,0">
+            </Grid>
 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <RadioButton Content="{Binding AdminName}"
-                                 Tag="{Binding AdminImage}"
-                                 Style="{StaticResource GridButtonStyle}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
+        </materialDesign:Card>
 
-            <!--Uniform Grid-->
-
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="5"
-                                 Rows="3"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-
-        </ItemsControl>
     </Grid>
 </UserControl>
