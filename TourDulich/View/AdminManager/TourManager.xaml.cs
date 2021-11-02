@@ -20,9 +20,14 @@ namespace TourDulich.View.AdminManager
     /// </summary>
     public partial class TourManager : UserControl
     {
+
+
+
         public TourManager()
         {
             InitializeComponent();
+
+
         }
     }
 }
