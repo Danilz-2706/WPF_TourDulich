@@ -43,45 +43,43 @@
             <TabItem Header="Tour" Style="{StaticResource TabItem}" Name="AdminTour">
                 <Grid>
                     <adminmanager:TourManager></adminmanager:TourManager>
-
                 </Grid>
             </TabItem>
+            
             <!--//Tour Group - manager//-->
             <TabItem Header="Tour Group" Style="{StaticResource TabItem}">
                 <Grid>
-                    <!--<mn:AdminTourGroupView></mn:AdminTourGroupView>-->
-
+                    <adminmanager:TourGroup></adminmanager:TourGroup>
                 </Grid>
             </TabItem>
+            
             <!--//Tour Attraction - manager//-->
             <TabItem Header="Tourist Attraction" Style="{StaticResource TabItem}">
-                <!--<mn:AdminTouristAttractionView></mn:AdminTouristAttractionView>-->
-                <adminmanager:TouristAttraction></adminmanager:TouristAttraction>
+                <adminmanager:TAttractionManager></adminmanager:TAttractionManager>
             </TabItem>
+            
             <!--//Price - manager//-->
             <TabItem Header="Price" Style="{StaticResource TabItem}">
-                <Grid>
-                    <!--<mn:AdminPriceView></mn:AdminPriceView>-->
-                </Grid>
+                <adminmanager:PriceManager></adminmanager:PriceManager>
             </TabItem>
+            
             <!--//Cost - manager//-->
             <TabItem Header="Cost" Style="{StaticResource TabItem}">
-                <!--<mn:AdminCostView></mn:AdminCostView>-->
-
+                <adminmanager:CostManager></adminmanager:CostManager>
             </TabItem>
+            
             <!--//Customer - manager//-->
             <TabItem Header="Customer" Style="{StaticResource TabItem}">
-                <adminmanager:UserManager></adminmanager:UserManager>
+                <adminmanager:CustomerManager></adminmanager:CustomerManager>
             </TabItem>
+            
             <!--//Staff - manager//-->
             <TabItem Header="Staff" Style="{StaticResource TabItem}">
-                <!--<mn:AdminPriceView></mn:AdminPriceView>-->
-
+                <adminmanager:StaffManager></adminmanager:StaffManager>
             </TabItem>
             <!--//Statistics - manager//-->
             <TabItem Header="Statistics" Style="{StaticResource TabItem}">
-                <!--<mn:AdminPriceView></mn:AdminPriceView>-->
-
+                <adminmanager:StatisticsManager></adminmanager:StatisticsManager>
             </TabItem>
         </TabControl>
         

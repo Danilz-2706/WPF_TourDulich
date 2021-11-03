@@ -200,7 +200,7 @@
                   Margin="0 4 0 4"
                   Background="#ECF0F1"
                   Name="Content">
-                <Image Source="/Assets/Icon/DT1__UI--icon/bg.png" />
+                <Image x:Name="BG" Source="/Assets/Icon/DT1__UI--icon/bg.png" />
                 <ContentControl x:Name="Pages" Content="{Binding SelectedViewModel}"/>
 
             </Grid>

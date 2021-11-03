@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TourDulich.View.AdminManager
 {
     /// <summary>
-    /// Interaction logic for UserManager.xaml
+    /// Interaction logic for CustomerManager.xaml
     /// </summary>
-    public partial class UserManager : UserControl
+    public partial class CustomerManager : UserControl
     {
-        public UserManager()
+        public CustomerManager()
         {
             InitializeComponent();
         }
