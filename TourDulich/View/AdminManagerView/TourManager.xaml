@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManager"
-             xmlns:vm="clr-namespace:TourDulich.ViewModel" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             DataContext="{StaticResource tvm}"
              mc:Ignorable="d" 
              d:DesignHeight="625" d:DesignWidth="947">
     <!--//Resource//-->
@@ -39,6 +40,7 @@
         <!--//End//-->
         
     </UserControl.Resources>
+    
     
     <!--//Main//-->
     <Grid Background="Transparent">
@@ -209,6 +211,7 @@
                                 BorderBrush="#C4C4C4"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="90"
+                                Command="{Binding AddTour}"
                                 ToolTip="Thêm">
 
                             <TextBlock Text="Thêm" Style="{StaticResource fontText}"/>
@@ -222,7 +225,7 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="90"
                                 Margin="20 0 20 0"
-                                Command="{Binding EditCommand}"
+                                Command="{Binding EditTour}"
                                 ToolTip="Sửa">
                             <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
                         </Button>
@@ -234,7 +237,7 @@
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="90"
-                                Command="{Binding DeleteCommand}"
+                                Command="{Binding DeleteTour}"
                                 ToolTip="Xóa">
                             <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>
                         </Button>

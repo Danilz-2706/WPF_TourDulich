@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:TourDulich.ViewModel"
-                    xmlns:vmm="clr-namespace:TourDulich.ViewModel.AdminManagerViewModel"
                     xmlns:v="clr-namespace:TourDulich.View"
                     xmlns:vml="clr-namespace:TourDulich.View.AdminManager">
-    
-    
-    
+
+    <vm:TourViewModel x:Key="tvm"></vm:TourViewModel>
+    <vm:NavigationViewModel x:Key="nvvm"></vm:NavigationViewModel>
+
     <!--//Đọc - đẩy dữ liệu theo View - ViewModel//-->
     <!--// Bắt đầu //-->
     
@@ -14,9 +14,7 @@
     <DataTemplate DataType="{x:Type vm:AdminViewModel}">
         <v:AdminView/>
     </DataTemplate>
-    <!--<DataTemplate DataType="{x:Type vmm:TourManagerViewModel}">
-        <vml:AddTour/>
-    </DataTemplate>-->
+    
     <!--Tour Page-->
     <DataTemplate DataType="{x:Type vm:TourViewModel}">
         <v:TourView/>

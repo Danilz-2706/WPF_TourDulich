@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using TourDulich.Model;
@@ -33,7 +34,7 @@ namespace TourDulich.ViewModel
 
             MenuItemsCollection = new CollectionViewSource { Source = menuItems };
 
-            // Set Startup Page
+
         }
 
         // Menu Button Command
@@ -49,6 +50,45 @@ namespace TourDulich.ViewModel
                 return _menucommand;
             }
         }
+
+
+        //Command Close//
+        public void CloseApp(object obj)
+        {
+            MainWindow x = obj as MainWindow;
+            x.Close();
+        }
+        private ICommand closeCommand;
+        public ICommand CloseAppCommand
+        {
+            get
+            {
+                if (closeCommand == null)
+                {
+                    closeCommand = new RelayCommand<object>(p => CloseApp(p));
+                }return closeCommand;
+            }
+        }
+
+        //Command Check Toggle Button//
+        private ICommand checkedToogle;
+        public ICommand CheckToogleCommand
+        {
+            get
+            {
+                if (checkedToogle == null)
+                {
+                    checkedToogle = new RelayCommand<object>(p => { MainWindow x =new MainWindow(); x.Content.Opacity = 0.5; });
+                }
+                else
+                {
+                    checkedToogle = new RelayCommand<object>(p => { MainWindow x = new MainWindow(); x.Content.Opacity = 1; });
+                }
+                return checkedToogle;
+
+            }
+        }
+
 
         // Select ViewModel
         private object _selectedViewModel;

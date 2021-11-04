@@ -5,8 +5,90 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourDulich.View.AdminManagerView"
         mc:Ignorable="d"
-        Title="TourManagerAdd" Height="450" Width="800">
-    <Grid Background="Aqua" Name="ahihi">
-        
+        Title="TourManagerAdd" Height="450" Width="800"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!--//Size - TextBlock//-->
+        <Style x:Key="fontText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <!--//Size - Combobox//-->
+        <Style x:Key="sizeCombobox" TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+        </Style>
+
+        <!--//Info - name - value //-->
+        <!--//Start//-->
+        <Style x:Key="tblIfo" TargetType="TextBox">
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style x:Key="tbName" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="111"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <!--//End//-->
+
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel Background="#C2C2C2" Height="auto">
+            <!--//Mã Tour//-->
+            <Grid Margin="0 5 0 8">
+                <TextBlock  Text="MÃ TOUR"  Style="{StaticResource tbName}"/>
+                <TextBox Style="{StaticResource tblIfo}"/>
+            </Grid>
+
+            <!--//Tên Tour//-->
+            <Grid Margin="0 5 0 8">
+                <TextBlock  Text="TÊN TOUR"  Style="{StaticResource tbName}"/>
+                <TextBox Style="{StaticResource tblIfo}"/>
+            </Grid>
+
+            <!--//Mã Địa điểm//-->
+            <Grid Margin="0 5 0 8">
+                <TextBlock  Text="MÃ ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
+                <TextBox Style="{StaticResource tblIfo}"/>
+            </Grid>
+
+            <!--//Tên Địa Điểm//-->
+            <Grid Margin="0 5 0 8">
+                <TextBlock  Text="TÊN ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
+                <TextBox Style="{StaticResource tblIfo}"/>
+            </Grid>
+
+            <!--//Mã Đoàn//-->
+            <Grid Margin="0 5 0 8">
+                <TextBlock  Text="MÃ ĐOÀN"  Style="{StaticResource tbName}"/>
+                <TextBox Style="{StaticResource tblIfo}"/>
+            </Grid>
+
+            <!--//Tên Đoàn//-->
+            <Grid Margin="0 5 0 8">
+                <TextBlock  Text="TÊN ĐOÀN"  Style="{StaticResource tbName}"/>
+                <TextBox Style="{StaticResource tblIfo}"/>
+            </Grid>
+
+            <!--//Mã Hành trình//-->
+            <Grid Margin="0 5 0 8">
+                <TextBlock  Text="MÃ HÀNH TRÌNH"  Style="{StaticResource tbName}"/>
+                <TextBox Style="{StaticResource tblIfo}"/>
+            </Grid>
+
+            <!--//Tên Hành trình//-->
+            <Grid Margin="0 5 0 8">
+                <TextBlock  Text="TÊN HÀNH TRÌNH"  Style="{StaticResource tbName}"/>
+                <TextBox Style="{StaticResource tblIfo}"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

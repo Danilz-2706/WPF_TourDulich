@@ -10,30 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourDulich
+namespace TourDulich.View.AdminManagerView
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TourManagerDelete.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TourManagerDelete : Window
     {
-        public MainWindow()
+        public TourManagerDelete()
         {
             InitializeComponent();
         }
-
-        //private void tg_btn_Unchecked(object sender, RoutedEventArgs e)
-        //{
-        //    Content.Opacity = 1;
-        //}
-
-        //private void tg_btn_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    Content.Opacity = 0.5;
-        //}
-
     }
 }

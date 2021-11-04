@@ -57,8 +57,4 @@
     <Resource Include="Assets\Icon\DT1__UI--icon\user.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModel\AdminManagerViewModel\" />
-  </ItemGroup>
-
 </Project>

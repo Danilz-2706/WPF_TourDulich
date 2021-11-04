@@ -5,18 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourDulich"
         xmlns:vm="clr-namespace:TourDulich.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
+        Name="mainw"
         Height="732" 
         Width="1000"
         ResizeMode="NoResize"
-        Topmost="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
+    
+    
     <!--//Set DataContext//-->
     <Window.DataContext>
         <vm:NavigationViewModel />
     </Window.DataContext>
-    <Grid Background="Transparent">
+    
+    <Grid Background="Transparent" Name="mainwindow"
+          >
         <!--Background Border-->
 
         <Border Background="#ECF0F1"
@@ -26,10 +31,15 @@
         <Border Background="#5C5C5C"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
+                Name="Header1"
                 CornerRadius="0,0,70,0"
                 Height="40"
                 Width="850">
-
+            <!--<i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding MouseMoveWindowCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>-->
             <TextBlock Text="T O U R - D U  L I C H"
                        Margin="0"
                        Style="{StaticResource HeaderStyle}"/>
@@ -87,6 +97,7 @@
                 <Grid   Height="55"
                         Background="#C4C4C4"
                         VerticalAlignment="Top"
+                        Name="test"
                         >
                     <!--// Menu title text //-->
                     <TextBlock  Grid.Row="1"
@@ -118,8 +129,7 @@
                                     Height="35"
                                     Width="35"
                                     BorderThickness="0"
-                                    Style="{StaticResource tb_style}" Unchecked="tg_btn_Unchecked" Checked="tg_btn_Checked"
-                                    >
+                                    Style="{StaticResource tb_style}">
 
                         <!--//img Menu Button//-->
                         <ToggleButton.Background>
@@ -212,7 +222,8 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Margin="0,5,20,0"
-                Style="{StaticResource CloseBtn_Style}" Click="Button_Click"/>
-
+                Style="{StaticResource CloseBtn_Style}"
+                Command="{Binding CloseAppCommand}"
+                CommandParameter="{Binding ElementName=mainw}"/>
     </Grid>
 </Window>
