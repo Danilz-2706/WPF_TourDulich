@@ -54,6 +54,7 @@
                        Style="{StaticResource HeaderStyle}"/>
             </Border>
 
+            
             <!--Footer-->
             <Border Background="#5C5C5C"
                 VerticalAlignment="Bottom"
