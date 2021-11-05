@@ -3,12 +3,96 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TourDulich.View.AdminManagerView"
+        xmlns:local="clr-namespace:TourDulich.View.AdminManagerView" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="TourManagerEdit" Height="450" Width="800"
+        Title="TourManagerEdit" Height="732" Width="1000" 
+        
+        AllowsTransparency="True"
+        Background="Transparent"
+        
+        WindowStyle="None"
+        DataContext="{StaticResource tvm}"
+        Name="ViewEditTour"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
-    <Grid Background="Aquamarine">
+    <Window.Resources>
+        <!--//Size - TextBlock//-->
+        <Style x:Key="fontText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <!--//Size - Combobox//-->
+        <Style x:Key="sizeCombobox" TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+        </Style>
 
+        <!--//Info - name - value //-->
+        <!--//Start//-->
+        <Style x:Key="tblIfo" TargetType="TextBox">
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style x:Key="tbName" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="111"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <!--//End//-->
+
+    </Window.Resources>
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="25" ShadowDepth="8" Direction="270" Color="#BBBBBB"/>
+        </Grid.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="425"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"></ColumnDefinition>
+                <ColumnDefinition Width="400"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <!--//header//-->
+            <Grid 
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Background="#5C5C5C">
+
+                <TextBlock Text="S Ử A - T O U R"
+                       Margin="0"
+                       Style="{StaticResource HeaderStyleViewChild}"/>
+
+                <Button 
+                            Height="24"
+                            Width="24"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="0,0,20,0"
+                            Style="{StaticResource CloseBtn_Style}"
+                            Command="{Binding CloseTourEdit}"
+                            CommandParameter="{Binding ElementName=ViewEditTour}"/>
+            </Grid>
+
+
+            <materialDesign:Card Grid.Row="1" Grid.Column="0">
+                <StackPanel Background="#fff" Height="auto" Grid.Row="1"></StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Grid.Column="1">
+                <StackPanel Background="#fff" Height="auto" Grid.Row="1"></StackPanel>
+            </materialDesign:Card>
+
+        </Grid>
     </Grid>
 </Window>

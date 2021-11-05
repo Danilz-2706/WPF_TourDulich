@@ -17,7 +17,28 @@
                 Value="Left" />
         <Setter Property="VerticalAlignment"
                 Value="Center" />
+        <Setter Property="MinHeight" Value="12"/>
     </Style>
+
+    <!--// Header Text Style ADD - EDIT - DELETE //-->
+    <Style x:Key="HeaderStyleViewChild"
+           TargetType="TextBlock">
+
+        <Setter Property="FontFamily"
+                Value="Fonts/Cairo-SemiBold.ttf #Cairo SemiBold"/>
+        <Setter Property="FontSize"
+                Value="20" />
+        <Setter Property="Padding"
+                Value="12 0 0 0" />
+        <Setter Property="Foreground"
+                Value="#CBD5DA" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        
+    </Style>
+    
 
     <!--// Footer Text Style //-->
     <Style x:Key="FooterStyle"

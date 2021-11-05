@@ -213,7 +213,6 @@
                                 Width="90"
                                 Command="{Binding AddTour}"
                                 ToolTip="Thêm">
-
                             <TextBlock Text="Thêm" Style="{StaticResource fontText}"/>
                         </Button>
 

@@ -10,73 +10,27 @@
         Name="mainw"
         Height="732" 
         Width="1000"
-        ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
-    
-    
+
+
     <!--//Set DataContext//-->
     <Window.DataContext>
         <vm:NavigationViewModel />
     </Window.DataContext>
-    
+
     <Grid Background="Transparent" Name="mainwindow"
           >
         <!--Background Border-->
-
         <Border Background="#ECF0F1"
                 CornerRadius="0"/>
-
-        <!--Header-->
-        <Border Background="#5C5C5C"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Name="Header1"
-                CornerRadius="0,0,70,0"
-                Height="40"
-                Width="850">
-            <!--<i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseLeftButtonDown">
-                    <i:InvokeCommandAction Command="{Binding MouseMoveWindowCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>-->
-            <TextBlock Text="T O U R - D U  L I C H"
-                       Margin="0"
-                       Style="{StaticResource HeaderStyle}"/>
-
-        </Border>
-
-        <!--Footer-->
-
-        <Border Background="#5C5C5C"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                CornerRadius="70,0,0,0"
-                Height="40"
-                Width="850">
-
-            <TextBlock Text="T E N  -  C A C  -  T H A N H  -  V I E N "
-                       Margin="0"
-                       Style="{StaticResource FooterStyle}"/>
-
-        </Border>
-
-        <!--Content Background-->
-
-        <Border Background="#fff"
-                BorderBrush="#FFFFFF"
-                BorderThickness="0,5,0,5"
-                Height="642"
-                Margin="0 4 0 4">
-            
-        </Border>
 
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0"></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="652"></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="16.3*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="0"></RowDefinition>
             </Grid.RowDefinitions>
             <!--<Grid.ColumnDefinitions>
@@ -85,7 +39,45 @@
                 <ColumnDefinition Width="947"></ColumnDefinition>
                 <ColumnDefinition Width="0"></ColumnDefinition>
             </Grid.ColumnDefinitions>-->
+            
+            <!--Header-->
+            <Border Background="#5C5C5C"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Name="Header1"
+                Grid.Row="1"
+                CornerRadius="0,0,70,0"
+                Height="40"
+                Width="850">
+                <TextBlock Text="T O U R - D U  L I C H"
+                       Margin="0"
+                       Style="{StaticResource HeaderStyle}"/>
+            </Border>
 
+            <!--Footer-->
+            <Border Background="#5C5C5C"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                CornerRadius="70,0,0,0"
+                Grid.Row="3"
+                Height="40"
+                Width="850">
+
+                <TextBlock Text="T E N  -  C A C  -  T H A N H  -  V I E N "
+                       Margin="0"
+                       Style="{StaticResource FooterStyle}"/>
+
+            </Border>
+
+            <!--Content Background-->
+            <Border Background="#fff"
+                BorderBrush="#FFFFFF"
+                BorderThickness="0,5,0,5"
+                Grid.Row="2"
+                Height="642"
+                Margin="0 4 0 4">
+            </Border>
+            
             <!--//Menu//-->
             <Grid Grid.Row="2"
                   Width="53"
@@ -175,7 +167,7 @@
 
                     </ToggleButton>
                 </Grid>
-                
+
                 <ItemsControl ItemsSource="{Binding SourceCollection}" Margin="0 55 0 0"
                               Background="#fff">
                     <ItemsControl.ItemTemplate>
@@ -189,15 +181,9 @@
                                             Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.MenuCommand}"
                                             Style="{StaticResource MenuButtonStyle}">
                                     </Button>
-                                    <!--<StackPanel.ToolTip >
-                                        <ToolTip Content="{Binding MenuName}"
-                                                 Panel.ZIndex="-1"
-                                                 Style="{StaticResource ttip_style}">
-                                        </ToolTip>
-                                    </StackPanel.ToolTip>-->
 
                                 </StackPanel>
-                                
+
                             </Grid>
 
                         </DataTemplate>
@@ -210,7 +196,16 @@
                   Margin="0 4 0 4"
                   Background="#ECF0F1"
                   Name="Content">
-                <Image x:Name="BG" Source="/Assets/Icon/DT1__UI--icon/bg.png" />
+                <Image x:Name="BG" Source="/Assets/Icon/DT1__UI--icon/bg.png" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
                 <ContentControl x:Name="Pages" Content="{Binding SelectedViewModel}"/>
 
             </Grid>
