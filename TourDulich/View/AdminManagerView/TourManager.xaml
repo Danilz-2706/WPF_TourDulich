@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:TourDulich.View.AdminManager"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              DataContext="{StaticResource tvm}"
-             mc:Ignorable="d" 
-             d:DesignHeight="625" d:DesignWidth="947">
+             mc:Ignorable="d" >
     <!--//Resource//-->
     <UserControl.Resources>
         <!--//Size - TextBlock//-->
@@ -130,7 +129,6 @@
                                                 </StackPanel>
                                             </Button>
                                         </DataTemplate>
-                                        
                                     </ListView.ItemTemplate>
                                 </ListView>-->
                         </WrapPanel>

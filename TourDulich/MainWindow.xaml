@@ -8,9 +8,10 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Name="mainw"
-        Height="732" 
-        Width="1000"
+        Height="720" 
+        Width="1280"
         WindowStyle="None"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
 
 
@@ -25,6 +26,7 @@
         <Border Background="#ECF0F1"
                 CornerRadius="0"/>
 
+        <!--//main Content//-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0"></RowDefinition>
@@ -33,43 +35,59 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="0"></RowDefinition>
             </Grid.RowDefinitions>
-            <!--<Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0"></ColumnDefinition>
-                <ColumnDefinition Width="53"></ColumnDefinition>
-                <ColumnDefinition Width="947"></ColumnDefinition>
-                <ColumnDefinition Width="0"></ColumnDefinition>
-            </Grid.ColumnDefinitions>-->
-            
+
             <!--Header-->
-            <Border Background="#5C5C5C"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Name="Header1"
-                Grid.Row="1"
-                CornerRadius="0,0,70,0"
-                Height="40"
-                Width="850">
-                <TextBlock Text="T O U R - D U  L I C H"
-                       Margin="0"
-                       Style="{StaticResource HeaderStyle}"/>
-            </Border>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Border Background="#5C5C5C"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Stretch"
+                        Name="Header1"
+                        Grid.Column="0"
+                        CornerRadius="0,0,70,0"
+                        Height="40" Width="auto">
+                    <TextBlock Text="T O U R - D U  L I C H"
+                           Margin="0"
+                           Style="{StaticResource HeaderStyle}"/>
+                </Border>
+                <!--Close Button-->
+                <Button 
+                        Grid.Column="1"
+                        Height="30"
+                        Width="30"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="0,5,20,0"
+                        Style="{StaticResource CloseBtn_Style}"
+                        Command="{Binding CloseAppCommand}"
+                        CommandParameter="{Binding ElementName=mainw}"/>    
+            </Grid>
+            
 
             
             <!--Footer-->
-            <Border Background="#5C5C5C"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                CornerRadius="70,0,0,0"
-                Grid.Row="3"
-                Height="40"
-                Width="850">
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="7*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Background="#5C5C5C"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Stretch"
+                        CornerRadius="70,0,0,0"
+                        Grid.Column="1"
+                        Height="40">
 
-                <TextBlock Text="T E N  -  C A C  -  T H A N H  -  V I E N "
+                    <TextBlock Text="T E N  -  C A C  -  T H A N H  -  V I E N "
                        Margin="0"
                        Style="{StaticResource FooterStyle}"/>
 
-            </Border>
-
+                </Border>
+            </Grid>
             <!--Content Background-->
             <Border Background="#fff"
                 BorderBrush="#FFFFFF"
@@ -78,148 +96,189 @@
                 Height="642"
                 Margin="0 4 0 4">
             </Border>
-            
-            <!--//Menu//-->
-            <Grid Grid.Row="2"
-                  Width="53"
-                  HorizontalAlignment="Left"
-                  Margin="0 4 0 4"
-                  x:Name="Navbar"
-                  Panel.ZIndex="2">
-                <!--//toggle button//-->
-                <Grid   Height="55"
-                        Background="#C4C4C4"
-                        VerticalAlignment="Top"
-                        Name="test"
-                        >
-                    <!--// Menu title text //-->
-                    <TextBlock  Grid.Row="1"
-                                Grid.Column="0"
-                                Text="M E N U"
-                                Foreground="#ffffff"
-                                Background="Transparent"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                FontSize="30"
-                                Margin="73 0 0 0">
-                        
-                    <!--// Effect //-->
-                        <TextBlock.Effect>
-                            <DropShadowEffect   BlurRadius=" 10"
-                                                ShadowDepth="1"
-                                                Direction="-90"
-                                                Color="White">
-                            </DropShadowEffect>
-                        </TextBlock.Effect>
-                    </TextBlock>
+            <Grid Grid.Row="2">
+                <Grid Panel.ZIndex="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
-                    <!--// Display Menu Button//-->
-                    <ToggleButton   x:Name="tg_btn"
+                    
+                    
+                    <!--//Menu//-->
+                    <Grid 
+                          Width="53"
+                          HorizontalAlignment="Left"
+                          Margin="0 4 0 4"
+                          x:Name="Navbar"
+                          Panel.ZIndex="2">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="0" ShadowDepth="0" Direction="270" Color="#BBBBBB" x:Name="sd"/>
+                        </Grid.Effect>
+                        <!--//toggle button//-->
+                        <Grid   Height="55"
+                                Background="#C4C4C4"
+                                VerticalAlignment="Top"
+                                Name="test"
+                            >
+                            <!--// Menu title text //-->
+                            <TextBlock  
+                                    x:Name="MenuButton"
+                                    Grid.Row="1"
                                     Grid.Column="0"
-                                    VerticalAlignment="Center"
+                                    Text="M E N U"
+                                    Foreground="#ffffff"
+                                    Background="Transparent"
                                     HorizontalAlignment="Left"
-                                    Margin="7 0 7 0"
-                                    Height="35"
-                                    Width="35"
-                                    BorderThickness="0"
-                                    Style="{StaticResource tb_style}">
+                                    VerticalAlignment="Center"
+                                    FontSize="30"
+                                    Margin="73 0 0 0">
+                        
+                        <!--// Effect //-->
+                                <TextBlock.Effect>
+                                    <DropShadowEffect   BlurRadius=" 10"
+                                                    ShadowDepth="1"
+                                                    Direction="-90"
+                                                    Color="White">
+                                    </DropShadowEffect>
+                                </TextBlock.Effect>
+                            </TextBlock>
 
-                        <!--//img Menu Button//-->
-                        <ToggleButton.Background>
-                            <ImageBrush ImageSource="/Assets/Icon/DT1__UI--icon/menu.png" 
-                                        Stretch="None"/>
-                        </ToggleButton.Background>
+                            <!--// Display Menu Button//-->
+                            <ToggleButton   x:Name="tg_btn"
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        Margin="7 0 7 0"
+                                        Height="35"
+                                        Width="35"
+                                        BorderThickness="0"
+                                        Style="{StaticResource tb_style}">
 
-                        <!--// Button - Checked - Unchecked events //-->
-                        <ToggleButton.Triggers>
+                                <!--//img Menu Button//-->
+                                <ToggleButton.Background>
+                                    <ImageBrush ImageSource="/Assets/Icon/DT1__UI--icon/menu.png" 
+                                                Stretch="None"/>
+                                </ToggleButton.Background>
 
-                            <!--// Unchecked //-->
-                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                <BeginStoryboard>
-                                    <Storyboard x:Name="HideStackPanel">
-                                        <DoubleAnimation Storyboard.TargetName ="Navbar"
-                                                            Storyboard.TargetProperty="Width"
-                                                            BeginTime="0:0:0"
-                                                            From="220" To="53"
-                                                            Duration="0:0:0.2">
+                                <!--// Button - Checked - Unchecked events //-->
+                                <ToggleButton.Triggers>
 
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
+                                    <!--// Unchecked //-->
+                                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="HideStackPanel">
+                                                <DoubleAnimation Storyboard.TargetName ="Navbar"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="220" To="53"
+                                                                Duration="0:0:0.2">
 
-                            <!--// Checked //-->
-                            <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                <BeginStoryboard>
-                                    <Storyboard x:Name="ShowStackPanel">
-                                        <DoubleAnimation Storyboard.TargetName ="Navbar"
-                                                            Storyboard.TargetProperty="Width"
-                                                            BeginTime="0:0:0"
-                                                            From="53" To="220"
-                                                            Duration="0:0:0.3">
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName ="sd"
+                                                                Storyboard.TargetProperty="BlurRadius"
+                                                                BeginTime="0:0:0"
+                                                                From="25" To="0"
+                                                                Duration="0:0:0.3">
 
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName ="Content"
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                From="0.5" To="1"
+                                                                Duration="0:0:0.3">
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    
+                                    <!--// Checked //-->
+                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="ShowStackPanel">
+                                                <DoubleAnimation Storyboard.TargetName ="Navbar"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="53" To="220"
+                                                                Duration="0:0:0.3">
 
-                        </ToggleButton.Triggers>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName ="sd"
+                                                                Storyboard.TargetProperty="BlurRadius"
+                                                                BeginTime="0:0:0"
+                                                                From="0" To="25"
+                                                                Duration="0:0:0.3">
+
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName ="Content"
+                                                                Storyboard.TargetProperty="Opacity"
+                                                                From="1" To="0.5"
+                                                                Duration="0:0:0.3">
+
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+
+                                </ToggleButton.Triggers>
 
 
-                    </ToggleButton>
+                            </ToggleButton>
+                        </Grid>
+
+                        <ItemsControl ItemsSource="{Binding SourceCollection}" Margin="0 55 0 0"
+                                  Background="#fff">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <StackPanel>
+                                            <Button Content="{Binding MenuName}"
+                                                Tag="{Binding MenuImage}"
+                                                Panel.ZIndex="1"
+                                                CommandParameter="{Binding MenuName}"
+                                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.MenuCommand}"
+                                                Style="{StaticResource MenuButtonStyle}">
+                                            </Button>
+
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
                 </Grid>
+                
+                <Grid Panel.ZIndex="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="53"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid   Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            Margin="0 4 0 4"
+                            Background="#ECF0F1"
+                            Name="Content">
 
-                <ItemsControl ItemsSource="{Binding SourceCollection}" Margin="0 55 0 0"
-                              Background="#fff">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <StackPanel>
-                                    <Button Content="{Binding MenuName}"
-                                            Tag="{Binding MenuImage}"
-                                            Panel.ZIndex="1"
-                                            CommandParameter="{Binding MenuName}"
-                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.MenuCommand}"
-                                            Style="{StaticResource MenuButtonStyle}">
-                                    </Button>
+                        <Image x:Name="BG" Source="/Assets/Icon/DT1__UI--icon/bg.png" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleY="-1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-180"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <ContentControl x:Name="Pages" Content="{Binding SelectedViewModel}"/>
 
-                                </StackPanel>
-
-                            </Grid>
-
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Grid>
-            <Grid Grid.Row="2"
-                  Width="947"
-                  HorizontalAlignment="Right"
-                  Margin="0 4 0 4"
-                  Background="#ECF0F1"
-                  Name="Content">
-                <Image x:Name="BG" Source="/Assets/Icon/DT1__UI--icon/bg.png" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="-180"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <ContentControl x:Name="Pages" Content="{Binding SelectedViewModel}"/>
+                    </Grid>
+                </Grid>
 
             </Grid>
         </Grid>
-        <!--Close Button-->
-
-        <Button Height="30"
-                Width="30"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Margin="0,5,20,0"
-                Style="{StaticResource CloseBtn_Style}"
-                Command="{Binding CloseAppCommand}"
-                CommandParameter="{Binding ElementName=mainw}"/>
+        
+        
+        
     </Grid>
 </Window>

@@ -21,7 +21,7 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                             From="0.0"
+                                             From="0.5"
                                              To="1.0"
                                              Duration="0:0:0.5" />
                         </Storyboard>
