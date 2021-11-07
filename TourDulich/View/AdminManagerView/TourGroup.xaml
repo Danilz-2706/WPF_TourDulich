@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManager" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             DataContext="{StaticResource tgvm}"
              d:DesignHeight="625" d:DesignWidth="947">
     <!--//Resource//-->
     <UserControl.Resources>
@@ -28,6 +29,25 @@
             <Setter Property="Margin" Value="0 0 10 0"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
+        <Style x:Key="tblIfo1" TargetType="TextBox">
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="CbblIfo1" TargetType="ComboBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
         <Style x:Key="tbName" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Width" Value="111"/>
@@ -45,12 +65,12 @@
             <Grid>
                 <!--//Layout//-->
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="14.625*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="612"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="1.827*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <!--//Search//-->
@@ -109,29 +129,22 @@
 
                 <!--//List Tour//-->
                 <Grid Grid.Row="1" Grid.Column="0" >
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <WrapPanel>
-                            <!--ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}"-->
-                            <!--<ListView>
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Button 
-                                                Width="109" Height="125" Margin="5"                       
-                                                    Background="#DBF2D0">
-                                                <StackPanel Orientation="Vertical">
-                                                    <TextBlock Text="132" Foreground="Black"/>
 
-                                                    <TextBlock Text="Hanh trinh" Foreground="Black"/>
-                                                    <TextBlock Text="Thoi gian" Foreground="Black"/>
-
-                                                </StackPanel>
-                                            </Button>
-                                        </DataTemplate>
-                                        
-                                    </ListView.ItemTemplate>
-                                </ListView>-->
-                        </WrapPanel>
-                    </ScrollViewer>
+                    <ListView ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Mã Đoàn" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Tour" DisplayMemberBinding="{Binding MaTour}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Đoàn" DisplayMemberBinding="{Binding TenTour}"></GridViewColumn>
+                                    <GridViewColumn Header="Nhân viên dẫn đoàn" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày đi" DisplayMemberBinding="{Binding NgayDi, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày về" DisplayMemberBinding="{Binding NgayVe, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Header="Doanh thu" DisplayMemberBinding="{Binding DoanhThu}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
 
 
@@ -139,67 +152,123 @@
                 <Grid   Grid.Row="1"
                             Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="52"></RowDefinition>
+                        <RowDefinition Height="10.25*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <!--//Info//-->
                     <Grid Grid.Row="0">
                         <ScrollViewer VerticalScrollBarVisibility="Auto" >
                             <StackPanel Background="#C2C2C2" Height="auto">
+                                
+                                
                                 <!--//MÃ ĐOÀN//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="MÃ ĐOÀN"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
+                                    <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan}"/>
                                 </Grid>
 
                                 <!--//TÊN ĐOÀN//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="TÊN ĐOÀN"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
-                                </Grid>
-
-                                <!--//MÃ TOUR//-->
-                                <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="MÃ TOUR"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
+                                    
+                                    <TextBox Style="{StaticResource tblIfo1}"
+                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                             Text="{Binding TenDoan}"/>
                                 </Grid>
 
                                 <!--//TÊN TOUR//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="TÊN TOUR"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
-                                </Grid>
-
-                                <!--//MÃ ĐỊA ĐIỂM//-->
-                                <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="MÃ ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
-                                </Grid>
-
-                                <!--//NGÀY ĐI//-->
-                                <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="NGÀY ĐI"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
-                                </Grid>
-
-                                <!--//NGÀY VỀ//-->
-                                <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="NGÀY VỀ"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
-                                </Grid>
-
-                                <!--//MÔ TẢ//-->
-                                <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="MÔ TẢ"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
+                                    <ComboBox
+                                                IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                                materialDesign:HintAssist.Hint="Search"
+                                                Style="{StaticResource CbblIfo1}"
+                                                IsEditable="{Binding ElementName=edit, Path=IsChecked}"
+                                                materialDesign:HintAssist.HintOpacity=".26">
+                                            <ComboBoxItem>
+                                                Apple
+                                            </ComboBoxItem>
+                                            <ComboBoxItem>
+                                                Banana
+                                            </ComboBoxItem>
+                                            <ComboBoxItem>
+                                                Pear
+                                            </ComboBoxItem>
+                                            <ComboBoxItem>
+                                                Orange
+                                            </ComboBoxItem>
+                                    </ComboBox> 
                                 </Grid>
                                 
-                                <!--//CHI TIẾT//-->
+                                <!--//NHÂN VIÊN DẪN ĐOÀN//-->
+                                <StackPanel Margin="0 5 0 8">
+                                    <TextBlock  Text="NHÂN VIÊN : "  Style="{StaticResource tbName}"/>
+
+                                    <Border Margin="10 0 10 0"
+                                            CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                            HorizontalAlignment="Stretch">
+                                        <ListView SelectedItem="{Binding SelectedItem}">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Header="Mã NV" DisplayMemberBinding="{Binding MaNM}"></GridViewColumn>
+                                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding NhanVien.TenNV}"></GridViewColumn>
+                                                    <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding ChucVu}"></GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Border>
+                                </StackPanel>
+
+                                <!--//NGÀY ĐI - NGÀY VỀ//-->
                                 <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="CHI TIẾT"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <DatePicker
+                                        Margin="10 0 5 0"
+                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                        SelectedDate="{Binding NgayDi, StringFormat='dd/MM/yyyy'}"
+                                                Grid.Column="0"
+                                                materialDesign:HintAssist.Hint="Ngày đi"
+                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
+                                    <DatePicker
+                                        Margin="5 0 10 0"
+                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                        SelectedDate="{Binding NgayVe, StringFormat='dd/MM/yyyy'}"
+
+                                                Grid.Column="1"
+                                                materialDesign:HintAssist.Hint="Ngày về"
+                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                                 </Grid>
+
+                                <!--//DOANH THU//-->
+                                <Grid Margin="0 5 0 8">
+                                    <TextBlock  Text="DOANH THU"  Style="{StaticResource tbName}"/>
+                                    <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False"/>
+                                </Grid>
+
+                                <!--//NỘI DUNG//-->
+                                <StackPanel Margin="0 5 0 8">
+                                    <TextBlock  Text="NỘI DUNG : "  Style="{StaticResource tbName}"/>
+
+                                    <Border Margin="10 0 10 0"
+                                            CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                            HorizontalAlignment="Stretch">
+                                            <TextBox 
+                                                TextWrapping="Wrap"
+                                                VerticalAlignment="Top"
+                                                IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                                AcceptsReturn="True"
+                                                Margin="10 5 10 0"
+                                                FontSize="14"
+                                                materialDesign:HintAssist.Hint="Nội dung đang trống"
+                                                />
+                                    </Border>
+                                </StackPanel>
+
+
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>
@@ -220,17 +289,18 @@
                         </Button>
 
                         <!--//Sửa//-->
-                        <Button
+                        <ToggleButton x:Name="edit"
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="90"
                                 Margin="20 0 20 0"
-                                Command="{Binding EditCommand}"
+                                IsChecked="False"
                                 ToolTip="Sửa">
                             <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
-                        </Button>
+                            
+                        </ToggleButton>
 
                         <!--//Xóa//-->
                         <Button

@@ -8,10 +8,9 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Name="mainw"
-        Height="720" 
+        Height="720"
         Width="1280"
         WindowStyle="None"
-        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
 
 

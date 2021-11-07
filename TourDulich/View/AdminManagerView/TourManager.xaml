@@ -29,6 +29,15 @@
             <Setter Property="Margin" Value="0 0 10 0"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
+        <Style x:Key="tblIf1o" TargetType="TextBox">
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
         <Style x:Key="tbName" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Width" Value="111"/>
@@ -151,13 +160,15 @@
                                 <!--//Mã Tour//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="MÃ TOUR"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
+                                    <TextBox Style="{StaticResource tblIf1o}"
+                                             IsEnabled="{Binding Path=IsChecked, ElementName=edit}"></TextBox>
                                 </Grid>
 
                                 <!--//Tên Tour//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="TÊN TOUR"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
+                                    <TextBox Style="{StaticResource tblIf1o}"
+                                             IsEnabled="{Binding Path=IsChecked, ElementName=edit}"></TextBox>
                                 </Grid>
 
                                 <!--//Mã Địa điểm//-->
@@ -202,7 +213,6 @@
                     <!--//Add - Edit - Remove//-->
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                         <!--//Thêm//-->
-
                         <Button
                                 Background="#C4C4C4"
                                 Foreground="#000"
@@ -215,17 +225,18 @@
                         </Button>
 
                         <!--//Sửa//-->
-                        <Button
+                        <ToggleButton
+                            x:Name="edit"
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="90"
                                 Margin="20 0 20 0"
-                                Command="{Binding EditTour}"
-                                ToolTip="Sửa">
+                                IsChecked="False"
+                                ToolTip="Sửa" >
                             <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
-                        </Button>
+                        </ToggleButton>
 
                         <!--//Xóa//-->
                         <Button

@@ -5,6 +5,7 @@
                     xmlns:vml="clr-namespace:TourDulich.View.AdminManager">
 
     <vm:TourViewModel x:Key="tvm"></vm:TourViewModel>
+    <vm:TourGroupViewModel x:Key="tgvm"></vm:TourGroupViewModel>
     <vm:NavigationViewModel x:Key="nvvm"></vm:NavigationViewModel>
 
     <!--//Đọc - đẩy dữ liệu theo View - ViewModel//-->
