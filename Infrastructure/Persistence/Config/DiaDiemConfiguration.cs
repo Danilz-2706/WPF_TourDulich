@@ -1,4 +1,4 @@
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,6 +10,11 @@ namespace Infrastructure.Persistence
         {
             builder.ToTable("DiaDiem");
             builder.HasKey(dd => dd.MaDiaDiem);
+
+            builder.HasData(
+                new DiaDiem { MaDiaDiem=1, TenDiaDiem = "Chùa Sài Gòn"},
+                new DiaDiem { MaDiaDiem = 2, TenDiaDiem = "Chùa Hà Nội" }
+                );
         }
     }
 }
