@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TourDulich.Model
+namespace TourDuLich.Model.Enum
 {
-    class Tour
+    public enum Gender
     {
-        public string Ma { get; set; }
-        public string Ten { get; set; }
+        MALE,
+        FEMALE
     }
 }
