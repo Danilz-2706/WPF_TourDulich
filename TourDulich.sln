@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourDulich", "TourDulich\TourDulich.csproj", "{5B306760-4A87-4806-820F-72261CF70948}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourDulich", "TourDulich\TourDulich.csproj", "{5B306760-4A87-4806-820F-72261CF70948}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{4C4F51E0-9A3E-4C90-A898-0212DB67C2DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{49A08622-3E3F-472B-A697-1B6C72361678}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{5B306760-4A87-4806-820F-72261CF70948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B306760-4A87-4806-820F-72261CF70948}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B306760-4A87-4806-820F-72261CF70948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C4F51E0-9A3E-4C90-A898-0212DB67C2DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C4F51E0-9A3E-4C90-A898-0212DB67C2DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C4F51E0-9A3E-4C90-A898-0212DB67C2DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C4F51E0-9A3E-4C90-A898-0212DB67C2DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49A08622-3E3F-472B-A697-1B6C72361678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A08622-3E3F-472B-A697-1B6C72361678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A08622-3E3F-472B-A697-1B6C72361678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A08622-3E3F-472B-A697-1B6C72361678}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
