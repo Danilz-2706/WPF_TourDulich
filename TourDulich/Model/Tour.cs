@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace TourDulich.Model
 {
-    class NhanVien
+    class Tour
     {
-        public string MaNV { get; set; }
-        public string TenNV1 { get; set; }
-        public string ChucVu { get; set; }
-
+        public string Ma { get; set; }
+        public string Ten { get; set; }
     }
 }
