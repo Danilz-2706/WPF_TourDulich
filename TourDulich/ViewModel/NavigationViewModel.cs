@@ -21,15 +21,15 @@ namespace TourDulich.ViewModel
             //Obser.... Lam moi lai danh sach //
             ObservableCollection<MenuItems> menuItems = new ObservableCollection<MenuItems>
             {
-                new MenuItems { MenuName = "Admin", MenuImage = @"Assets/Icon/DT1__UI--icon/Admin.png" },
-                new MenuItems { MenuName = "Tour", MenuImage = @"Assets/Icon/DT1__UI--icon/tour.png" },
-                new MenuItems { MenuName = "Tour Group", MenuImage = @"Assets/Icon/DT1__UI--icon/tourist group.png" },
-                new MenuItems { MenuName = "Tourist Attraction", MenuImage = @"Assets/Icon/DT1__UI--icon/tourist attraction.png" },
-                new MenuItems { MenuName = "Price", MenuImage = @"Assets/Icon/DT1__UI--icon/price.png" },
-                new MenuItems { MenuName = "Cost", MenuImage = @"Assets/Icon/DT1__UI--icon/cost.png" },
-                new MenuItems { MenuName = "User", MenuImage = @"Assets/Icon/DT1__UI--icon/user.png" },
-                new MenuItems { MenuName = "Staff", MenuImage = @"Assets/Icon/DT1__UI--icon/staff.png" },
-                new MenuItems { MenuName = "Statistics", MenuImage = @"Assets/Icon/DT1__UI--icon/statistics.png" }
+                new MenuItems { MenuName = "Admin", MenuImage = @"Assets/Icon/DT1__UI--icon/Admin.png" }
+                //new MenuItems { MenuName = "Tour", MenuImage = @"Assets/Icon/DT1__UI--icon/tour.png" },
+                //new MenuItems { MenuName = "Tour Group", MenuImage = @"Assets/Icon/DT1__UI--icon/tourist group.png" },
+                //new MenuItems { MenuName = "Tourist Attraction", MenuImage = @"Assets/Icon/DT1__UI--icon/tourist attraction.png" },
+                //new MenuItems { MenuName = "Price", MenuImage = @"Assets/Icon/DT1__UI--icon/price.png" },
+                //new MenuItems { MenuName = "Cost", MenuImage = @"Assets/Icon/DT1__UI--icon/cost.png" },
+                //new MenuItems { MenuName = "User", MenuImage = @"Assets/Icon/DT1__UI--icon/user.png" },
+                //new MenuItems { MenuName = "Staff", MenuImage = @"Assets/Icon/DT1__UI--icon/staff.png" },
+                //new MenuItems { MenuName = "Statistics", MenuImage = @"Assets/Icon/DT1__UI--icon/statistics.png" }
             };
 
             MenuItemsCollection = new CollectionViewSource { Source = menuItems };

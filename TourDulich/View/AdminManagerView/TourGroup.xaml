@@ -134,11 +134,11 @@
                     <ListView ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
                         <ListView.View>
                             <GridView>
-                                <GridView.Columns>
+                                
+                                    <GridView.Columns>
                                     <GridViewColumn Header="Mã Đoàn" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                    <GridViewColumn Header="Mã Tour" DisplayMemberBinding="{Binding MaTour}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Đoàn" DisplayMemberBinding="{Binding TenTour}"></GridViewColumn>
-                                    <GridViewColumn Header="Nhân viên dẫn đoàn" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Tour" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Đoàn" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
                                     <GridViewColumn Header="Ngày đi" DisplayMemberBinding="{Binding NgayDi, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                                     <GridViewColumn Header="Ngày về" DisplayMemberBinding="{Binding NgayVe, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                                     <GridViewColumn Header="Doanh thu" DisplayMemberBinding="{Binding DoanhThu}"></GridViewColumn>
@@ -166,7 +166,7 @@
                                 <!--//MÃ ĐOÀN//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="MÃ ĐOÀN"  Style="{StaticResource tbName}"/>
-                                    <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan}"/>
+                                    <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
                                 <!--//TÊN ĐOÀN//-->
@@ -174,32 +174,25 @@
                                     <TextBlock  Text="TÊN ĐOÀN"  Style="{StaticResource tbName}"/>
                                     
                                     <TextBox Style="{StaticResource tblIfo1}"
+                                             
                                              IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                             Text="{Binding TenDoan}"/>
+                                             
+                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
                                 <!--//TÊN TOUR//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="TÊN TOUR"  Style="{StaticResource tbName}"/>
                                     <ComboBox
+                                                ItemsSource="{Binding Tour}"
+                                                DisplayMemberPath="Ten"
+                                                SelectedValue="{Binding SelectedTour ,UpdateSourceTrigger=PropertyChanged}"
+                                        
                                                 IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                                materialDesign:HintAssist.Hint="Search"
-                                                Style="{StaticResource CbblIfo1}"
                                                 IsEditable="{Binding ElementName=edit, Path=IsChecked}"
+                                                Style="{StaticResource CbblIfo1}"
                                                 materialDesign:HintAssist.HintOpacity=".26">
-                                            <ComboBoxItem>
-                                                Apple
-                                            </ComboBoxItem>
-                                            <ComboBoxItem>
-                                                Banana
-                                            </ComboBoxItem>
-                                            <ComboBoxItem>
-                                                Pear
-                                            </ComboBoxItem>
-                                            <ComboBoxItem>
-                                                Orange
-                                            </ComboBoxItem>
-                                    </ComboBox> 
+                                    </ComboBox>
                                 </Grid>
                                 
                                 <!--//NHÂN VIÊN DẪN ĐOÀN//-->
@@ -209,12 +202,12 @@
                                     <Border Margin="10 0 10 0"
                                             CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
                                             HorizontalAlignment="Stretch">
-                                        <ListView SelectedItem="{Binding SelectedItem}">
+                                        <ListView ItemsSource="{Binding NhanVien}" MaxHeight="220">
                                             <ListView.View>
                                                 <GridView>
-                                                    <GridViewColumn Header="Mã NV" DisplayMemberBinding="{Binding MaNM}"></GridViewColumn>
-                                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding NhanVien.TenNV}"></GridViewColumn>
-                                                    <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding ChucVu}"></GridViewColumn>
+                                                    <GridViewColumn Header="Mã NV" DisplayMemberBinding="{Binding MaNV,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNV1,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                                    <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding ChucVu,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                                 </GridView>
                                             </ListView.View>
                                         </ListView>
@@ -230,14 +223,14 @@
                                     <DatePicker
                                         Margin="10 0 5 0"
                                         IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                        SelectedDate="{Binding NgayDi, StringFormat='dd/MM/yyyy'}"
+                                        SelectedDate="{Binding NgayDi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
                                                 Grid.Column="0"
                                                 materialDesign:HintAssist.Hint="Ngày đi"
                                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
                                     <DatePicker
                                         Margin="5 0 10 0"
                                         IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                        SelectedDate="{Binding NgayVe, StringFormat='dd/MM/yyyy'}"
+                                        SelectedDate="{Binding NgayVe, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
 
                                                 Grid.Column="1"
                                                 materialDesign:HintAssist.Hint="Ngày về"
@@ -247,7 +240,7 @@
                                 <!--//DOANH THU//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="DOANH THU"  Style="{StaticResource tbName}"/>
-                                    <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False"/>
+                                    <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding DoanhThu,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
                                 <!--//NỘI DUNG//-->
@@ -264,6 +257,7 @@
                                                 AcceptsReturn="True"
                                                 Margin="10 5 10 0"
                                                 FontSize="14"
+                                                Text="{Binding NoiDung,UpdateSourceTrigger=PropertyChanged}"
                                                 materialDesign:HintAssist.Hint="Nội dung đang trống"
                                                 />
                                     </Border>
