@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TourDuLich.Model
+namespace TourDulich.Model
 {
     public class NhanVienDTO
     {

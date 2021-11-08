@@ -1,8 +1,8 @@
-using TourDuLich.Model.Enum;
 using System;
 using System.Collections.Generic;
+using TourDulich.Model.Enum;
 
-namespace TourDuLich.Model
+namespace TourDulich.Model
 {
     public class KhachDTO
     {

@@ -1,6 +1,6 @@
-using TourDuLich.Model.Enum;
+using TourDulich.Model.Enum;
 
-namespace TourDuLich.Model
+namespace TourDulich.Model
 {
     public class ChiTietDoanDTO
     {

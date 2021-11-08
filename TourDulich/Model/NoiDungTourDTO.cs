@@ -1,6 +1,5 @@
 using System;
-namespace TourDuLich.Model
-
+namespace TourDulich.Model
 {
     public class NoiDungTourDTO
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TourDuLich.Model.Enum
+namespace TourDulich.Model.Enum
 {
     public enum Gender
     {
