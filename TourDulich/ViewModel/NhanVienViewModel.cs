@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace TourDulich.ViewModel
 {
-    class UserViewModel
-
+    class NhanVienViewModel
     {
-        public UserViewModel() { }
+        public NhanVienViewModel() { }
     }
 }

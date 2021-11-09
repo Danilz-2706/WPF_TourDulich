@@ -5,7 +5,10 @@
                     xmlns:vml="clr-namespace:TourDulich.View.AdminManager">
 
     <vm:TourViewModel x:Key="tvm"></vm:TourViewModel>
-    <vm:TourGroupViewModel x:Key="tgvm"></vm:TourGroupViewModel>
+    <vm:DoanDuLichViewModel x:Key="tgvm"></vm:DoanDuLichViewModel>
+    <vm:KhachHangViewModel x:Key="khvm"></vm:KhachHangViewModel>
+    <vm:NhanVienViewModel x:Key="nvm"></vm:NhanVienViewModel>
+    
     <vm:NavigationViewModel x:Key="nvvm"></vm:NavigationViewModel>
 
     <!--//Đọc - đẩy dữ liệu theo View - ViewModel//-->
@@ -22,7 +25,7 @@
     </DataTemplate>
 
     <!--Tour Page-->
-    <DataTemplate DataType="{x:Type vm:TourGroupViewModel}">
+    <DataTemplate DataType="{x:Type vm:DoanDuLichViewModel}">
         <v:TourGroupView/>
     </DataTemplate>
 
@@ -42,12 +45,12 @@
     </DataTemplate>
 
     <!--Tour Page-->
-    <DataTemplate DataType="{x:Type vm:UserViewModel}">
+    <DataTemplate DataType="{x:Type vm:KhachHangViewModel}">
         <v:UserView/>
     </DataTemplate>
 
     <!--Tour Page-->
-    <DataTemplate DataType="{x:Type vm:StaffViewModel}">
+    <DataTemplate DataType="{x:Type vm:NhanVienViewModel}">
         <v:StaffView/>
     </DataTemplate>
 

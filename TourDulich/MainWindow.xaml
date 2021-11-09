@@ -22,7 +22,7 @@
     <Grid Background="Transparent" Name="mainwindow"
           >
         <!--Background Border-->
-        <Border Background="#ECF0F1"
+        <Border Background="#eff0f3"
                 CornerRadius="0"/>
 
         <!--//main Content//-->
@@ -42,7 +42,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Border Background="#5C5C5C"
+                <Border Background="#ff8e3c"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Stretch"
                         Name="Header1"
@@ -74,14 +74,14 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="7*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Border Background="#5C5C5C"
+                <Border Background="#ff8e3c"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Stretch"
                         CornerRadius="70,0,0,0"
                         Grid.Column="1"
                         Height="40">
 
-                    <TextBlock Text="T E N  -  C A C  -  T H A N H  -  V I E N "
+                    <TextBlock Text="D A T -- A N -- L A M -- N H A N"
                        Margin="0"
                        Style="{StaticResource FooterStyle}"/>
 
@@ -116,7 +116,7 @@
                         </Grid.Effect>
                         <!--//toggle button//-->
                         <Grid   Height="55"
-                                Background="#C4C4C4"
+                                Background="#ff7009"
                                 VerticalAlignment="Top"
                                 Name="test"
                             >
@@ -225,7 +225,7 @@
                         </Grid>
 
                         <ItemsControl ItemsSource="{Binding SourceCollection}" Margin="0 55 0 0"
-                                  Background="#fff">
+                                  Background="#eff0f3">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -256,7 +256,7 @@
                     <Grid   Grid.Column="1"
                             HorizontalAlignment="Right"
                             Margin="0 4 0 4"
-                            Background="#ECF0F1"
+                            Background="#eff0f3"
                             Name="Content">
 
                         <Image x:Name="BG" Source="/Assets/Icon/DT1__UI--icon/bg.png" RenderTransformOrigin="0.5,0.5" Stretch="Fill">

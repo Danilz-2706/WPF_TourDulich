@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourDulich.View.AdminManager
+namespace TourDulich.View.AdminManagerView
 {
     /// <summary>
-    /// Interaction logic for StaffManager.xaml
+    /// Interaction logic for DoanDuLich_ThemNhanVien.xaml
     /// </summary>
-    public partial class StaffManager : UserControl
+    public partial class DoanDuLich_ThemNhanVien : Window
     {
-        public StaffManager()
+        public DoanDuLich_ThemNhanVien()
         {
             InitializeComponent();
         }

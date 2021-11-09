@@ -31,13 +31,13 @@
             <Setter Property="Width" Value="110"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Margin" Value="4 0 4 0"/>
+            
         </Style>
     </UserControl.Resources>
 
     <Grid Background="#ECF0F1">
         <!--Content-->
         <TabControl>
-            
             <!--//Tour - manager//-->
             <TabItem Header="Tour" Style="{StaticResource TabItem}" Name="AdminTour">
                 <Grid>
@@ -46,38 +46,38 @@
             </TabItem>
             
             <!--//Tour Group - manager//-->
-            <TabItem Header="Tour Group" Style="{StaticResource TabItem}">
+            <TabItem Header="ĐOÀN" Style="{StaticResource TabItem}">
                 <Grid>
-                    <adminmanager:TourGroup></adminmanager:TourGroup>
+                    <adminmanager:DoanDuLich></adminmanager:DoanDuLich>
                 </Grid>
             </TabItem>
             
             <!--//Tour Attraction - manager//-->
-            <TabItem Header="Tourist Attraction" Style="{StaticResource TabItem}">
+            <TabItem Header="ĐỊA ĐIỂM" Style="{StaticResource TabItem}">
                 <adminmanager:TAttractionManager></adminmanager:TAttractionManager>
             </TabItem>
             
             <!--//Price - manager//-->
-            <TabItem Header="Price" Style="{StaticResource TabItem}">
+            <TabItem Header="GIÁ" Style="{StaticResource TabItem}">
                 <adminmanager:PriceManager></adminmanager:PriceManager>
             </TabItem>
             
             <!--//Cost - manager//-->
-            <TabItem Header="Cost" Style="{StaticResource TabItem}">
+            <TabItem Header="CHI PHÍ" Style="{StaticResource TabItem}">
                 <adminmanager:CostManager></adminmanager:CostManager>
             </TabItem>
             
             <!--//Customer - manager//-->
-            <TabItem Header="Customer" Style="{StaticResource TabItem}">
-                <adminmanager:CustomerManager></adminmanager:CustomerManager>
+            <TabItem Header="KHÁCH HÀNG" Style="{StaticResource TabItem}">
+                <adminmanager:KhachHang></adminmanager:KhachHang>
             </TabItem>
             
             <!--//Staff - manager//-->
-            <TabItem Header="Staff" Style="{StaticResource TabItem}">
-                <adminmanager:StaffManager></adminmanager:StaffManager>
+            <TabItem Header="NHÂN VIÊN" Style="{StaticResource TabItem}">
+                <adminmanager:NhanVien></adminmanager:NhanVien>
             </TabItem>
             <!--//Statistics - manager//-->
-            <TabItem Header="Statistics" Style="{StaticResource TabItem}">
+            <TabItem Header="THỐNG KÊ" Style="{StaticResource TabItem}">
                 <adminmanager:StatisticsManager></adminmanager:StatisticsManager>
             </TabItem>
         </TabControl>

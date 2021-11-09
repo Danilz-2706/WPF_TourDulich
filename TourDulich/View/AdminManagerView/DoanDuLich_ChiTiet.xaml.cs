@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourDulich.View.AdminManager
+namespace TourDulich.View.AdminManagerView
 {
     /// <summary>
-    /// Interaction logic for CustomerManager.xaml
+    /// Interaction logic for DoanDuLich_ChiTiet.xaml
     /// </summary>
-    public partial class CustomerManager : UserControl
+    public partial class DoanDuLich_ChiTiet : Window
     {
-        public CustomerManager()
+        public DoanDuLich_ChiTiet()
         {
             InitializeComponent();
         }
