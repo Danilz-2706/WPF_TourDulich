@@ -1,6 +1,5 @@
 ﻿using Domain.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -10,6 +9,12 @@ namespace Infrastructure.Persistence
     {
         public TourContext(DbContextOptions<TourContext> options) : base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
