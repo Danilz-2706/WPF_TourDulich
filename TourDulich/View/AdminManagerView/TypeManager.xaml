@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="TourDulich.View.AdminManagerView.TypeManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TourDulich.View.AdminManagerView" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <!--//Resource//-->
+    <UserControl.Resources>
+        <!--//Size - TextBlock//-->
+        <Style x:Key="fontText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <!--//Size - Combobox//-->
+        <Style x:Key="sizeCombobox" TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+        </Style>
+
+        <!--//Info - name - value //-->
+        <!--//Start//-->
+        <Style x:Key="tblIfo" TargetType="TextBlock">
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style x:Key="tblIf1o" TargetType="TextBox">
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style x:Key="tblIfo1" TargetType="TextBox">
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="tbName" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="111"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <!--//End//-->
+
+    </UserControl.Resources>
+
+    <Grid Background="Transparent">
+        <materialDesign:Card>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ListView Grid.Column="0" ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="Mã Loại Hình" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
+                                <GridViewColumn Header="Tên Loại Hình " DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <StackPanel Background="#C2C2C2" Grid.Column="1">
+                    <Grid Margin="0 5 0 8">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!--//Mã loại hình//-->
+                        <Grid Grid.Row="0" Margin="0 0 0 15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3.5*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="MÃ LOẠI HÌNH"  Style="{StaticResource tbName}"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaLoaiHinh,UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+
+                        <!--//Mã Tour//-->
+                        <Grid Grid.Row="1" Margin="0 0 0 50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3.5*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="TÊN LOẠI HÌNH"  Style="{StaticResource tbName}"/>
+                            <TextBox Grid.Column="1" Style="{StaticResource tblIfo1}"
+                                             
+                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                             
+                                             Text="{Binding TenLoaiHinh,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+                        </Grid>
+
+                        <!--//Add - Edit - Remove//-->
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <!--//Thêm//-->
+                            <Button
+                                Background="#C4C4C4"
+                                Foreground="#000"
+                                BorderBrush="#C4C4C4"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="90"
+                                Command="{Binding AddTour}"
+                                ToolTip="Thêm">
+                                <TextBlock Text="Thêm" Style="{StaticResource fontText}"/>
+                            </Button>
+
+                            <!--//Sửa//-->
+                            <ToggleButton
+                            x:Name="edit"
+                                BorderBrush="#C4C4C4"
+                                Background="#C4C4C4"
+                                Foreground="#000"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="90"
+                                Margin="20 0 20 0"
+                                IsChecked="False"
+                                ToolTip="Sửa" >
+                                <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
+                            </ToggleButton>
+
+                            <!--//Xóa//-->
+                            <Button
+                                BorderBrush="#C4C4C4"
+                                Background="#C4C4C4"
+                                Foreground="#000"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="90"
+                                Command="{Binding DeleteTour}"
+                                ToolTip="Xóa">
+                                <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>
+                            </Button>
+                        </StackPanel>
+
+                    </Grid>
+                </StackPanel>
+
+
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
