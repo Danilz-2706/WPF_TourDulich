@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View"
              xmlns:adminmanager="clr-namespace:TourDulich.View.AdminManager"
+             xmlns:adminmanagerview="clr-namespace:TourDulich.View.AdminManagerView"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
     <UserControl.Style>
@@ -54,9 +55,14 @@
             
             <!--//Tour Attraction - manager//-->
             <TabItem Header="ĐỊA ĐIỂM" Style="{StaticResource TabItem}">
-                <adminmanager:TAttractionManager></adminmanager:TAttractionManager>
+                <adminmanagerview:LocationManager></adminmanagerview:LocationManager>
             </TabItem>
             
+            <!--//Tour Attraction - manager//-->
+            <TabItem Header="LOẠI HÌNH" Style="{StaticResource TabItem}">
+                <adminmanagerview:TypeManager></adminmanagerview:TypeManager>
+            </TabItem>
+
             <!--//Price - manager//-->
             <TabItem Header="GIÁ" Style="{StaticResource TabItem}">
                 <adminmanager:PriceManager></adminmanager:PriceManager>
