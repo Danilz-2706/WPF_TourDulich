@@ -131,7 +131,7 @@
                 
                 <!--//MÃ NHÂN VIÊN//-->
                 <Grid Margin="0 8 0 16">
-                    <TextBlock  Text="Khách hàng: "  Style="{StaticResource tbName}"/>
+                    <TextBlock  Text="Mã nhân viên: "  Style="{StaticResource tbName}"/>
                     <ComboBox
                                 ItemsSource="{Binding NhanVien}"
                                 DisplayMemberPath="MaNV"
@@ -141,7 +141,26 @@
                                 materialDesign:HintAssist.HintOpacity=".26">
                     </ComboBox>
                 </Grid>
-                
+                <!--//TÊN NHÂN VIÊN//-->
+                <Grid Margin="0 16 0 16">
+                    <TextBlock  Text="Tên nhân viên:"  Style="{StaticResource tbName}"/>
+                    <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                        <TextBox
+                                Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"
+                                IsEnabled="True"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập tên nhân viên"/>
+                    </Border>
+                </Grid>
                 <!--//VAI TRÒ//-->
                 <Grid Margin="0 16 0 8">
                     <TextBlock  Text="Vai trò: "  Style="{StaticResource tbName}"/>

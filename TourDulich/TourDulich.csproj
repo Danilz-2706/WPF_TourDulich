@@ -37,6 +37,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\Icon\DT1__UI--icon\Admin.png" />
     <Resource Include="Assets\Icon\DT1__UI--icon\bg.png" />
     <Resource Include="Assets\Icon\DT1__UI--icon\close-old.png" />

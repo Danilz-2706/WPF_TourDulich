@@ -9,12 +9,13 @@ namespace Infrastructure.Persistence
     {
         public TourContext CreateDbContext(string[] args)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
+            /*IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
-            .Build();
+            .Build();*/
 
-            var connectionString = configuration.GetConnectionString("TourDB");
+            //var connectionString = configuration.GetConnectionString("TourDB");
+            var connectionString = "Server=.\\Admin;Database=TourDB;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<TourContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
