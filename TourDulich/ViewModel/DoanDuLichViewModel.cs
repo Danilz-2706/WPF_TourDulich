@@ -80,7 +80,7 @@ namespace TourDulich.ViewModel
         //    set
         //    {
         //        _SelectedTour = value;
-                
+
         //    }
         //}
 
@@ -117,8 +117,10 @@ namespace TourDulich.ViewModel
         //    }
         //}
 
-        //private ObservableCollection<DoanDuLichDTO> _list;
-        //public ObservableCollection<DoanDuLichDTO> ListGroup { get => _list; set { _list = value;} }
+        private ObservableCollection<DoanDuLich> _list;
+        public ObservableCollection<DoanDuLich> ListGroup { get => _list; set { _list = value; } }
+
+
 
         //private ObservableCollection<TourDuLichDTO> _Tour;
         //public ObservableCollection<TourDuLichDTO> Tour { get => _Tour; set { _Tour = value; } }
@@ -134,7 +136,23 @@ namespace TourDulich.ViewModel
         public ICommand Close_DoanThemCP { get; set; }
         public ICommand Close_DoanChiTiet { get; set; }
         public DoanDuLichViewModel() {
-            //ListGroup = new ObservableCollection<DoanDuLichDTO>();
+            ListGroup = new ObservableCollection<DoanDuLich> { 
+            new DoanDuLich{ name="asdf"},
+            new DoanDuLich{ name="as2f"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="111df"},
+            new DoanDuLich{ name="a"}
+            };
 
             //Tour = new ObservableCollection<TourDuLichDTO>();
 
@@ -170,6 +188,11 @@ namespace TourDulich.ViewModel
 
         private void ShowThemCP() { DoanDuLich_ThemChiPhi x = new DoanDuLich_ThemChiPhi(); x.ShowDialog(); }
         private void CloseThemCP(object obj) { DoanDuLich_ThemChiPhi x = obj as DoanDuLich_ThemChiPhi; x.Close();  }
+    }
+
+    class DoanDuLich
+    {
+        public string name { get; set; }
     }
 
 }
