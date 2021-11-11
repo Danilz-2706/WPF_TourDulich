@@ -12,7 +12,7 @@ namespace TourDulich.ViewModel
     {
         public string MaDiaDiem { get; set; }
         public string TenDiaDiem { get; set; }
-        public ObservableCollection<DiaDiemDTO> List { get; set; }
+        //public ObservableCollection<DiaDiemDTO> List { get; set; }
 
     }
 }

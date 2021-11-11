@@ -12,6 +12,6 @@ namespace TourDulich.ViewModel
     {
         public string MaLoaiHinh { get; set; }
         public string TenLoaiHinh { get; set; }
-        public ObservableCollection<LoaiHinhDuLichDTO> List { get; set; }
+        //public ObservableCollection<LoaiHinhDuLichDTO> List { get; set; }
     }
 }

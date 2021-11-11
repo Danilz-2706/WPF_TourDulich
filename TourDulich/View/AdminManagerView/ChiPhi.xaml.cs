@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourDulich.View.AdminManager
+namespace TourDulich.View.AdminManagerView
 {
     /// <summary>
-    /// Interaction logic for CostManager.xaml
+    /// Interaction logic for ChiPhi.xaml
     /// </summary>
-    public partial class CostManager : UserControl
+    public partial class ChiPhi : UserControl
     {
-        public CostManager()
+        public ChiPhi()
         {
             InitializeComponent();
         }

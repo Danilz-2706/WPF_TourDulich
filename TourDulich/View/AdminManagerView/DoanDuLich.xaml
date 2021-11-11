@@ -153,8 +153,7 @@
 
 
                 <!--//Info - Add - Edit - Remove //-->
-                <Grid   Grid.Row="1"
-                            Grid.Column="1">
+                <Grid   Grid.Row="1" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10.25*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>

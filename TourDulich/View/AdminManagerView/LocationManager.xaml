@@ -62,103 +62,169 @@
     <Grid Background="Transparent">
         <materialDesign:Card>
             <Grid>
+                <!--//Layout//-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="14.625*"></RowDefinition>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1.827*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <ListView Grid.Column="0" ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView>
-                            <GridView.Columns>
-                                <GridViewColumn Header="Mã Địa Điểm" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                <GridViewColumn Header="Tên Địa Điểm" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
-                            </GridView.Columns>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <StackPanel Background="#C2C2C2" Grid.Column="1">
-                    <Grid Margin="0 5 0 8">
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                <!--//Search//-->
+                <Grid Grid.Row="0" Grid.Column="0" Background="#ff8e3c">
+                    <TextBlock  Text="Tìm kiếm" 
+                                    Margin="55 0 0 0" 
+                                    Width="70"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                Foreground="#eff0f3"
+                                    Style="{StaticResource fontText}"></TextBlock>
+                    <ComboBox
+                                    materialDesign:HintAssist.Hint="Search"
+                                    IsEditable="True"
+                                    VerticalContentAlignment="Center"
+                                    Background="#fff"
+                                    VerticalAlignment="Center" Margin="125,0,92,0"
+                                    materialDesign:HintAssist.HintOpacity=".26"  
+                                    Style="{StaticResource sizeCombobox}">
+                    </ComboBox>
+                    <Grid Background="#ff7a1a"  Width="30" Height="30"
+                              Margin="0 0 62 0"
+                              HorizontalAlignment="Right">
+                        <Image  Source="/Assets/Icon/DT1__UI--icon/search.png"
+                                    Width="30" Height="30"/>
+                    </Grid>
+                </Grid>
 
-                        <!--//Mã loại hình//-->
-                        <Grid Grid.Row="0" Margin="0 0 0 15">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3.5*"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
+                <!--//Filter//-->
+                <Grid Grid.Row="0" Grid.Column="1" Background="#ff8e3c">
+                    <TextBlock  Text="Lọc" 
+                                    Margin="20 0 0 0" 
+                                    Width="40"
+                                Foreground="#eff0f3"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource fontText}"/>
+                    <ComboBox
+                                    Width="260" Background="#fff"
+                                    Margin="0 0 16 0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    Style="{StaticResource sizeCombobox}">
 
-                            <TextBlock Grid.Column="0" Text="MÃ ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
-                            <TextBox Grid.Column="1" Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDiaDiem,UpdateSourceTrigger=PropertyChanged}"/>
-                        </Grid>
+                    </ComboBox>
+                </Grid>
 
-                        <!--//Mã Tour//-->
-                        <Grid Grid.Row="1" Margin="0 0 0 50">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3.5*"/>
-                                <ColumnDefinition Width="26.627"/>
-                                <ColumnDefinition Width="173.373"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="TÊN ĐỊA ĐIỂM"  Style="{StaticResource tbName}" Grid.ColumnSpan="2"/>
-                            <TextBox Grid.Column="1" Style="{StaticResource tblIfo1}"
+
+                <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
+                    <ListView ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Mã Địa Điểm" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Địa Điểm" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="1">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10.25*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--//Info//-->
+                    <Grid Grid.Row="0">
+                        <Grid.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFFF8E3C" Offset="0.372"/>
+                                <GradientStop Color="#FFFFAB6F" Offset="0.925"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        <StackPanel  VerticalAlignment="Center">
+
+
+                            <!--//MÃ NHÂN VIÊN//-->
+                            <Grid Margin="0 8 0 16">
+                                <TextBlock  Text="MÃ ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
+                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                            </Grid>
+
+                            <!--//TÊN NHÂN VIÊN//-->
+                            <Grid Margin="0 16 0 8">
+                                <TextBlock  Text="TÊN ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
+
+                                <TextBox Style="{StaticResource tblIfo1}"
                                              
                                              IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
-                                             Text="{Binding TenDiaDiem,UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
-                        </Grid>
+                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
 
-                        <!--//Add - Edit - Remove//-->
-                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!--//Add - Edit - Remove//-->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
                             <!--//Thêm//-->
                             <Button
+                                Grid.Column="0"
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
+                                Margin="10 0 5 0"
+                                Command="{Binding AddCommand}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Width="90"
-                                Command="{Binding }"
                                 ToolTip="Thêm">
+
                                 <TextBlock Text="Thêm" Style="{StaticResource fontText}"/>
                             </Button>
 
                             <!--//Sửa//-->
-                            <ToggleButton
-                            x:Name="edit"
+                            <ToggleButton x:Name="edit"
+                                Grid.Column="1"   
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Width="90"
-                                Margin="20 0 20 0"
+                                Margin="5 0 5 0"
                                 IsChecked="False"
-                                ToolTip="Sửa" >
+                                ToolTip="Sửa">
                                 <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
+
                             </ToggleButton>
 
                             <!--//Xóa//-->
                             <Button
+                                Grid.Column="2"
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Width="90"
-                                Command="{Binding }"
+                                Command="{Binding DeleteCommand}"
+                                Margin="5 0 5 0"
                                 ToolTip="Xóa">
                                 <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>
                             </Button>
-                        </StackPanel>
 
-                    </Grid>
-                </StackPanel>
+                        </Grid>
+
+                    </StackPanel>
+                </Grid>
 
 
             </Grid>

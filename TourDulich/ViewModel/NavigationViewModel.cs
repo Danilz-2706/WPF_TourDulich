@@ -95,7 +95,7 @@ namespace TourDulich.ViewModel
         public object SelectedViewModel
         {
             get => _selectedViewModel;
-            set { _selectedViewModel = value; OnPropertyChanged("SelectedViewModel"); }
+            set { _selectedViewModel = value;  }
         }
 
         // Switch Views
