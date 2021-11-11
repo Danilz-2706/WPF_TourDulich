@@ -1,6 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using AutoMapper;
+﻿using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -14,33 +12,27 @@ namespace Application.Services
     public class KhachService : IKhachService
     {
         private readonly IKhachRepository khachRepository;
-        private readonly IMapper mapper;
 
-        public KhachService(IKhachRepository khachRepository, IMapper mapper)
+        public KhachService(IKhachRepository khachRepository)
         {
             this.khachRepository = khachRepository;
-            this.mapper = mapper;
         }
         
 
-        public bool Create(KhachDTO dto)
+        public bool Create(Khach dto)
         {
-            var kh = mapper.Map<Khach>(dto);
-            khachRepository.Add(kh);
+            khachRepository.Add(dto);
             return true;
         }
 
-        public KhachDTO Get(int id)
+        public Khach Get(int id)
         {
-            var kh = khachRepository.GetBy(id);
-            return mapper.Map<KhachDTO>(kh);
+            return khachRepository.GetBy(id);
         }
 
-        public bool Update(KhachDTO dto)
+        public bool Update(Khach dto)
         {
-            var kh = khachRepository.GetBy(dto.MaKhachHang);
-            mapper.Map<KhachDTO, Khach>(dto, kh);
-            khachRepository.Update(kh);
+            khachRepository.Update(dto, dto.MaKhachHang);
             return true;
         }
 
@@ -51,10 +43,9 @@ namespace Application.Services
             return true;
         }
 
-        public IEnumerable<KhachDTO> GetDTOs(string sortOrder, string searchString, int pageIndex, int pageSize, out int count)
+        public IEnumerable<Khach> GetDTOs()
         {
-            var khachs = khachRepository.Filter(sortOrder, searchString, pageIndex, pageSize, out count);
-            return mapper.Map<IEnumerable<KhachDTO>>(khachs);
+            return khachRepository.GetAll();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using AutoMapper;
+﻿using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -14,32 +12,26 @@ namespace Application.Services
     public class LoaiChiPhiService : ILoaiChiPhiService
     {
         private readonly ILoaiChiPhiRepository loaiChiPhiRepository;
-        private readonly IMapper mapper;
 
-        public LoaiChiPhiService(ILoaiChiPhiRepository loaiChiPhiRepository, IMapper mapper)
+        public LoaiChiPhiService(ILoaiChiPhiRepository loaiChiPhiRepository)
         {
             this.loaiChiPhiRepository = loaiChiPhiRepository;
-            this.mapper = mapper;
         }
 
-        public bool Create(LoaiChiPhiDTO dto)
+        public bool Create(LoaiChiPhi dto)
         {
-            var lcp = mapper.Map<LoaiChiPhi>(dto);
-            loaiChiPhiRepository.Add(lcp);
+            loaiChiPhiRepository.Add(dto);
             return true;
         }
 
-        public LoaiChiPhiDTO Get(int maLCP)
+        public LoaiChiPhi Get(int maLCP)
         {
-            var lcp = loaiChiPhiRepository.GetBy(maLCP);
-            return mapper.Map<LoaiChiPhiDTO>(lcp);
+            return loaiChiPhiRepository.GetBy(maLCP);
         } 
 
-        public bool Update(LoaiChiPhiDTO dto)
+        public bool Update(LoaiChiPhi dto)
         {
-            var lcp = loaiChiPhiRepository.GetBy(dto.MaLoaiChiPhi);
-            mapper.Map<LoaiChiPhiDTO, LoaiChiPhi>(dto, lcp);
-            loaiChiPhiRepository.Update(lcp);
+            loaiChiPhiRepository.Update(dto, dto.MaLoaiChiPhi);
             return true;
         }
 
@@ -50,10 +42,9 @@ namespace Application.Services
             return true;
         }
 
-        public IEnumerable<LoaiChiPhiDTO> GetDTOs(string sortOrder, string searchString, int pageIndex, int pageSize, out int count)
+        public IEnumerable<LoaiChiPhi> GetDTOs()
         {
-            var lcps = loaiChiPhiRepository.Filter(sortOrder, searchString, pageIndex, pageSize, out count);
-            return mapper.Map<IEnumerable<LoaiChiPhiDTO>>(lcps);
+            return loaiChiPhiRepository.GetAll();
         }
     }
 }

@@ -13,8 +13,7 @@ namespace Infrastructure.Persistence.Repositories
 
         public IEnumerable<ChiPhi> GetChiPhis()
         {
-            List<ChiPhi> cp = new ();
-            cp = (from t in context.ChiPhis select t).ToList();
+            List<ChiPhi> cp = (from t in context.ChiPhis select t).ToList();
             return cp;
         }
 

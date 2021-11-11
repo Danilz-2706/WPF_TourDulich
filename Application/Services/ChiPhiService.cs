@@ -1,6 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using AutoMapper;
+﻿using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -12,32 +10,27 @@ namespace Application.Services
     public class ChiPhiService : IChiPhiService
     {
         private readonly IChiPhiRepository chiPhiRepository;
-        private readonly IMapper mapper;
 
-        public ChiPhiService(IChiPhiRepository chiPhiRepository, IMapper mapper)
+        public ChiPhiService(IChiPhiRepository chiPhiRepository)
         {
             this.chiPhiRepository = chiPhiRepository;
-            this.mapper = mapper;
         }
 
-        public bool Create(ChiPhiDTO chiPhiDTO)
+        public bool Create(ChiPhi chiPhi)
         {
-            var chiPhi = mapper.Map<ChiPhi>(chiPhiDTO);
             chiPhiRepository.Add(chiPhi);
             return true;
         }
 
-        public ChiPhiDTO Get(int maCP)
+        public ChiPhi Get(int maCP)
         {
             var chiPhi = chiPhiRepository.GetBy(maCP);
-            return mapper.Map<ChiPhiDTO>(chiPhi);
+            return chiPhi;
         }
 
-        public bool Update(ChiPhiDTO chiPhiDTO)
+        public bool Update(ChiPhi chiPhi)
         {
-            var chiPhi = chiPhiRepository.GetBy(chiPhiDTO.MaChiPhi);
-            mapper.Map<ChiPhiDTO, ChiPhi>(chiPhiDTO, chiPhi);
-            chiPhiRepository.Update(chiPhi);
+            chiPhiRepository.Update(chiPhi, chiPhi.MaChiPhi);
             return true;
         }
 
@@ -48,10 +41,9 @@ namespace Application.Services
             return true;
         }
 
-        public IEnumerable<ChiPhiDTO> GetDTOs(string sortOrder, string searchString, int pageIndex, int pageSize, out int count)
+        public IEnumerable<ChiPhi> GetDTOs()
         {
-            var chiPhis = chiPhiRepository.Filter(sortOrder, searchString, pageIndex, pageSize, out count);
-            return mapper.Map<IEnumerable<ChiPhiDTO>>(chiPhis);
+            return chiPhiRepository.GetAll();
         }
     }
 }

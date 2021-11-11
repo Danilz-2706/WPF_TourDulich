@@ -1,6 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using AutoMapper;
+﻿using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -14,31 +12,25 @@ namespace Application.Services
     public class TourDuLichService : ITourDuLichService
     {
         private readonly ITourDuLichRepository tourDuLichRepository;
-        private readonly IMapper mapper;
 
-        public TourDuLichService(ITourDuLichRepository tourDuLichRepository, IMapper mapper)
+        public TourDuLichService(ITourDuLichRepository tourDuLichRepository)
         {
             this.tourDuLichRepository = tourDuLichRepository;
-            this.mapper = mapper;
         }
 
-        public bool Create(TourDuLichDTO dto)
+        public bool Create(TourDuLich dto)
         {
-            var tour = mapper.Map<TourDuLich>(dto);
-            tourDuLichRepository.Add(tour);
+            tourDuLichRepository.Add(dto);
             return true;
         }
-        public TourDuLichDTO Get(int id)
+        public TourDuLich Get(int id)
         {
-            var tour = tourDuLichRepository.GetBy(id);
-            return mapper.Map<TourDuLichDTO>(tour);
+            return tourDuLichRepository.GetBy(id);
         }
 
-        public bool Update(TourDuLichDTO dto)
+        public bool Update(TourDuLich dto)
         {
-            var tour = tourDuLichRepository.GetBy(dto.MaTour);
-            mapper.Map<TourDuLichDTO, TourDuLich>(dto, tour);
-            tourDuLichRepository.Update(tour);
+            tourDuLichRepository.Update(dto, dto.MaTour);
             return true;
         }
 
@@ -49,10 +41,9 @@ namespace Application.Services
             return true;
         }
 
-        public IEnumerable<TourDuLichDTO> GetDTOs(string sortOrder, string searchString, int pageIndex, int pageSize, out int count)
+        public IEnumerable<TourDuLich> GetDTOs()
         {
-            var tours = tourDuLichRepository.Filter(sortOrder, searchString, pageIndex, pageSize, out count);
-            return mapper.Map<IEnumerable<TourDuLichDTO>>(tours);
+            return tourDuLichRepository.GetAll();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using AutoMapper;
+﻿using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -14,32 +12,26 @@ namespace Application.Services
     public class NhanVienService : INhanVienService
     {
         private readonly INhanVienRepository nhanVienRepository;
-        private readonly IMapper mapper;
 
-        public NhanVienService(INhanVienRepository nhanVienRepository, IMapper mapper)
+        public NhanVienService(INhanVienRepository nhanVienRepository)
         {
             this.nhanVienRepository = nhanVienRepository;
-            this.mapper = mapper;
         }
 
-        public bool Create(NhanVienDTO dto)
+        public bool Create(NhanVien dto)
         {
-            var nv = mapper.Map<NhanVien>(dto);
-            nhanVienRepository.Add(nv);
+            nhanVienRepository.Add(dto);
             return true;
         }
 
-        public NhanVienDTO Get(int maNV)
+        public NhanVien Get(int maNV)
         {
-            var nv = nhanVienRepository.GetBy(maNV);
-            return mapper.Map<NhanVienDTO>(nv);
+            return nhanVienRepository.GetBy(maNV);
         }
 
-        public bool Update(NhanVienDTO dto)
+        public bool Update(NhanVien dto)
         {
-            var nv = nhanVienRepository.GetBy(dto.MaNhanVien);
-            mapper.Map<NhanVienDTO, NhanVien>(dto, nv);
-            nhanVienRepository.Update(nv);
+            nhanVienRepository.Update(dto, dto.MaNhanVien);
             return true;
         }
 
@@ -50,10 +42,9 @@ namespace Application.Services
             return true;
         }
 
-        public IEnumerable<NhanVienDTO> GetDTOs(string sortOrder, string searchString, int pageIndex, int pageSize, out int count)
+        public IEnumerable<NhanVien> GetDTOs()
         {
-            var nhanViens = nhanVienRepository.Filter(sortOrder, searchString, pageIndex, pageSize, out count);
-            return mapper.Map<IEnumerable<NhanVienDTO>>(nhanViens);
+            return nhanVienRepository.GetAll();
         }
     }
 }

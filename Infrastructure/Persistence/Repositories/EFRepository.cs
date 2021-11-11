@@ -39,6 +39,13 @@ namespace Infrastructure.Persistence.Repositories
             context.SaveChanges();
         }
 
+        public void Update(T entity, int id)
+        {
+            T exist = context.Set<T>().Find(id);
+            context.Entry(exist).CurrentValues.SetValues(entity);
+            context.SaveChanges();
+        }
+
         public void Update(T entity)
         {
             context.Set<T>().Update(entity);

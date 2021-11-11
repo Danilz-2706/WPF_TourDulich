@@ -1,6 +1,5 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using AutoMapper;
+﻿using Application.Interfaces;
+using Domain.Entities;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,26 +12,24 @@ namespace Application.Services
     public class DiaDiemService : IDiaDiemService
     {
         private readonly IDiaDiemRepository diaDiemRepository;
-        private readonly IMapper mapper;
 
-        public DiaDiemService(IDiaDiemRepository diaDiemRepository, IMapper mapper)
+        public DiaDiemService(IDiaDiemRepository diaDiemRepository)
         {
             this.diaDiemRepository = diaDiemRepository;
-            this.mapper = mapper;
         }
 
-        public bool Create(DiaDiemDTO dto)
+        public bool Create(DiaDiem dto)
         {
 
 
             throw new NotImplementedException();
         }
 
-        public DiaDiemDTO Get(int maDD)
+        public DiaDiem Get(int maDD)
         {
             throw new NotImplementedException();
         }
-        public bool Update(DiaDiemDTO dto)
+        public bool Update(DiaDiem dto)
         {
             throw new NotImplementedException();
         }
@@ -42,7 +39,7 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<DiaDiemDTO> GetDTOs(string sortOrder, string searchString, int pageIndex, int pageSize, out int count)
+        public IEnumerable<DiaDiem> GetDTOs()
         {
             throw new NotImplementedException();
         }

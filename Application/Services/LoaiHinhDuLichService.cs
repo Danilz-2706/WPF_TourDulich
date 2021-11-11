@@ -1,6 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using AutoMapper;
+﻿using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -14,32 +12,26 @@ namespace Application.Services
     public class LoaiHinhDuLichService : ILoaiHinhDuLichService
     {
         private readonly ILoaiHinhDuLichRepository loaiHinhDuLichRepository;
-        private readonly IMapper mapper;
 
-        public LoaiHinhDuLichService(ILoaiHinhDuLichRepository loaiHinhDuLichRepository, IMapper mapper )
+        public LoaiHinhDuLichService(ILoaiHinhDuLichRepository loaiHinhDuLichRepository)
         {
             this.loaiHinhDuLichRepository = loaiHinhDuLichRepository;
-            this.mapper = mapper;
         }
 
-        public bool Create(LoaiHinhDuLichDTO dto)
+        public bool Create(LoaiHinhDuLich dto)
         {
-            var lh = mapper.Map<LoaiHinhDuLich>(dto);
-            loaiHinhDuLichRepository.Add(lh);
+            loaiHinhDuLichRepository.Add(dto);
             return true;
         }
 
-        public LoaiHinhDuLichDTO Get(int maLH)
+        public LoaiHinhDuLich Get(int maLH)
         {
-            var lh = loaiHinhDuLichRepository.GetBy(maLH);
-            return mapper.Map<LoaiHinhDuLichDTO>(lh);
+            return loaiHinhDuLichRepository.GetBy(maLH);
         }
 
-        public bool Update(LoaiHinhDuLichDTO dto)
+        public bool Update(LoaiHinhDuLich dto)
         {
-            var lh = loaiHinhDuLichRepository.GetBy(dto.MaLoaiHinh);
-            mapper.Map<LoaiHinhDuLichDTO, LoaiHinhDuLich>(dto,lh);
-            loaiHinhDuLichRepository.Update(lh);
+            loaiHinhDuLichRepository.Update(dto, dto.MaLoaiHinh);
             return true;
         }
 
@@ -50,10 +42,9 @@ namespace Application.Services
             return true;
         }
 
-        public IEnumerable<LoaiHinhDuLichDTO> GetDTOs(string sortOrder, string searchString, int pageIndex, int pageSize, out int count)
+        public IEnumerable<LoaiHinhDuLich> GetDTOs()
         {
-            var lhs = loaiHinhDuLichRepository.Filter(sortOrder, searchString, pageIndex, pageSize, out count);
-            return mapper.Map<IEnumerable<LoaiHinhDuLichDTO>>(lhs);
+            return loaiHinhDuLichRepository.GetAll();
         }
         
     }

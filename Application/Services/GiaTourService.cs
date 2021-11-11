@@ -1,6 +1,4 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
-using AutoMapper;
+﻿using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -14,31 +12,25 @@ namespace Application.Services
     public class GiaTourService : IGiaTourService
     {
         private readonly IGiaTourRepository giaTourRepository;
-        private readonly IMapper mapper;
 
-        public GiaTourService(IGiaTourRepository giaTourRepository, IMapper mapper)
+        public GiaTourService(IGiaTourRepository giaTourRepository)
         {
             this.giaTourRepository = giaTourRepository;
-            this.mapper = mapper;
         }
 
-        public bool Create(GiaTourDTO dto)
+        public bool Create(GiaTour dto)
         {
-            var gia = mapper.Map<GiaTour>(dto);
-            giaTourRepository.Add(gia);
+            giaTourRepository.Add(dto);
             return true;
         }
-        public GiaTourDTO Get(int id)
+        public GiaTour Get(int id)
         {
-            var gia = giaTourRepository.GetBy(id);
-            return mapper.Map<GiaTourDTO>(gia);
+            return giaTourRepository.GetBy(id);
         }
 
-        public bool Update(GiaTourDTO dto)
+        public bool Update(GiaTour dto)
         {
-            var gia = giaTourRepository.GetBy(dto.MaGia);
-            mapper.Map<GiaTourDTO, GiaTour>(dto, gia);
-            giaTourRepository.Update(gia);
+            giaTourRepository.Update(dto, dto.MaGia);
             return true;
         }
 
@@ -49,10 +41,9 @@ namespace Application.Services
             return true;
         }
 
-        public IEnumerable<GiaTourDTO> GetDTOs(string sortOrder, string searchString, int pageIndex, int pageSize, out int count)
+        public IEnumerable<GiaTour> GetDTOs()
         {
-            var gias = giaTourRepository.Filter(sortOrder, searchString, pageIndex, pageSize, out count);
-            return mapper.Map<IEnumerable<GiaTourDTO>>(gias);
+            return giaTourRepository.GetAll();
         }
     }
 }
