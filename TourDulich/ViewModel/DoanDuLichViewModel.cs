@@ -13,8 +13,8 @@ namespace TourDulich.ViewModel
 {
     class DoanDuLichViewModel:BaseViewModel
     {
-        private string _MaDoan;
-        public string MaDoan
+        private int _MaDoan;
+        public int MaDoan
         {
             get => _MaDoan;
             set
@@ -32,8 +32,8 @@ namespace TourDulich.ViewModel
                 _TenDoan = value; OnPropertyChanged();
             }
         }
-        private string _DoanhThu;
-        public string DoanhThu
+        private long _DoanhThu;
+        public long DoanhThu
         {
             get => _DoanhThu;
             set
@@ -41,6 +41,7 @@ namespace TourDulich.ViewModel
                 _DoanhThu = value; OnPropertyChanged();
             }
         }
+        
         private string _NoiDung;
         public string NoiDung
         {
@@ -71,8 +72,9 @@ namespace TourDulich.ViewModel
             }
         }
 
-        private Tour _SelectedTour;
-        public Tour SelectedTour
+
+        private TourDuLichDTO _SelectedTour;
+        public TourDuLichDTO SelectedTour
         {
             get => _SelectedTour;
             set
@@ -93,8 +95,8 @@ namespace TourDulich.ViewModel
             }
         }
 
-        private TourGroup _SelectedItem;
-        public TourGroup SelectedItem
+        private DoanDuLichDTO _SelectedItem;
+        public DoanDuLichDTO SelectedItem
         {
             get => _SelectedItem;
             set
@@ -104,21 +106,23 @@ namespace TourDulich.ViewModel
                 {
                     MaDoan = SelectedItem.MaDoan;
                     TenDoan = SelectedItem.TenDoan;
-                    NgayDi = SelectedItem.NgayDi;
-                    NgayVe = SelectedItem.NgayVe;
+                    NgayDi = SelectedItem.NgayKhoiHanh;
+                    NgayVe = SelectedItem.NgayKetThuc;
                     DoanhThu = SelectedItem.DoanhThu;
-                    NoiDung = SelectedItem.NoiDung;
-                    SelectedTour = SelectedItem.Tour;
-                    NhanVien = SelectedItem.NhanVien;
+
+                    //NoiDung = SelectedItem.NoiDung;
+                    //SelectedTour = SelectedItem.T;
+                    //NhanVien = SelectedItem.NhanVien;
                 }
             }
         }
 
-        private ObservableCollection<TourGroup> _list;
-        public ObservableCollection<TourGroup> ListGroup { get => _list; set { _list = value;OnPropertyChanged(); } }
+        private ObservableCollection<DoanDuLichDTO> _list;
+        public ObservableCollection<DoanDuLichDTO> ListGroup { get => _list; set { _list = value;OnPropertyChanged(); } }
 
-        private ObservableCollection<Tour> _Tour;
-        public ObservableCollection<Tour> Tour { get => _Tour; set { _Tour = value; OnPropertyChanged(); } }
+        private ObservableCollection<TourDuLichDTO> _Tour;
+        public ObservableCollection<TourDuLichDTO> Tour { get => _Tour; set { _Tour = value; OnPropertyChanged(); } }
+
         public ICommand AddCommand { get; set; }
         public ICommand ShowCommand { get; set; }
         public ICommand DoanThemNV { get; set; }
@@ -130,47 +134,9 @@ namespace TourDulich.ViewModel
         public ICommand Close_DoanThemCP { get; set; }
         public ICommand Close_DoanChiTiet { get; set; }
         public DoanDuLichViewModel() {
-            ListGroup = new ObservableCollection<TourGroup>
-            {
-                new TourGroup{DoanhThu="a", MaDoan="a9", NgayDi=DateTime.ParseExact("24/01/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("12/10/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd1", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat", MaNV="asdsadsadasd", ChucVu="asd" }, new NhanVien { TenNV1 = "Nhan" }, new NhanVien { TenNV1 = "An" }, new NhanVien { TenNV1 = "Lam" } },NoiDung="What's up ... Mic check" },
-                new TourGroup{ DoanhThu="a", MaDoan="a8", NgayDi=DateTime.ParseExact("25/02/2022", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("11/11/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd2", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ",},
-                new TourGroup{  DoanhThu="a", MaDoan="a7", NgayDi=DateTime.ParseExact("26/04/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("30/12/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd3",Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic checksssssssssss" },
-                new TourGroup{  DoanhThu="a", MaDoan="a6", NgayDi=DateTime.ParseExact("27/03/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("04/11/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd4", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic check3333333333333" },
-                new TourGroup{  DoanhThu="a", MaDoan="a5", NgayDi=DateTime.ParseExact("01/02/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("14/03/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd5", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"},NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic checkdsfasdfsdfasdfsadf" },
-                new TourGroup{  DoanhThu="a", MaDoan="a4", NgayDi=DateTime.ParseExact("22/01/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("21/05/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd6", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"},NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } }},
-                new TourGroup{  DoanhThu="a", MaDoan="a7", NgayDi=DateTime.ParseExact("26/04/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("30/12/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd3",Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"},NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic checksssssssssss" },
-                new TourGroup{DoanhThu="a", MaDoan="a9", NgayDi=DateTime.ParseExact("24/01/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("12/10/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd1", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic check" },
-                new TourGroup{ DoanhThu="a", MaDoan="a8", NgayDi=DateTime.ParseExact("25/02/2022", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("11/11/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd2", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ",},
-                new TourGroup{  DoanhThu="a", MaDoan="a7", NgayDi=DateTime.ParseExact("26/04/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("30/12/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd3",Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic checksssssssssss" },
-                new TourGroup{  DoanhThu="a", MaDoan="a6", NgayDi=DateTime.ParseExact("27/03/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("04/11/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd4", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic check3333333333333" },
-                new TourGroup{  DoanhThu="a", MaDoan="a5", NgayDi=DateTime.ParseExact("01/02/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("14/03/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd5", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"},NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic checkdsfasdfsdfasdfsadf" },
-                new TourGroup{  DoanhThu="a", MaDoan="a4", NgayDi=DateTime.ParseExact("22/01/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("21/05/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd6", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"},NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } }},
-                new TourGroup{  DoanhThu="a", MaDoan="a7", NgayDi=DateTime.ParseExact("26/04/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("30/12/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd3",Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"},NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic checksssssssssss" },
-                new TourGroup{DoanhThu="a", MaDoan="a9", NgayDi=DateTime.ParseExact("24/01/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("12/10/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd1", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic check" },
-                new TourGroup{ DoanhThu="a", MaDoan="a8", NgayDi=DateTime.ParseExact("25/02/2022", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("11/11/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd2", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ",},
-                new TourGroup{  DoanhThu="a", MaDoan="a7", NgayDi=DateTime.ParseExact("26/04/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("30/12/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd3",Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic checksssssssssss" },
-                new TourGroup{  DoanhThu="a", MaDoan="a6", NgayDi=DateTime.ParseExact("27/03/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("04/11/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd4", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"}, NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic check3333333333333" },
-                new TourGroup{  DoanhThu="a", MaDoan="a5", NgayDi=DateTime.ParseExact("01/02/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("14/03/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd5", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"},NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic checkdsfasdfsdfasdfsadf" },
-                new TourGroup{  DoanhThu="a", MaDoan="a4", NgayDi=DateTime.ParseExact("22/01/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("21/05/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd6", Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"},NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } }},
-                new TourGroup{  DoanhThu="a", MaDoan="a7", NgayDi=DateTime.ParseExact("26/04/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), NgayVe =DateTime.ParseExact("30/12/2013", "dd/MM/yyyy",CultureInfo.InvariantCulture), TenDoan="asd3",Tour=new Tour{ Ma="DALAT", Ten="Đà Lạt - Nha Trang"},NhanVien=new List<NhanVien>{ new NhanVien { TenNV1 = "Dat" } },NoiDung="What's up ... Mic checksssssssssss" }
-            };
+            ListGroup = new ObservableCollection<DoanDuLichDTO>();
 
-            Tour = new ObservableCollection<Tour>
-            {
-                new Tour{Ma = "12", Ten="Đà Lạt - Nha Trang"},
-                new Tour{Ma = "123", Ten="HCM - Hà Nội"},
-                new Tour{Ma = "124", Ten="Cà Mau - Hà Giang"},
-                new Tour{Ma = "11", Ten="Quận 1 - Hầm Thủ Thiêm"},
-
-                new Tour{Ma = "11", Ten="Quận 1 - Hầm Thủ Thiêm"},
-                new Tour{Ma = "11", Ten="Quận 1 - Hầm Thủ Thiêm"},
-                new Tour{Ma = "11", Ten="Quận 1 - Hầm Thủ Thiêm"},
-                new Tour{Ma = "11", Ten="Quận 1 - Hầm Thủ Thiêm"},
-                new Tour{Ma = "11", Ten="Quận 1 - Hầm Thủ Thiêm"},
-                new Tour{Ma = "11", Ten="Quận 1 - Hầm Thủ Thiêm"},
-                new Tour{Ma = "11", Ten="Quận 1 - Hầm Thủ Thiêm"},
-                new Tour{Ma = "1232", Ten="SGU - Sư phạm"}
-            };
+            Tour = new ObservableCollection<TourDuLichDTO>();
 
 
             #region Commands

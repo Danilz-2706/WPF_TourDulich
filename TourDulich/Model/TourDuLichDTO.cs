@@ -9,5 +9,8 @@ namespace TourDulich.Model
         public string TenGoi { get; set; }
         public string DacDiem { get; set; }
         public int MaLoaiHinh { get; set; }
+
+       
+
     }
 }

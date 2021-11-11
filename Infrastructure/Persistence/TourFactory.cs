@@ -15,7 +15,7 @@ namespace Infrastructure.Persistence
             .Build();*/
 
             //var connectionString = configuration.GetConnectionString("TourDB");
-            var connectionString = "Server=.\\Admin;Database=TourDB;Trusted_Connection=True;";
+            var connectionString = @"Server=.\SQLEXPRESS;Database=TourDB;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<TourContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
