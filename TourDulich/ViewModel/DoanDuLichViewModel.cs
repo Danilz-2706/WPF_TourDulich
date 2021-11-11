@@ -13,64 +13,12 @@ namespace TourDulich.ViewModel
 {
     class DoanDuLichViewModel:BaseViewModel
     {
-        private int _MaDoan;
-        public int MaDoan
-        {
-            get => _MaDoan;
-            set
-            {
-                _MaDoan = value;
-            }
-        }
-
-        private string _TenDoan;
-        public string TenDoan
-        {
-            get => _TenDoan;
-            set
-            {
-                _TenDoan = value;
-            }
-        }
-        private long _DoanhThu;
-        public long DoanhThu
-        {
-            get => _DoanhThu;
-            set
-            {
-                _DoanhThu = value;
-            }
-        }
-        
-        private string _NoiDung;
-        public string NoiDung
-        {
-            get => _NoiDung;
-            set
-            {
-                _NoiDung = value;
-            }
-        }
-        
-
-        private DateTime? _NgayDi;
-        public DateTime? NgayDi
-        {
-            get => _NgayDi;
-            set
-            {
-                _NgayDi = value;
-            }
-        }
-        private DateTime? _NgayVe;
-        public DateTime? NgayVe
-        {
-            get => _NgayVe;
-            set
-            {
-                _NgayVe = value;
-            }
-        }
+        public int MaDoan { get; set; }
+        public string TenDoan { get; set; }
+        public long DoanhThu { get; set; }
+        public string NoiDung { get; set; }
+        public DateTime? NgayDi { get; set; }
+        public DateTime? NgayVe { get; set; }
 
 
         //private TourDuLichDTO _SelectedTour;
@@ -117,8 +65,7 @@ namespace TourDulich.ViewModel
         //    }
         //}
 
-        private ObservableCollection<DoanDuLich> _list;
-        public ObservableCollection<DoanDuLich> ListGroup { get => _list; set { _list = value; } }
+        public ObservableCollection<DoanDuLich> ListGroup { get; set; }
 
 
 
