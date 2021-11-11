@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Service.Interfaces;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace Service.Services
 {
     public class DoanDuLichService : IDoanDuLichService
     {

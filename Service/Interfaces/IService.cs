@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Application.Interfaces
+namespace Service.Interfaces
 {
     public interface IService<T> where T : class
     {

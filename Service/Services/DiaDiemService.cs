@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Service.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace Service.Services
 {
     public class DiaDiemService : IDiaDiemService
     {

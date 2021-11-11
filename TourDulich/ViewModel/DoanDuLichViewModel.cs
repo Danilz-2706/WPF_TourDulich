@@ -64,8 +64,8 @@ namespace TourDulich.ViewModel
         //        }
         //    }
         //}
-
-        public ObservableCollection<DoanDuLich> ListGroup { get; set; }
+        private ObservableCollection<DoanDuLich> _list;
+        public ObservableCollection<DoanDuLich> ListGroup { get => _list; set { _list = value;} }
 
 
 
