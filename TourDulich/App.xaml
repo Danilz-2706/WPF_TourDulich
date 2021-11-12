@@ -2,9 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TourDulich"
-             StartupUri="MainWindow.xaml">
+             xmlns:ninject="clr-namespace:TourDulich.NInject">
     <Application.Resources>
         <ResourceDictionary>
+            <ninject:ServiceLocator x:Key="ServiceLocator"/>
             <ResourceDictionary.MergedDictionaries>
                 <!--Materidal Design-->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />

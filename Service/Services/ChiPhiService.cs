@@ -1,11 +1,11 @@
-﻿using Application.Interfaces;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Interfaces;
+using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Services
+namespace Service.Services
 {
     public class ChiPhiService : IChiPhiService
     {

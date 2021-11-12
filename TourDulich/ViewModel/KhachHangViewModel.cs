@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TourDulich.ViewModel
 {
-    class KhachHangViewModel
+    public class KhachHangViewModel
 
     {
         public KhachHangViewModel() { }

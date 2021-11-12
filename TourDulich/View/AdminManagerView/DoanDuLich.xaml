@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TourDulich.View.AdminManager" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             DataContext="{StaticResource tgvm}"
+             DataContext="{Binding Path = DoanDuLichViewModel, Source={StaticResource ServiceLocator}}"
              d:DesignHeight="625" d:DesignWidth="947">
     <!--//Resource//-->
     <UserControl.Resources>
@@ -140,7 +140,7 @@
 
                                 <GridView.Columns>
                                     <GridViewColumn Header="Mã Đoàn" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Tour" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Tour" DisplayMemberBinding="{Binding Tour.TenGoi}"></GridViewColumn>
                                     <GridViewColumn Header="Tên Đoàn" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
                                     <GridViewColumn Header="Ngày đi" DisplayMemberBinding="{Binding NgayDi, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                                     <GridViewColumn Header="Ngày về" DisplayMemberBinding="{Binding NgayVe, StringFormat='dd/MM/yyyy'}"></GridViewColumn>

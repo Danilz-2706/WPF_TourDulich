@@ -13,7 +13,7 @@ using TourDulich.View;
 
 namespace TourDulich.ViewModel
 {
-    class AdminViewModel
+    public class AdminViewModel
     {
 
         public AdminViewModel()

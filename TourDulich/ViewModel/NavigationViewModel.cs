@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -11,7 +13,7 @@ using TourDulich.Model;
 
 namespace TourDulich.ViewModel
 {
-    class NavigationViewModel : BaseViewModel
+    public class NavigationViewModel : BaseViewModel
     {
 
         private CollectionViewSource MenuItemsCollection;
@@ -110,7 +112,7 @@ namespace TourDulich.ViewModel
                     SelectedViewModel = new TourViewModel();
                     break;
                 case "Tour Group":
-                    SelectedViewModel = new DoanDuLichViewModel();
+                   //SelectedViewModel = new DoanDuLichViewModel();
                     break;
                 case "Tourist Attraction":
                     SelectedViewModel = new TouristAttractionViewModel();

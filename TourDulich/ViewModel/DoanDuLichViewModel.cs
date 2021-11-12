@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Entities;
+using Service.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -11,67 +13,17 @@ using TourDulich.View.AdminManagerView;
 
 namespace TourDulich.ViewModel
 {
-    class DoanDuLichViewModel:BaseViewModel
+    public class DoanDuLichViewModel : BaseViewModel
     {
+        private readonly IDoanDuLichService doanDuLichService;
+
         public int MaDoan { get; set; }
         public string TenDoan { get; set; }
         public long DoanhThu { get; set; }
         public string NoiDung { get; set; }
         public DateTime? NgayDi { get; set; }
         public DateTime? NgayVe { get; set; }
-
-
-        //private TourDuLichDTO _SelectedTour;
-        //public TourDuLichDTO SelectedTour
-        //{
-        //    get => _SelectedTour;
-        //    set
-        //    {
-        //        _SelectedTour = value;
-
-        //    }
-        //}
-
-        //private List<NhanVienDTO> _Nhanvien;
-        //public List<NhanVienDTO> NhanVien
-        //{
-        //    get => _Nhanvien;
-        //    set
-        //    {
-        //        _Nhanvien = value;
-
-        //    }
-        //}
-
-        //private DoanDuLichDTO _SelectedItem;
-        //public DoanDuLichDTO SelectedItem
-        //{
-        //    get => _SelectedItem;
-        //    set
-        //    {
-        //        _SelectedItem = value;
-        //        if(SelectedItem != null)
-        //        {
-        //            MaDoan = SelectedItem.MaDoan;
-        //            TenDoan = SelectedItem.TenDoan;
-        //            NgayDi = SelectedItem.NgayKhoiHanh;
-        //            NgayVe = SelectedItem.NgayKetThuc;
-        //            DoanhThu = SelectedItem.DoanhThu;
-
-        //            //NoiDung = SelectedItem.NoiDung;
-        //            //SelectedTour = SelectedItem.T;
-        //            //NhanVien = SelectedItem.NhanVien;
-        //        }
-        //    }
-        //}
-
         public ObservableCollection<DoanDuLich> ListGroup { get; set; }
-
-
-
-        //private ObservableCollection<TourDuLichDTO> _Tour;
-        //public ObservableCollection<TourDuLichDTO> Tour { get => _Tour; set { _Tour = value; } }
-
         public ICommand AddCommand { get; set; }
         public ICommand ShowCommand { get; set; }
         public ICommand DoanThemNV { get; set; }
@@ -82,8 +34,8 @@ namespace TourDulich.ViewModel
         public ICommand Close_DoanThemKH { get; set; }
         public ICommand Close_DoanThemCP { get; set; }
         public ICommand Close_DoanChiTiet { get; set; }
-        public DoanDuLichViewModel() {
-            ListGroup = new ObservableCollection<DoanDuLich> { 
+        public DoanDuLichViewModel(IDoanDuLichService doanDuLichService) {
+            /*ListGroup = new ObservableCollection<DoanDuLich> { 
             new DoanDuLich{ name="asdf"},
             new DoanDuLich{ name="as2f"},
             new DoanDuLich{ name="111df"},
@@ -99,10 +51,11 @@ namespace TourDulich.ViewModel
             new DoanDuLich{ name="111df"},
             new DoanDuLich{ name="111df"},
             new DoanDuLich{ name="a"}
-            };
+            };*/
 
             //Tour = new ObservableCollection<TourDuLichDTO>();
-
+            this.doanDuLichService = doanDuLichService;
+            ListGroup = new ObservableCollection<DoanDuLich>(doanDuLichService.GetDTOs());
 
             #region Commands
             AddCommand = new RelayCommand<object>(p => { return true; }, p => { Add(); });
@@ -117,6 +70,7 @@ namespace TourDulich.ViewModel
             Close_DoanThemKH = new RelayCommand<object>(p => { return true; }, p => { CloseThemKH(p); });
             Close_DoanThemCP = new RelayCommand<object>(p => { return true; }, p => { CloseThemCP(p); });
             Close_DoanChiTiet = new RelayCommand<object>(p => { return true; }, p => { CloseChiTiet(p); });
+            
             #endregion
         }
         private void Add() { DoanDuLich_Them x = new DoanDuLich_Them(); x.ShowDialog(); }
@@ -135,11 +89,6 @@ namespace TourDulich.ViewModel
 
         private void ShowThemCP() { DoanDuLich_ThemChiPhi x = new DoanDuLich_ThemChiPhi(); x.ShowDialog(); }
         private void CloseThemCP(object obj) { DoanDuLich_ThemChiPhi x = obj as DoanDuLich_ThemChiPhi; x.Close();  }
-    }
-
-    class DoanDuLich
-    {
-        public string name { get; set; }
     }
 
 }
