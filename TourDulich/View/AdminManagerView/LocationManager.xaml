@@ -129,7 +129,7 @@
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Địa Điểm" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Địa Điểm" DisplayMemberBinding="{Binding  }"></GridViewColumn>
                                     <GridViewColumn Header="Tên Địa Điểm" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>

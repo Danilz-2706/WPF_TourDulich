@@ -1,4 +1,6 @@
 ﻿
+using Domain.Interfaces;
+using Infrastructure.Persistence.Repositories;
 using Service.Services;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,8 @@ namespace TourDulich.ViewModel
         public ObservableCollection<DiaDiemService> List { get => _List; set { _List = value; } }
         public LocationViewModel()
         {
-            List = new ObservableCollection<DiaDiemService>();
+            //List = new ObservableCollection<DiaDiemService>(new DiaDiemService(new DiaDiemRepository()).GetDTOs);
+            
         }
 
     }

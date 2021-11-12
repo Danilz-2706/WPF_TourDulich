@@ -72,6 +72,8 @@ namespace TourDulich.ViewModel
         //private ObservableCollection<TourDuLichDTO> _Tour;
         //public ObservableCollection<TourDuLichDTO> Tour { get => _Tour; set { _Tour = value; } }
 
+        #region commands
+        
         public ICommand AddCommand { get; set; }
         public ICommand ShowCommand { get; set; }
         public ICommand DoanThemNV { get; set; }
@@ -82,6 +84,7 @@ namespace TourDulich.ViewModel
         public ICommand Close_DoanThemKH { get; set; }
         public ICommand Close_DoanThemCP { get; set; }
         public ICommand Close_DoanChiTiet { get; set; }
+        #endregion
         public DoanDuLichViewModel() {
             ListGroup = new ObservableCollection<DoanDuLich> { 
             new DoanDuLich{ name="asdf"},
