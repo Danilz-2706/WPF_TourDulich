@@ -17,7 +17,7 @@
         <Style x:Key="sizeCombobox" TargetType="ComboBox">
             <Setter Property="Height" Value="30"/>
         </Style>
-        
+
         <!--//Info - name - value //-->
         <!--//Start//-->
         <Style x:Key="tblIfo" TargetType="TextBlock">
@@ -46,31 +46,32 @@
             <Setter Property="FontSize" Value="16"/>
         </Style>
         <!--//End//-->
-        
+
     </UserControl.Resources>
-    
-    
+
+
     <!--//Main//-->
     <Grid Background="Transparent">
         <materialDesign:Card>
             <Grid>
                 <!--//Layout//-->
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="14.625*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="612"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="1.827*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <!--//Search//-->
-                <Grid Grid.Row="0" Grid.Column="0" Background="#9D9D9D">
+                <Grid Grid.Row="0" Grid.Column="0" Background="#ff8e3c">
                     <TextBlock  Text="Tìm kiếm" 
                                     Margin="55 0 0 0" 
                                     Width="70"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
+                                Foreground="#eff0f3"
                                     Style="{StaticResource fontText}"></TextBlock>
                     <ComboBox
                                     materialDesign:HintAssist.Hint="Search"
@@ -81,7 +82,7 @@
                                     materialDesign:HintAssist.HintOpacity=".26"  
                                     Style="{StaticResource sizeCombobox}">
                     </ComboBox>
-                    <Grid Background="#918D8D"  Width="30" Height="30"
+                    <Grid Background="#ff7a1a"  Width="30" Height="30"
                               Margin="0 0 62 0"
                               HorizontalAlignment="Right">
                         <Image  Source="/Assets/Icon/DT1__UI--icon/search.png"
@@ -90,10 +91,11 @@
                 </Grid>
 
                 <!--//Filter//-->
-                <Grid Grid.Row="0" Grid.Column="1" Background="#9D9D9D">
+                <Grid Grid.Row="0" Grid.Column="1" Background="#ff8e3c">
                     <TextBlock  Text="Lọc" 
                                     Margin="20 0 0 0" 
                                     Width="40"
+                                Foreground="#eff0f3"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Style="{StaticResource fontText}"/>
@@ -119,140 +121,221 @@
                 </Grid>
 
                 <!--//List Tour//-->
-                <Grid Grid.Row="1" Grid.Column="0" >
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <WrapPanel>
-                            <!--ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}"-->
-                            <!--<ListView>
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Button 
-                                                Width="109" Height="125" Margin="5"                       
-                                                    Background="#DBF2D0">
-                                                <StackPanel Orientation="Vertical">
-                                                    <TextBlock Text="132" Foreground="Black"/>
+                <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
 
-                                                    <TextBlock Text="Hanh trinh" Foreground="Black"/>
-                                                    <TextBlock Text="Thoi gian" Foreground="Black"/>
+                    <ListView ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
+                        <ListView.View>
+                            <GridView>
 
-                                                </StackPanel>
-                                            </Button>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>-->
-                        </WrapPanel>
-                    </ScrollViewer>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Mã Tour" DisplayMemberBinding="{Binding name}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Gọi" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Đặc Điểm" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
+                                    <GridViewColumn Header="Giá Tour" DisplayMemberBinding="{Binding NgayDi, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Header="Điểm Tham Quan" DisplayMemberBinding="{Binding NgayVe, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Header="Loại Hình" DisplayMemberBinding="{Binding DoanhThu}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <!--<ItemsControl Width="auto" Height="auto" ItemsSource="{Binding ListGroup}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton Content="{Binding name}"
+                                             Style="{StaticResource GridButtonStyle}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>-->
                 </Grid>
 
 
                 <!--//Info - Add - Edit - Remove //-->
-                <Grid   Grid.Row="1"
-                            Grid.Column="1">
+                <Grid   Grid.Row="1" Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="52"></RowDefinition>
+                        <RowDefinition Height="10.25*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <!--//Info//-->
                     <Grid Grid.Row="0">
                         <ScrollViewer VerticalScrollBarVisibility="Auto" >
-                            <StackPanel Background="#C2C2C2" Height="auto">
-                                <!--//Mã Tour//-->
+                            <StackPanel Height="auto">
+                                <StackPanel.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFFF8E3C" Offset="0.372"/>
+                                        <GradientStop Color="#FFFFAB6F" Offset="0.925"/>
+                                    </LinearGradientBrush>
+                                </StackPanel.Background>
+
+
+                                <!--//MÃ ĐOÀN//-->
                                 <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="MÃ TOUR"  Style="{StaticResource tbName}"/>
-                                    <TextBox Style="{StaticResource tblIf1o}"
-                                             IsEnabled="{Binding Path=IsChecked, ElementName=edit}"></TextBox>
+                                    <TextBlock  Text="Mã Tour"  Style="{StaticResource tbName}"/>
+                                    <TextBox  IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
-                                <!--//Tên Tour//-->
+                                <!--//TÊN ĐOÀN//-->
                                 <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="TÊN TOUR"  Style="{StaticResource tbName}"/>
-                                    <TextBox Style="{StaticResource tblIf1o}"
-                                             IsEnabled="{Binding Path=IsChecked, ElementName=edit}"></TextBox>
+                                    <TextBlock  Text="Tên Gọi"  Style="{StaticResource tbName}"/>
+
+                                    <TextBox
+                                             
+                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                             
+                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
-                                <!--//Mã Địa điểm//-->
+                                <!--//TÊN TOUR//-->
                                 <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="MÃ ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
+                                    <TextBlock  Text="Đặc Điểm"  Style="{StaticResource tbName}"/>
+                                    <ComboBox
+                                                ItemsSource="{Binding Tour}"
+                                                DisplayMemberPath="Ten"
+                                                SelectedValue="{Binding SelectedTour ,UpdateSourceTrigger=PropertyChanged}"
+                                                IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                                IsEditable="{Binding ElementName=edit, Path=IsChecked}"
+                                                
+                                                materialDesign:HintAssist.HintOpacity=".26">
+                                    </ComboBox>
                                 </Grid>
 
-                                <!--//Tên Địa Điểm//-->
+                                <!--//NHÂN VIÊN DẪN ĐOÀN//-->
+                                
+                                    <StackPanel Margin="0 5 0 8">
+                                        <TextBlock  Text="Điểm Tham Quan : "  Style="{StaticResource tbName}"/>
+
+                                        
+                                    </StackPanel>
+                                
+
+                                <!--//NGÀY ĐI - NGÀY VỀ//-->
                                 <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="TÊN ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <DatePicker
+                                        Margin="10 0 5 0"
+                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                        SelectedDate="{Binding NgayDi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                                Grid.Column="0"
+                                                materialDesign:HintAssist.Hint="Ngày đi"
+                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
+                                    <DatePicker
+                                        Margin="5 0 10 0"
+                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                        SelectedDate="{Binding NgayVe, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+
+                                                Grid.Column="1"
+                                                materialDesign:HintAssist.Hint="Ngày về"
+                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                                 </Grid>
 
-                                <!--//Mã Đoàn//-->
+                                <!--//DOANH THU//-->
                                 <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="MÃ ĐOÀN"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
+                                    <TextBlock  Text="Loại Hình"  Style="{StaticResource tbName}"/>
+                                    <TextBox  IsEnabled="False" Text="{Binding DoanhThu,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
-                                <!--//Tên Đoàn//-->
-                                <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="TÊN ĐOÀN"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
-                                </Grid>
+                                <!--//NỘI DUNG//-->
+                                <StackPanel Margin="0 5 0 8">
+                                    <TextBlock  Text="Giá Tour : "  Style="{StaticResource tbName}"/>
 
-                                <!--//Mã Hành trình//-->
-                                <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="MÃ HÀNH TRÌNH"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
-                                </Grid>
+                                    <Border Margin="10 0 10 0"
+                                            CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                            HorizontalAlignment="Stretch">
+                                        <TextBox 
+                                                TextWrapping="Wrap"
+                                                VerticalAlignment="Top"
+                                                IsEnabled="False"
+                                                AcceptsReturn="True"
+                                                Margin="10 5 10 0"
+                                                FontSize="14"
+                                                Text="{Binding NoiDung,UpdateSourceTrigger=PropertyChanged}"
+                                                materialDesign:HintAssist.Hint="Nội dung đang trống"
+                                                />
+                                    </Border>
+                                </StackPanel>
 
-                                <!--//Tên Hành trình//-->
-                                <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="TÊN HÀNH TRÌNH"  Style="{StaticResource tbName}"/>
-                                    <TextBlock Style="{StaticResource tblIfo}"/>
-                                </Grid>
+
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>
 
                     <!--//Add - Edit - Remove//-->
                     <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <!--//Thêm//-->
-                        <Button
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <!--//Thêm//-->
+
+                            <Button
+                                Grid.Column="0"
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
+                                Margin="10 0 5 0"
+                                Command="{Binding AddCommand}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Width="90"
-                                Command="{Binding AddTour}"
                                 ToolTip="Thêm">
-                            <TextBlock Text="Thêm" Style="{StaticResource fontText}"/>
-                        </Button>
 
-                        <!--//Sửa//-->
-                        <ToggleButton
-                            x:Name="edit"
+                                <TextBlock Text="Thêm" Style="{StaticResource fontText}"/>
+                            </Button>
+
+                            <!--//Sửa//-->
+                            <ToggleButton x:Name="edit"
+                                Grid.Column="1"   
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Width="90"
-                                Margin="20 0 20 0"
+                                Margin="5 0 5 0"
                                 IsChecked="False"
-                                ToolTip="Sửa" >
-                            <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
-                        </ToggleButton>
+                                ToolTip="Sửa">
+                                <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
 
-                        <!--//Xóa//-->
-                        <Button
+                            </ToggleButton>
+
+                            <!--//Xóa//-->
+                            <Button
+                                Grid.Column="2"
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Width="90"
-                                Command="{Binding DeleteTour}"
+                                Command="{Binding DeleteCommand}"
+                                Margin="5 0 5 0"
                                 ToolTip="Xóa">
-                            <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>
-                        </Button>
+                                <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>
+                            </Button>
+                            <!--//Xem chi tiết//-->
+                            <Button
+                                Grid.Column="3"
+                                BorderBrush="#C4C4C4"
+                                Background="#C4C4C4"
+                                Foreground="#000"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Command="{Binding ShowCommand}"
+                                Margin="5 0 10 0"
+                                ToolTip="Chi tiết đoàn">
+                                <TextBlock Text="Chi Tiết Tour" Style="{StaticResource fontText}"/>
+                            </Button>
+                        </Grid>
+
                     </StackPanel>
                 </Grid>
             </Grid>
         </materialDesign:Card>
     </Grid>
-    
+
 </UserControl>
