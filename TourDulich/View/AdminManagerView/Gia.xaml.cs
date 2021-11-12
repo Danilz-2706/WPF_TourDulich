@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourDulich.View.AdminManager
+namespace TourDulich.View.AdminManagerView
 {
     /// <summary>
-    /// Interaction logic for PriceManager.xaml
+    /// Interaction logic for Gia.xaml
     /// </summary>
-    public partial class PriceManager : UserControl
+    public partial class Gia : UserControl
     {
-        public PriceManager()
+        public Gia()
         {
             InitializeComponent();
         }

@@ -65,7 +65,7 @@
 
             <!--//Price - manager//-->
             <TabItem Header="GIÁ" Style="{StaticResource TabItem}">
-                <adminmanager:PriceManager></adminmanager:PriceManager>
+                <adminmanagerview:Gia></adminmanagerview:Gia>
             </TabItem>
             
             <!--//Cost - manager//-->

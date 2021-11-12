@@ -5,8 +5,11 @@
                     xmlns:vml="clr-namespace:TourDulich.View.AdminManager">
 
     <vm:TourViewModel x:Key="tvm"></vm:TourViewModel>
+    <vm:DoanDuLichViewModel x:Key="tgvm"></vm:DoanDuLichViewModel>
     <vm:KhachHangViewModel x:Key="khvm"></vm:KhachHangViewModel>
     <vm:NhanVienViewModel x:Key="nvm"></vm:NhanVienViewModel>
+    <vm:LocationViewModel x:Key="lcvm"></vm:LocationViewModel>
+    
     <vm:NavigationViewModel x:Key="nvvm"></vm:NavigationViewModel>
 
     <!--//Đọc - đẩy dữ liệu theo View - ViewModel//-->

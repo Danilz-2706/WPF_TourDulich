@@ -1,11 +1,10 @@
-﻿<UserControl x:Class="TourDulich.View.AdminManagerView.LocationManager"
+﻿<UserControl x:Class="TourDulich.View.AdminManagerView.Gia"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManagerView" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             DataContext="{StaticResource lcvm}"
              mc:Ignorable="d" >
 
     <!--//Resource//-->
@@ -120,7 +119,7 @@
 
 
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
+                    <ListView ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -129,8 +128,10 @@
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Địa Điểm" DisplayMemberBinding="{Binding  }"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Địa Điểm" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Giá" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày bắt đầu" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày kết thúc" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Giá tiền" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -156,13 +157,37 @@
 
                             <!--//MÃ NHÂN VIÊN//-->
                             <Grid Margin="0 8 0 16">
-                                <TextBlock  Text="MÃ ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
+                                <TextBlock  Text="MÃ CHI PHÍ"  Style="{StaticResource tbName}"/>
                                 <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
 
+                            <!--//NGÀY ĐI - NGÀY VỀ//-->
+                            <Grid Margin="0 5 0 8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <DatePicker
+                                        Margin="10 0 5 0"
+                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                        SelectedDate="{Binding NgayDi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                                Grid.Column="0"
+                                                materialDesign:HintAssist.Hint="Ngày đi"
+                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
+                                <DatePicker
+                                        Margin="5 0 10 0"
+                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                        SelectedDate="{Binding NgayVe, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+
+                                                Grid.Column="1"
+                                                materialDesign:HintAssist.Hint="Ngày về"
+                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            </Grid>
+
+
                             <!--//TÊN NHÂN VIÊN//-->
                             <Grid Margin="0 16 0 8">
-                                <TextBlock  Text="TÊN ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
+                                <TextBlock  Text="GIÁ TIỀN"  Style="{StaticResource tbName}"/>
 
                                 <TextBox Style="{StaticResource tblIfo1}"
                                              

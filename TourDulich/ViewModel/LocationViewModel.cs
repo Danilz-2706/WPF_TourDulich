@@ -1,4 +1,8 @@
-﻿using System;
+﻿
+using Domain.Interfaces;
+using Infrastructure.Persistence.Repositories;
+using Service.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,7 +16,15 @@ namespace TourDulich.ViewModel
     {
         public string MaDiaDiem { get; set; }
         public string TenDiaDiem { get; set; }
-        //public ObservableCollection<DiaDiemDTO> List { get; set; }
+
+
+        private ObservableCollection<DiaDiemService> _List;
+        public ObservableCollection<DiaDiemService> List { get => _List; set { _List = value; } }
+        public LocationViewModel()
+        {
+            //List = new ObservableCollection<DiaDiemService>(new DiaDiemService(new DiaDiemRepository()).GetDTOs);
+            
+        }
 
     }
 }
