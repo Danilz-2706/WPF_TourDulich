@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Domain.Entities;
+using Ninject;
+using Service.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +16,6 @@ namespace TourDulich
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

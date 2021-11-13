@@ -8,7 +8,7 @@ using TourDulich.View.AdminManagerView;
 
 namespace TourDulich.ViewModel
 {
-    class PriceViewModel : BaseViewModel
+    public class PriceViewModel : BaseViewModel
     {
         //public ICommand Add { get; set; }
         public PriceViewModel()

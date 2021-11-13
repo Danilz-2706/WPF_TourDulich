@@ -18,11 +18,10 @@ namespace Service.Services
         private readonly IChiTietDoanRepository chiTietDoanRepository;
         private readonly INhanVienRepository nhanVienRepository;
         private readonly ILoaiChiPhiRepository loaiChiPhiRepository;
-        private readonly IMapper mapper;
 
         public DoanDuLichService(IDoanDuLichRepository doanDuLichRepository,INoiDungTourRepository noiDungTourRepository,
             IKhachRepository khachRepository,IChiTietDoanRepository chiTietDoanRepository, 
-            INhanVienRepository nhanVienRepository, ILoaiChiPhiRepository loaiChiPhiRepository ,IMapper mapper)
+            INhanVienRepository nhanVienRepository, ILoaiChiPhiRepository loaiChiPhiRepository)
         {
             this.doanDuLichRepository = doanDuLichRepository;
             this.noiDungTourRepository = noiDungTourRepository;
@@ -30,7 +29,6 @@ namespace Service.Services
             this.chiTietDoanRepository = chiTietDoanRepository;
             this.nhanVienRepository = nhanVienRepository;
             this.loaiChiPhiRepository = loaiChiPhiRepository;
-            this.mapper = mapper;
         }
 
         #region Đoàn Du Lịch
@@ -61,7 +59,12 @@ namespace Service.Services
 
         public IEnumerable<DoanDuLich> GetDTOs()
         {
-            return doanDuLichRepository.GetAll();
+            List<DoanDuLich> list = new ();
+            list.Add(new DoanDuLich());
+            list.Add(new DoanDuLich());
+            list.Add(new DoanDuLich());
+            return list;
+            //return doanDuLichRepository.GetAll();
         }
 
         #endregion

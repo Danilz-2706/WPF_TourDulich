@@ -1,6 +1,6 @@
-﻿using Service.Interfaces;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Interfaces;
+using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

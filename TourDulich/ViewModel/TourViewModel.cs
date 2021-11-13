@@ -12,7 +12,7 @@ using TourDulich.View.AdminManagerView;
 
 namespace TourDulich.ViewModel
 {
-    class TourViewModel: BaseViewModel
+    public class TourViewModel: BaseViewModel
     {
         public ICommand AddTour { get; set; }
         public ICommand EditTour { get; set; }

@@ -10,7 +10,7 @@ using TourDulich.Model;
 
 namespace TourDulich.ViewModel
 {
-    class CostViewModel
+    public class CostViewModel
 
     {
         
