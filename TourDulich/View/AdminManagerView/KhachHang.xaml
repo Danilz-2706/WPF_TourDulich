@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManager" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             DataContext="{StaticResource khvm}"
+             DataContext="{Binding Source={StaticResource ServiceLocator}, Path=KhachHangViewModel}"
              >
 
     <!--//Resource//-->
@@ -132,18 +132,18 @@
                 <!--//List Tour//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
 
-                    <ListView ItemsSource="{Binding ListKH}" SelectedItem="{Binding SelectedItem}">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
                         <ListView.View>
                             <GridView>
 
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Khách Hàng" DisplayMemberBinding="{Binding MaKH}"></GridViewColumn>
-                                    <GridViewColumn Header="Họ Tên" DisplayMemberBinding="{Binding TenKH}"></GridViewColumn>
-                                    <GridViewColumn Header="CMND" DisplayMemberBinding="{Binding CMND}"></GridViewColumn>
-                                    <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding Address}"></GridViewColumn>
-                                    <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding Sex}"></GridViewColumn>
-                                    <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding Phonenum}"></GridViewColumn>
-                                    <GridViewColumn Header="Quốc tịch" DisplayMemberBinding="{Binding Quoctich}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Khách Hàng" DisplayMemberBinding="{Binding MaKhachHang}"></GridViewColumn>
+                                    <GridViewColumn Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                                    <GridViewColumn Header="CMND" DisplayMemberBinding="{Binding SoCMND}"></GridViewColumn>
+                                    <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
+                                    <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh}"></GridViewColumn>
+                                    <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
+                                    <GridViewColumn Header="Quốc tịch" DisplayMemberBinding="{Binding QuocTich}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -170,7 +170,7 @@
                                 <!--//MÃ KH//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="MÃ KHÁCH HÀNG: "  Style="{StaticResource tbName}"/>
-                                    <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaKhachHang,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
                                 <!--//TÊN ĐOÀN//-->
@@ -181,7 +181,7 @@
                                              
                                              IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                             Text="{Binding HoTen,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
                                 <!--//CMND//-->
@@ -192,7 +192,7 @@
                                              
                                              IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                             Text="{Binding SoCMND,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
 
@@ -204,7 +204,7 @@
                                              
                                              IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                             Text="{Binding DiaChi,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
 
@@ -241,7 +241,7 @@
                                              
                                              IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                             Text="{Binding QuocTich,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
                                 
 

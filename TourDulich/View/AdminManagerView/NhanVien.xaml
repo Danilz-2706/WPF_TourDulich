@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManager" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             DataContext="{StaticResource nvm}"
+             DataContext="{Binding Source={StaticResource ServiceLocator}, Path=NhanVienViewModel}"
              >
 
     <!--//Resource//-->
@@ -132,13 +132,13 @@
             <!--//List Tour//-->
             <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
 
-                <ListView ItemsSource="{Binding ListNV}" SelectedItem="{Binding SelectedItem}">
+                <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
                         <GridView>
 
                             <GridView.Columns>
-                                <GridViewColumn Header="Mã Nhân Viên" DisplayMemberBinding="{Binding MaVN}"></GridViewColumn>
-                                <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNV}"></GridViewColumn>
+                                <GridViewColumn Header="Mã Nhân Viên" DisplayMemberBinding="{Binding MaNhanVien}"></GridViewColumn>
+                                <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNhanVien}"></GridViewColumn>
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
@@ -165,7 +165,7 @@
                             <!--//MÃ NHÂN VIÊN//-->
                             <Grid Margin="0 8 0 16">
                                 <TextBlock  Text="MÃ NHÂN VIÊN"  Style="{StaticResource tbName}"/>
-                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaNhanVien,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
 
                             <!--//TÊN NHÂN VIÊN//-->
@@ -176,7 +176,7 @@
                                              
                                              IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                             Text="{Binding TenNhanVien,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </StackPanel>
                     </Grid>

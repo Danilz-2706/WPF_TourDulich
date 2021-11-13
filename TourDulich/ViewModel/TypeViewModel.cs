@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Entities;
+using Service.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,8 +12,18 @@ namespace TourDulich.ViewModel
 {
     public class TypeViewModel : BaseViewModel
     {
-        public string MaLoaiHinh { get; set; }
-        public string TenLoaiHinh { get; set; }
-        //public ObservableCollection<LoaiHinhDuLichDTO> List { get; set; }
+        private readonly ILoaiHinhDuLichService loaiHinhDuLichService;
+
+        private ObservableCollection<LoaiHinhDuLich> _list;
+        public ObservableCollection<LoaiHinhDuLich> List { get => _list; set { _list = value; } }
+        public TypeViewModel()
+        {
+
+        }
+        public TypeViewModel(ILoaiHinhDuLichService loaiHinhDuLichService)
+        {
+            this.loaiHinhDuLichService = loaiHinhDuLichService;
+            List = new ObservableCollection<LoaiHinhDuLich>(this.loaiHinhDuLichService.GetDTOs());
+        }
     }
 }

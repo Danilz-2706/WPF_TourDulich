@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Entities;
+using Service.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,10 +15,18 @@ namespace TourDulich.ViewModel
     public class CostViewModel
 
     {
-        
+        private readonly IChiPhiService chiPhiService;
+
+        private ObservableCollection<ChiPhi> _list;
+        public ObservableCollection<ChiPhi> List { get => _list; set { _list = value; } }
         public CostViewModel()
         {
             
+        }
+        public CostViewModel(IChiPhiService chiPhiService)
+        {
+            this.chiPhiService = chiPhiService;
+            List = new ObservableCollection<ChiPhi>(this.chiPhiService.GetDTOs());
         }
     }
 }

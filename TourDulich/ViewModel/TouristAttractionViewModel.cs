@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TourDulich.ViewModel
+﻿namespace TourDulich.ViewModel
 {
-    public class TouristAttractionViewModel
+    internal class TouristAttractionViewModel
     {
-        public TouristAttractionViewModel() { }
+        public TouristAttractionViewModel()
+        {
+        }
     }
 }

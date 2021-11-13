@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Entities;
+using Service.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -20,12 +22,16 @@ namespace TourDulich.ViewModel
         public ICommand CloseTourAdd { get; set; }
         public ICommand CloseTourEdit { get; set; }
         public ICommand CloseTourDelete { get; set; }
-     
-        public TourViewModel()
+        private readonly ITourDuLichService tourDuLichService;
+
+        private ObservableCollection<TourDuLich> _list;
+        public ObservableCollection<TourDuLich> List { get => _list; set { _list = value; } }
+        
+        public TourViewModel() { }
+        public TourViewModel(ITourDuLichService tourDuLichService)
         {
-
-
-
+            this.tourDuLichService = tourDuLichService;
+            List = new ObservableCollection<TourDuLich>(tourDuLichService.GetDTOs());
             //// Commands  -  Add - Edit - Delete - ...... //
             #region Commands
             AddTour = new RelayCommand<object>(p => { return true; }, p => { Add(); });

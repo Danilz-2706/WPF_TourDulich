@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManagerView" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             DataContext="{Binding Path=TypeViewModel,Source={StaticResource ServiceLocator} }"
              mc:Ignorable="d" >
 
     <!--//Resource//-->
@@ -119,7 +120,7 @@
 
 
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -128,8 +129,8 @@
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Loại Hình" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Loại Hình" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Loại Hình" DisplayMemberBinding="{Binding MaLoaiHinh}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Loại Hình" DisplayMemberBinding="{Binding TenLoaiHinh}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>

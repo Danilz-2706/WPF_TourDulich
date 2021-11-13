@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManagerView" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                          DataContext="{Binding Path=CostViewModel,Source={StaticResource ServiceLocator} }"
              mc:Ignorable="d" >
 
     <!--//Resource//-->
@@ -119,7 +120,7 @@
 
 
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -128,9 +129,10 @@
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Chi Phí" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Chi Phí" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
-                                    <GridViewColumn Header="Giá tiền" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Chi Phí" DisplayMemberBinding="{Binding MaChiPhi}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã đoàn" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
+                                    <GridViewColumn Header="Số tiền" DisplayMemberBinding="{Binding SoTien}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã loại chi phí" DisplayMemberBinding="{Binding MaLoaiChiPhi}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>

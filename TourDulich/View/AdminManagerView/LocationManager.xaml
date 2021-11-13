@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManagerView" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             DataContext="{StaticResource lcvm}"
+             DataContext="{Binding Path=LocationViewModel, Source={StaticResource ServiceLocator}}"
              mc:Ignorable="d" >
 
     <!--//Resource//-->
@@ -129,8 +129,8 @@
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Địa Điểm" DisplayMemberBinding="{Binding  }"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Địa Điểm" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Địa Điểm" DisplayMemberBinding="{Binding MaDiaDiem }"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Địa Điểm" DisplayMemberBinding="{Binding TenDiaDiem}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -157,7 +157,7 @@
                             <!--//MÃ NHÂN VIÊN//-->
                             <Grid Margin="0 8 0 16">
                                 <TextBlock  Text="MÃ ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
-                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDiaDiem,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
 
                             <!--//TÊN NHÂN VIÊN//-->
@@ -168,7 +168,7 @@
                                              
                                              IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                             Text="{Binding TenDiaDiem,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </StackPanel>
                     </Grid>

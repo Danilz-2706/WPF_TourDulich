@@ -59,12 +59,12 @@ namespace Service.Services
 
         public IEnumerable<DoanDuLich> GetDTOs()
         {
-            List<DoanDuLich> list = new ();
-            list.Add(new DoanDuLich());
-            list.Add(new DoanDuLich());
-            list.Add(new DoanDuLich());
-            return list;
-            //return doanDuLichRepository.GetAll();
+            //List<DoanDuLich> list = new ();
+            //list.Add(new DoanDuLich());
+            //list.Add(new DoanDuLich());
+            //list.Add(new DoanDuLich());
+            //return list;
+            return doanDuLichRepository.GetAll();
         }
 
         #endregion

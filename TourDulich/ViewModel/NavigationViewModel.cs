@@ -123,9 +123,7 @@ namespace TourDulich.ViewModel
                 case "Cost":
                     SelectedViewModel = new CostViewModel();
                     break;
-                case "User":
-                    SelectedViewModel = new KhachHangViewModel();
-                    break;
+                
                 case "Staff":
                     SelectedViewModel = new NhanVienViewModel();
                     break;
@@ -137,7 +135,6 @@ namespace TourDulich.ViewModel
                     break;
             }
         }
-
 
     }
 }

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManager"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             DataContext="{StaticResource tvm}"
+                     DataContext="{Binding Path=TourViewModel,Source={StaticResource ServiceLocator} }"
              mc:Ignorable="d" >
     <!--//Resource//-->
     <UserControl.Resources>
@@ -123,17 +123,15 @@
                 <!--//List Tour//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
 
-                    <ListView ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
                         <ListView.View>
                             <GridView>
 
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Tour" DisplayMemberBinding="{Binding name}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Gọi" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
-                                    <GridViewColumn Header="Đặc Điểm" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
-                                    <GridViewColumn Header="Giá Tour" DisplayMemberBinding="{Binding NgayDi, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
-                                    <GridViewColumn Header="Điểm Tham Quan" DisplayMemberBinding="{Binding NgayVe, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
-                                    <GridViewColumn Header="Loại Hình" DisplayMemberBinding="{Binding DoanhThu}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Tour" DisplayMemberBinding="{Binding MaTour}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Gọi" DisplayMemberBinding="{Binding TenGoi}"></GridViewColumn>
+                                    <GridViewColumn Header="Đặc Điểm" DisplayMemberBinding="{Binding DacDiem}"></GridViewColumn>
+                                    <GridViewColumn Header="Loại Hình" DisplayMemberBinding="{Binding MaLoaiHinh}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>

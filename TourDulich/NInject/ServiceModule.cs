@@ -27,7 +27,7 @@ namespace TourDulich.NInject
 
             //DiaDiem
             Bind<IDiaDiemRepository>().To<DiaDiemRepository>().InThreadScope();
-            //services.AddScoped<ITacGiaService, TacGiaService>();
+            Bind<IDiaDiemService>().To<DiaDiemService>().InThreadScope();
 
             //DiemThamQuan
             Bind<IDiemThamQuanRepository>().To<DiemThamQuanRepository>().InThreadScope();
