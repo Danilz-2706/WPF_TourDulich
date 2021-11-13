@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,11 +12,29 @@ namespace Infrastructure.Persistence.Repositories
         {
         }
 
+        public override IEnumerable<DoanDuLich> GetAll()
+        {
+            /*context.DoanDuLiches.ToList().ForEach(x => {
+                x.TenTour = x.Tour.TenGoi; 
+            });*/
+
+            return context.DoanDuLiches.Include(d => d.ChiTietDoans).Include(c => c.ChiPhis).Include(nv => nv.PhanBoNhanVienDoans)
+                .Include(ntd => ntd.NoiDungTour).Include(t => t.Tour).Include(k => k.Khaches).Include(nv => nv.NhanViens).ToList();
+        }
+
         public IEnumerable<DoanDuLich> GetDoans()
         {
-            List<DoanDuLich> d = new();
-            d = (from t in context.DoanDuLiches select t).ToList();
-            d.Insert(0, new DoanDuLich { MaDoan = 0, TenDoan = "Chọn đoàn" });
+            return context.DoanDuLiches.Include(d => d.ChiTietDoans).Include(c => c.ChiPhis).Include(nv => nv.PhanBoNhanVienDoans).Include(ntd => ntd.NoiDungTour).Include(t => t.Tour).ToList();
+        }
+
+        public IEnumerable<DoanDuLich> GetDoans_Eager()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public DoanDuLich GetDoan_Eager(int id)
+        {
+            var d = context.DoanDuLiches.Where(x => x.MaDoan == id).Include(d => d.ChiTietDoans).Include(c => c.ChiPhis).Include(nv => nv.PhanBoNhanVienDoans).FirstOrDefault();
             return d;
         }
 
@@ -62,5 +81,6 @@ namespace Infrastructure.Persistence.Repositories
             var c = context.DoanDuLiches.Count();
             return c;
         }
+        
     }
 }

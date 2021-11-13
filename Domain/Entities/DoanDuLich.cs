@@ -7,6 +7,7 @@ namespace Domain.Entities
     {
         public int MaDoan { get; set; }
         public TourDuLich Tour { get; set; }
+        public string TenTour { get; set; }
         public int MaTour { get; set; }
         public NoiDungTour NoiDungTour { get; set; }
         public string TenDoan { get; set; }

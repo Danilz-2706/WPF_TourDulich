@@ -9,5 +9,6 @@ namespace Domain.Entities
         public string TenDiaDiem { get; set; }
         public ICollection<DiemThamQuan> DiemThamQuans { get; set; }
         public ICollection<TourDuLich> TourDuLiches { get; set; }
+        public int ThuTu { get; set; }
     }
 }

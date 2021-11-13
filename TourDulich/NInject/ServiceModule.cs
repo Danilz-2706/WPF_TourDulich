@@ -24,6 +24,7 @@ namespace TourDulich.NInject
 
             //ChiTietDoan
             Bind<IChiTietDoanRepository>().To<ChiTietDoanRepository>().InThreadScope();
+            Bind<IChiTietDoanService>().To<ChiTietDoanService>().InThreadScope();
 
             //DiaDiem
             Bind<IDiaDiemRepository>().To<DiaDiemRepository>().InThreadScope();
@@ -31,7 +32,7 @@ namespace TourDulich.NInject
 
             //DiemThamQuan
             Bind<IDiemThamQuanRepository>().To<DiemThamQuanRepository>().InThreadScope();
-            //services.AddScoped<INhaXuatBanService, NhaXuatBanService>();
+            Bind<IDiemThamQuanService>().To<DiemThamQuanService>().InThreadScope();
 
             //DoanDuLich
             Bind<IDoanDuLichRepository>().To<DoanDuLichRepository>().InThreadScope();
@@ -59,10 +60,11 @@ namespace TourDulich.NInject
 
             //NoiDungTour
             Bind<INoiDungTourRepository>().To<NoiDungTourRepository>().InThreadScope();
+            Bind<INoiDungTourService>().To<NoiDungTourService>().InThreadScope();
 
             //PhanBoNhanVienDoan
             Bind<IPhanBoNhanVienDoanRepository>().To<PhanBoNhanVienDoanRepository>().InThreadScope();
-            //services.AddScoped<ITacGiaService, TacGiaService>();
+            Bind<IPhanBoNhanVienDoanService>().To<PhanBoNhanVienDoanService>().InThreadScope();
 
             //TourDuLich
             Bind<ITourDuLichRepository>().To<TourDuLichRepository>().InThreadScope();

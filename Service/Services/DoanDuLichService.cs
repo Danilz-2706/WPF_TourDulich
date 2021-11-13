@@ -1,5 +1,4 @@
 ﻿using Service.Interfaces;
-using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using System;

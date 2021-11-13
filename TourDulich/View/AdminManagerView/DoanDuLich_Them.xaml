@@ -12,7 +12,7 @@
         Title="Đoàn_Thêm" Height="732" Width="1000" 
         ResizeMode="NoResize"
         
-        DataContext="{StaticResource tgvm}"
+        DataContext="{Binding Path=DoanDuLichViewModel,Source={StaticResource ServiceLocator} }"
         
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">

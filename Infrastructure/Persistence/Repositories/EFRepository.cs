@@ -17,7 +17,7 @@ namespace Infrastructure.Persistence.Repositories
             this.context = context;
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return context.Set<T>().ToList();
         }
