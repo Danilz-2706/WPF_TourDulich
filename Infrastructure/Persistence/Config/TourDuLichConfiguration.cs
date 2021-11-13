@@ -1,4 +1,4 @@
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,6 +11,17 @@ namespace Infrastructure.Persistence
             builder.ToTable("TourDuLich");
             builder.HasKey(tour => tour.MaTour);
             builder.HasOne(tour => tour.LoaiHinh).WithMany(lh => lh.TourDuLiches).HasForeignKey(tour => tour.MaLoaiHinh);
+
+            //Many-to-Many with Địa Điểm
+            builder.HasMany(t => t.DiaDiems).WithMany(d => d.TourDuLiches).UsingEntity<DiemThamQuan>(
+                j => j.HasOne(dtq => dtq.DiaDiem).WithMany(dd => dd.DiemThamQuans).HasForeignKey(dtq => dtq.MaDiaDiem),
+                j => j.HasOne(dtq => dtq.TourDuLich).WithMany(tour => tour.DiemThamQuans).HasForeignKey(dtq => dtq.MaTour),
+                j =>
+                {
+                    j.ToTable("DiemThamQuan");
+                    j.HasKey(dtq => new { dtq.MaDiaDiem, dtq.MaTour });
+                }
+                );
         }
     }
 }

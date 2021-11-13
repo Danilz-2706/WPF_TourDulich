@@ -8,5 +8,6 @@ namespace Domain.Entities
         public int MaNhanVien { get; set; }
         public string TenNhanVien { get; set; }
         public ICollection<PhanBoNhanVienDoan> PhanBoNhanVienDoans { get; set; }
+        public ICollection<DoanDuLich> DoanDuLiches { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace Domain.Entities
         public int MaLoaiHinh { get; set; }
         public LoaiHinhDuLich LoaiHinh { get; set; }
         public ICollection<DiemThamQuan> DiemThamQuans { get; set; }
+        public ICollection<DiaDiem> DiaDiems { get; set; }
         public ICollection<DoanDuLich> DoanDuLichs { get; set; }
     }
 }
