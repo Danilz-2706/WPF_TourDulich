@@ -27,7 +27,7 @@ namespace TourDulich.NInject
                 return Kernel.Get<DoanDuLichViewModel>();
             }
         }
-         
+         //Tour
         public TourViewModel TourViewModel
         {
             get
@@ -65,7 +65,7 @@ namespace TourDulich.NInject
             }
         }
 
-        //Tour//
+        
        
 
         //Loại hình//
