@@ -3,10 +3,13 @@
                     xmlns:vm="clr-namespace:TourDulich.ViewModel"
                     xmlns:v="clr-namespace:TourDulich.View"
                     xmlns:vml="clr-namespace:TourDulich.View.AdminManager">
-
+    <!--
     <vm:TourViewModel x:Key="tvm"></vm:TourViewModel>
+    -->
+    <vm:KhachHangViewModel x:Key="khvm"></vm:KhachHangViewModel>
     <vm:NhanVienViewModel x:Key="nvm"></vm:NhanVienViewModel>
-
+    <vm:LocationViewModel x:Key="lcvm"></vm:LocationViewModel>
+    
     <vm:NavigationViewModel x:Key="nvvm"></vm:NavigationViewModel>
 
     <!--//Đọc - đẩy dữ liệu theo View - ViewModel//-->

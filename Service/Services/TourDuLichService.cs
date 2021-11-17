@@ -43,6 +43,7 @@ namespace Service.Services
 
         public IEnumerable<TourDuLich> GetDTOs()
         {
+            
             return tourDuLichRepository.GetAll();
         }
     }

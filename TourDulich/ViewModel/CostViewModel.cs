@@ -12,21 +12,16 @@ using TourDulich.Model;
 
 namespace TourDulich.ViewModel
 {
-    public class CostViewModel
+    public class CostViewModel :BaseViewModel
 
     {
-        private readonly IChiPhiService chiPhiService;
+       
 
-        private ObservableCollection<ChiPhi> _list;
-        public ObservableCollection<ChiPhi> List { get => _list; set { _list = value; } }
         public CostViewModel()
         {
             
-        }
-        public CostViewModel(IChiPhiService chiPhiService)
-        {
-            this.chiPhiService = chiPhiService;
-            List = new ObservableCollection<ChiPhi>(this.chiPhiService.GetDTOs());
+            
+
         }
     }
 }

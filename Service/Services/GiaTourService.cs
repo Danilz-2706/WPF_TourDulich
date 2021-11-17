@@ -43,7 +43,8 @@ namespace Service.Services
 
         public IEnumerable<GiaTour> GetDTOs()
         {
-            return giaTourRepository.GetAll();
+           
+           return giaTourRepository.GetAll();
         }
     }
 }

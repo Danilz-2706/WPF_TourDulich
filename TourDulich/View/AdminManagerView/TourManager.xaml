@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManager"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                     DataContext="{Binding Path=TourViewModel,Source={StaticResource ServiceLocator} }"
+             DataContext="{Binding Path=TourViewModel ,Source={StaticResource ServiceLocator} }"
              mc:Ignorable="d" >
     <!--//Resource//-->
     <UserControl.Resources>
@@ -123,7 +123,7 @@
                 <!--//List Tour//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
 
-                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
+                    <ListView ItemsSource="{Binding ListTour}" SelectedItem="{Binding SelectedItem}">
                         <ListView.View>
                             <GridView>
 
@@ -131,7 +131,8 @@
                                     <GridViewColumn Header="Mã Tour" DisplayMemberBinding="{Binding MaTour}"></GridViewColumn>
                                     <GridViewColumn Header="Tên Gọi" DisplayMemberBinding="{Binding TenGoi}"></GridViewColumn>
                                     <GridViewColumn Header="Đặc Điểm" DisplayMemberBinding="{Binding DacDiem}"></GridViewColumn>
-                                    <GridViewColumn Header="Loại Hình" DisplayMemberBinding="{Binding MaLoaiHinh}"></GridViewColumn>
+                                  
+                                    <GridViewColumn Header=" Mã Loại Hình" DisplayMemberBinding="{Binding MaLoaiHinh}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -283,7 +284,7 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="10 0 5 0"
-                                Command="{Binding AddCommand}"
+                                Command="{Binding AddTour}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Thêm">
 
@@ -299,6 +300,7 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Margin="5 0 5 0"
                                 IsChecked="False"
+                                Command="{Binding EditTour}"
                                 ToolTip="Sửa">
                                 <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
 
@@ -311,7 +313,7 @@
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Command="{Binding DeleteCommand}"
+                                Command="{Binding DeleteTour}"
                                 Margin="5 0 5 0"
                                 ToolTip="Xóa">
                                 <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>
@@ -323,7 +325,7 @@
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Command="{Binding ShowCommand}"
+                                Command="{Binding ChitietTour}"
                                 Margin="5 0 10 0"
                                 ToolTip="Chi tiết đoàn">
                                 <TextBlock Text="Chi Tiết Tour" Style="{StaticResource fontText}"/>

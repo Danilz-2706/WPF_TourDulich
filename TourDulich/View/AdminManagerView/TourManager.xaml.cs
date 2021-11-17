@@ -26,6 +26,7 @@ namespace TourDulich.View.AdminManager
         public TourManager()
         {
             InitializeComponent();
+           
 
 
         }
