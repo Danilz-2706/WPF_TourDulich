@@ -25,6 +25,16 @@ namespace TourDulich.NInject
                 return Kernel.Get<DoanDuLichViewModel>();
             }
         }
+         
+        public TourViewModel TourViewModel
+        {
+            get
+            {
+                return Kernel.Get<TourViewModel>();
+            }
+
+        }
+
 
     }
 }

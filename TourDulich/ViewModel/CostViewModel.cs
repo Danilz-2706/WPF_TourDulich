@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Entities;
+using Service.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,13 +12,16 @@ using TourDulich.Model;
 
 namespace TourDulich.ViewModel
 {
-    public class CostViewModel
+    public class CostViewModel :BaseViewModel
 
     {
-        
+       
+
         public CostViewModel()
         {
             
+            
+
         }
     }
 }

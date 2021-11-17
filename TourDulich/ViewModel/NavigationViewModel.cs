@@ -1,4 +1,6 @@
 ﻿using Ninject;
+using Service.Interfaces;
+using Domain.Entities;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -94,6 +96,8 @@ namespace TourDulich.ViewModel
 
         // Select ViewModel
         private object _selectedViewModel;
+     //  private object tourDuLichService;
+        public readonly ITourDuLichService tourDuLichService;
         public object SelectedViewModel
         {
             get => _selectedViewModel;
@@ -109,7 +113,7 @@ namespace TourDulich.ViewModel
                     SelectedViewModel = new AdminViewModel();
                     break;
                 case "Tour":
-                    SelectedViewModel = new TourViewModel();
+                    SelectedViewModel = new TourViewModel(tourDuLichService);
                     break;
                 case "Tour Group":
                    //SelectedViewModel = new DoanDuLichViewModel();
@@ -133,7 +137,7 @@ namespace TourDulich.ViewModel
                     SelectedViewModel = new StatisticsViewModel();
                     break;
                 default:
-                    SelectedViewModel = new TourViewModel();
+                   // SelectedViewModel = new TourViewModel(ITourDuLichService tourDuLichService);
                     break;
             }
         }

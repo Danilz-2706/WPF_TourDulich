@@ -52,7 +52,7 @@
             <DropShadowEffect BlurRadius="25" ShadowDepth="8" Direction="270" Color="#BBBBBB"/>
         </Grid.Effect>
 
-        <Grid>
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"></RowDefinition>
                 <RowDefinition Height="400"></RowDefinition>
@@ -66,9 +66,9 @@
 
             <!--//header//-->
             <Grid 
-                    Grid.Row="0"
+                Grid.Row="0"
                     Grid.ColumnSpan="2"
-                    Background="#5C5C5C">
+                    Background="Orange">
 
                 <TextBlock Text="T H Ê M - T O U R"
                        Margin="0"
@@ -328,7 +328,7 @@
                     <!--//Trở lại//-->
                     <Button
                                 BorderBrush="#C4C4C4"
-                                Background="#C4C4C4"
+                                Background="Orange"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
@@ -340,7 +340,7 @@
                     
                     <!--//Xác nhận//-->
                     <Button
-                                Background="#C4C4C4"
+                                Background="Orange"
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Style="{StaticResource MaterialDesignRaisedButton}"

@@ -53,10 +53,11 @@
             <DropShadowEffect BlurRadius="25" ShadowDepth="8" Direction="270" Color="#BBBBBB"/>
         </Grid.Effect>
 
-        <Grid>
+        <Grid >
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="425"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="400"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="400"></ColumnDefinition>
@@ -66,9 +67,9 @@
 
             <!--//header//-->
             <Grid 
-                    Grid.Row="0"
+                Grid.Row="0"
                     Grid.ColumnSpan="2"
-                    Background="#5C5C5C">
+                    Background="Orange">
 
                 <TextBlock Text="S Ử A - T O U R"
                        Margin="0"
@@ -81,18 +82,280 @@
                             VerticalAlignment="Center"
                             Margin="0,0,20,0"
                             Style="{StaticResource CloseBtn_Style}"
-                            Command="{Binding CloseTourEdit}"
-                            CommandParameter="{Binding ElementName=ViewEditTour}"/>
+                            Command="{Binding CloseTourAdd}"
+                            CommandParameter="{Binding ElementName=ViewAddTour}"/>
             </Grid>
 
 
-            <materialDesign:Card Grid.Row="1" Grid.Column="0">
-                <StackPanel Background="#fff" Height="auto" Grid.Row="1"></StackPanel>
-            </materialDesign:Card>
-            <materialDesign:Card Grid.Row="1" Grid.Column="1">
-                <StackPanel Background="#fff" Height="auto" Grid.Row="1"></StackPanel>
-            </materialDesign:Card>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
 
+                    <StackPanel Background="#fff" Height="auto">
+                        <!--//Mã Tour//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="MÃ TOUR"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập mã tour"/>
+                            </Border>
+                        </Grid>
+
+                        <!--//Tên Tour//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="TÊN TOUR"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                MaxHeight="60"
+                                VerticalAlignment="Top"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập tên tour"/>
+                            </Border>
+                        </Grid>
+
+                        <!--//Đặc điểm//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="ĐẶC ĐIỂM"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                MaxHeight="60"
+                                VerticalAlignment="Top"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập đặc điểm"/>
+                            </Border>
+                        </Grid>
+
+                        <!--//Mã Loại hình//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="MÃ LOẠI HÌNH"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                MaxHeight="60"
+                                VerticalAlignment="Top"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập mã loại hình"/>
+                            </Border>
+                        </Grid>
+
+                        <!--//Tên Loại hình//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="TÊN LOẠI HÌNH"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                MaxHeight="60"
+                                VerticalAlignment="Top"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập tên loại hình"/>
+                            </Border>
+                        </Grid>
+
+                        <!--//Mã Giá//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="MÃ GIÁ"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                MaxHeight="60"
+                                VerticalAlignment="Top"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập mã giá"/>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <Border Background="#BBBBBB" Grid.Row="1" Width="1" HorizontalAlignment="Center" Grid.ColumnSpan="2"></Border>
+            <Grid Grid.Row="1" Grid.Column="1">
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                    <StackPanel Background="#fff" Height="auto">
+                        <!--//Mã địa điểm//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="MÃ ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                MaxHeight="60"
+                                VerticalAlignment="Top"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập mã địa điểm"/>
+                            </Border>
+                        </Grid>
+
+                        <!--//Tên địa điểm//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="TÊN ĐỊA ĐIỂM"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                MaxHeight="60"
+                                VerticalAlignment="Top"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập tên địa điểm"/>
+                            </Border>
+                        </Grid>
+
+                        <!--//Mã Điểm tham quan//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="MÃ ĐIỂM THAM QUAN"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                MaxHeight="60"
+                                VerticalAlignment="Top"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập mã điểm tham quan"/>
+                            </Border>
+                        </Grid>
+
+                        <!--//Thu tu diem tham quan//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="THỨ TỰ ĐIỂM THAM QUAN"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                MaxHeight="60"
+                                VerticalAlignment="Top"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập thứ tự điểm tham quan"/>
+                            </Border>
+                        </Grid>
+
+                        <!--//Mã Đoàn//-->
+                        <Grid Margin="0 5 0 8">
+                            <TextBlock  Text="MÃ ĐOÀN"  Style="{StaticResource tbName}"/>
+                            <Border Margin="0 0 10 0"
+                                Width="250" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
+                                HorizontalAlignment="Right">
+                                <TextBox
+                                IsEnabled="True"
+                                MaxHeight="60"
+                                VerticalAlignment="Top"
+                                FontSize="16"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập mã đoàn"/>
+                            </Border>
+                        </Grid>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <!--//footer//-->
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="#fff">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!--//Trở lại//-->
+                    <Button
+                                BorderBrush="#C4C4C4"
+                                Background="Orange"
+                                Foreground="#000"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="100"
+                                Margin="0 0 20 0"
+                                Command="{Binding iiiiiiiiiiiiiiiiiii}"
+                                ToolTip="Trở lại">
+                        <TextBlock Text="Trở lại" Style="{StaticResource fontText}"/>
+                    </Button>
+
+                    <!--//Xác nhận//-->
+                    <Button
+                                Background="Orange"
+                                Foreground="#000"
+                                BorderBrush="#C4C4C4"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Width="100"
+                                Command="{Binding kkkkkkkkkkkkkkkk}"
+                                ToolTip="Xác nhận">
+                        <TextBlock Text="Xác nhận" Style="{StaticResource fontText}"/>
+                    </Button>
+
+
+
+
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
