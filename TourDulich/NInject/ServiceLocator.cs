@@ -66,13 +66,7 @@ namespace TourDulich.NInject
         }
 
         //Tour//
-        public TourViewModel TourViewModel
-        {
-            get
-            {
-                return Kernel.Get<TourViewModel>();
-            }
-        }
+       
 
         //Loại hình//
         public TypeViewModel TypeViewModel
