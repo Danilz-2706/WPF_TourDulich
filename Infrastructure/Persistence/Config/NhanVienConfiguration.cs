@@ -10,6 +10,7 @@ namespace Infrastructure.Persistence
         {
             builder.ToTable("NhanVien");
             builder.HasKey(nv => nv.MaNhanVien);
+            builder.Ignore(nv => nv.NhiemVu);
             builder.HasData(
                 new NhanVien { MaNhanVien = 1, TenNhanVien = "An" },
                 new NhanVien { MaNhanVien = 2, TenNhanVien = "Đạt" },

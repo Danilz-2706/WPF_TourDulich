@@ -20,28 +20,31 @@ namespace Service.Services
 
         public bool Create(DiaDiem dto)
         {
-
-
-            throw new NotImplementedException();
+            diaDiemRepository.Add(dto);
+            return true;
         }
 
         public DiaDiem Get(int maDD)
         {
-            throw new NotImplementedException();
+            var dd = diaDiemRepository.GetBy(maDD);
+            return dd;
         }
         public bool Update(DiaDiem dto)
         {
-            throw new NotImplementedException();
+            diaDiemRepository.Update(dto, dto.MaDiaDiem);
+            return true;
         }
 
         public bool Delete(int maDD)
         {
-            throw new NotImplementedException();
+            var dd = diaDiemRepository.GetBy(maDD);
+            diaDiemRepository.Delete(dd);
+            return true;
         }
 
         public IEnumerable<DiaDiem> GetDTOs()
         {
-            throw new NotImplementedException();
+            return diaDiemRepository.GetAll();
         }
 
     }

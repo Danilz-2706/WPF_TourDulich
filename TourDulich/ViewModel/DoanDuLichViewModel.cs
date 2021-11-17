@@ -23,7 +23,9 @@ namespace TourDulich.ViewModel
         public string NoiDung { get; set; }
         public DateTime? NgayDi { get; set; }
         public DateTime? NgayVe { get; set; }
-        public ObservableCollection<DoanDuLich> ListGroup { get; set; }
+        private ObservableCollection<DoanDuLich> _list;
+
+        public ObservableCollection<DoanDuLich> ListGroup { get => _list; set { _list = value; } }
         #region commands
         
         public ICommand AddCommand { get; set; }

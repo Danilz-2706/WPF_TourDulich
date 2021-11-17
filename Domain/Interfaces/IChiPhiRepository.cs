@@ -7,7 +7,7 @@ namespace Domain.Interfaces
     {
         int CountChiPhi();
 
-        IEnumerable<ChiPhi> GetChiPhis();
+        IEnumerable<ChiPhi> GetChiPhis(int maTour);
 
         IEnumerable<ChiPhi> Filter(string sortOrder, string searchString, int pageIndex, int pageSize, out int count);
     }

@@ -18,6 +18,8 @@ namespace TourDulich.NInject
             kernel = new StandardKernel(new ServiceModule());
         }*/
 
+
+        //Đoàn du lịch//
         public DoanDuLichViewModel DoanDuLichViewModel
         {
             get
@@ -34,6 +36,72 @@ namespace TourDulich.NInject
             }
 
         }
+
+
+        //Khách hàng//
+        public KhachHangViewModel KhachHangViewModel
+        {
+            get
+            {
+                return Kernel.Get<KhachHangViewModel>();
+            }
+        }
+
+        //Nhân viên//
+        public NhanVienViewModel NhanVienViewModel
+        {
+            get
+            {
+                return Kernel.Get<NhanVienViewModel>();
+            }
+        }
+
+        //Địa điểm//
+        public LocationViewModel LocationViewModel
+        {
+            get
+            {
+                return Kernel.Get<LocationViewModel>();
+            }
+        }
+
+        //Tour//
+        public TourViewModel TourViewModel
+        {
+            get
+            {
+                return Kernel.Get<TourViewModel>();
+            }
+        }
+
+        //Loại hình//
+        public TypeViewModel TypeViewModel
+        {
+            get
+            {
+                return Kernel.Get<TypeViewModel>();
+            }
+        }
+
+        //Giá//
+        public PriceViewModel PriceViewModel
+        {
+            get
+            {
+                return Kernel.Get<PriceViewModel>();
+            }
+        }
+
+        //Chi phí//
+        public CostViewModel CostViewModel
+        {
+            get
+            {
+                return Kernel.Get<CostViewModel>();
+            }
+        }
+
+
 
 
     }

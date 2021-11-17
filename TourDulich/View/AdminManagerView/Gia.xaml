@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManagerView" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             DataContext="{Binding Path=PriceViewModel,Source={StaticResource ServiceLocator} }"
              mc:Ignorable="d" >
 
     <!--//Resource//-->
@@ -119,7 +120,7 @@
 
 
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem}">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -128,10 +129,11 @@
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Giá" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                    <GridViewColumn Header="Ngày bắt đầu" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
-                                    <GridViewColumn Header="Ngày kết thúc" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
-                                    <GridViewColumn Header="Giá tiền" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Giá" DisplayMemberBinding="{Binding MaGia}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Tour" DisplayMemberBinding="{Binding MaTour}"></GridViewColumn>
+                                    <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding ThanhTien}"></GridViewColumn>
+                                    <GridViewColumn Header="Thời gian kết thúc" DisplayMemberBinding="{Binding ThoiGianBatDau}"></GridViewColumn>
+                                    <GridViewColumn Header="Thời gian bắt đầu" DisplayMemberBinding="{Binding ThoiGianKetThuc}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>

@@ -10,7 +10,7 @@ namespace Infrastructure.Persistence
         {
             builder.ToTable("DiaDiem");
             builder.HasKey(dd => dd.MaDiaDiem);
-
+            builder.Ignore(dd => dd.ThuTu);
             builder.HasData(
                 new DiaDiem { MaDiaDiem=1, TenDiaDiem = "Chùa Sài Gòn"},
                 new DiaDiem { MaDiaDiem = 2, TenDiaDiem = "Chùa Hà Nội" }

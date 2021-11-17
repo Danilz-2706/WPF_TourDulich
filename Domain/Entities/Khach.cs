@@ -14,5 +14,7 @@ namespace Domain.Entities
         public string SDT { get; set; }
         public string QuocTich { get; set; }
         public ICollection<ChiTietDoan> ChiTietDoans { get; set; }
+        public ICollection<DoanDuLich> DoanDuLiches { get; set; }
+        public VaiTro VaiTro { get; set; }
     }
 }
