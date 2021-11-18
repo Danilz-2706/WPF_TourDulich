@@ -132,13 +132,13 @@
 
             <!--//List Tour//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView x:Name="list" ItemsSource="{Binding List, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView x:Name="list" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView>
 
                             <GridView.Columns>
-                                <GridViewColumn Header="Mã Nhân Viên" DisplayMemberBinding="{Binding MaNhanVien, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNhanVien, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"></GridViewColumn>
+                                <GridViewColumn Header="Mã Nhân Viên" DisplayMemberBinding="{Binding MaNhanVien}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNhanVien}"></GridViewColumn>
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
@@ -209,12 +209,11 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Margin="5 0 5 0"
                                 IsChecked="False"
-                                          Command="{Binding EditCommand}"
+                                Command="{Binding EditCommand, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="Sửa">
-                                <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
-
+                                <TextBlock x:Name="sua" Text="Sửa" Style="{StaticResource fontText}"/>
                             </ToggleButton>
-
+                            
                             <!--//Xóa//-->
                             <Button
                                 Grid.Column="2"
@@ -222,7 +221,7 @@
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Command="{Binding DeleteCommand}"
+                                Command="{Binding DeleteCommand, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="5 0 5 0"
                                 ToolTip="Xóa">
                                 <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>

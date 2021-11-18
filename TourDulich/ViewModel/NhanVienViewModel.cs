@@ -36,6 +36,7 @@ namespace TourDulich.ViewModel
         public ICommand _Save { get; set; }
         public ICommand Save { get => _Save; set => _Save = value; }
 
+        // Các biến trong ViewChild_Add
         private string _addtennhanvien;
         public string AddTenNhanVien { get=>_addtennhanvien; set => _addtennhanvien = value; }
 
@@ -65,8 +66,10 @@ namespace TourDulich.ViewModel
         }
         #endregion
 
+
         private ObservableCollection<NhanVien> _list;
         public ObservableCollection<NhanVien> List { get => _list; set { _list = value;  } }
+
         public NhanVienViewModel()
         {
 
@@ -78,38 +81,50 @@ namespace TourDulich.ViewModel
 
 
             #region Commands
+
+            #region Add
             AddCommand = new RelayCommand<object>(p => { return true; }, p => { Add(); });
             Close_ThemNV = new RelayCommand<object>(p => { return true; }, p => { CloseThem(p); });
 
-            //command ViewChild
+            //ViewChild
+            //Reset
             Reset = new RelayCommand<object>(p => { return true; }, p => { AddTenNhanVien = null; AddNhiemVu = null; });
+
+            //Save
             Save = new RelayCommand<object>(p => 
             {
                 return !string.IsNullOrEmpty(AddTenNhanVien) ;
             }, p => 
             {
-                var nv = new NhanVien() { TenNhanVien = AddTenNhanVien};
-                nhanVienService.Create(nv);
-                List = new ObservableCollection<NhanVien>(this.nhanVienService.GetDTOs());
-                //List.Add(this.nhanVienService.Get(nv.MaNhanVien));
-                
-                //Khúc này là khúc cần reload lại lên View. 
-                // Có 2 hướng xử lý
-                // 1 - Kiễm tra kỹ mode biding đúng chưa -> tui nghĩ là ổn. Vì để TwoWay là cái check dễ nhất. TowWay mà ko chạy được thì các Mode khác sẽ chạy ko được....
-                // 2 - kiểm tra các biến trong lớp nhân viên khi được set thuộc tính thì có bắt được sự kiện hay ko. 
-                // Tui đang kiểm tra lại cái cách 2.
-
-
+                try
+                {
+                    var nv = new NhanVien() { TenNhanVien = AddTenNhanVien};
+                    nhanVienService.Create(nv);
+                    CloseThem(p);
+                    List.Add(nv);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                }
             });
+            #endregion
 
+            #region Edit
             EditCommand = new RelayCommand<object>(p =>
             {
-                return !string.IsNullOrEmpty(TenNhanVien)||SelectedItem == null;
+                if (SelectedItem != null)
+                {
+                    return  SelectedItem.TenNhanVien != TenNhanVien;
+                }
+                return false;
             }, p =>
             {
-                var nv = new NhanVien() { TenNhanVien = TenNhanVien, MaNhanVien=SelectedItem.MaNhanVien};
-                if (nhanVienService.Update(nv))
+                try
                 {
+                    var nv = new NhanVien() { TenNhanVien = TenNhanVien, MaNhanVien=SelectedItem.MaNhanVien};
+                    nhanVienService.Update(nv);
+
                     int a = 0;
                     foreach (var i in List)
                     {
@@ -125,40 +140,52 @@ namespace TourDulich.ViewModel
                         }
                     }
                 }
-                
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                }
             });
+            #endregion
 
-
-
-
+            #region Delete
             DeleteCommand = new RelayCommand<object>(p =>
             {
-                return !string.IsNullOrEmpty(TenNhanVien);
+                return SelectedItem!=null;
             }, p =>
             {
-                var nv = new NhanVien() { MaNhanVien = SelectedItem.MaNhanVien };
-
-                if (nhanVienService.Delete(nv.MaNhanVien))
+                try
                 {
+                    var nv = new NhanVien() { MaNhanVien = SelectedItem.MaNhanVien };
+                    nhanVienService.Delete(nv.MaNhanVien);
                     foreach (var i in List)
                     {
                         if (i.MaNhanVien == nv.MaNhanVien)
                         {
                             List.Remove(i);
+                            MaNhanVien = 0;
+                            TenNhanVien = null;
                             break;
                         }
                     }
                 }
-
-
-
-
-
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                }
             });
+            #endregion
+
             #endregion
         }
 
-        private void Add() { NhanVien_Them x = new NhanVien_Them(); x.ShowDialog(); }
+        private void Add()
+        {
+            NhanVien_Them x = new NhanVien_Them();
+            x.DataContext = this;
+            x.ShowDialog();
+            AddTenNhanVien = null;
+            AddNhiemVu = null;
+        }
         private void CloseThem(object obj) { NhanVien_Them x = obj as NhanVien_Them; x.Close(); }
     }
 }
