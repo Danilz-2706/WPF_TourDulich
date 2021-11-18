@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using TourDulich.View.AdminManagerView;
 
@@ -102,6 +103,8 @@ namespace TourDulich.ViewModel
                     nhanVienService.Create(nv);
                     CloseThem(p);
                     List.Add(nv);
+                    MessageBox.Show($"Bạn đã thêm nhân viên: Mã {nv.MaNhanVien} - Tên: {nv.TenNhanVien}");
+
                 }
                 catch (Exception e)
                 {
@@ -164,6 +167,7 @@ namespace TourDulich.ViewModel
                             List.Remove(i);
                             MaNhanVien = 0;
                             TenNhanVien = null;
+                            MessageBox.Show($"Bạn đã xóa nhân viên: Mã {i.MaNhanVien} - Tên: {i.TenNhanVien}");
                             break;
                         }
                     }
