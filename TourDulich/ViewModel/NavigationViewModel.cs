@@ -75,23 +75,23 @@ namespace TourDulich.ViewModel
         }
 
         //Command Check Toggle Button//
-        private ICommand checkedToogle;
-        public ICommand CheckToogleCommand
-        {
-            get
-            {
-                if (checkedToogle == null)
-                {
-                    checkedToogle = new RelayCommand<object>(p => { MainWindow x =new MainWindow(); x.Content.Opacity = 0.5; });
-                }
-                else
-                {
-                    checkedToogle = new RelayCommand<object>(p => { MainWindow x = new MainWindow(); x.Content.Opacity = 1; });
-                }
-                return checkedToogle;
+        //private ICommand checkedToogle;
+        //public ICommand CheckToogleCommand
+        //{
+        //    get
+        //    {
+        //        if (checkedToogle == null)
+        //        {
+        //            checkedToogle = new RelayCommand<object>(p => { MainWindow x = new MainWindow(); x.Content.Opacity = 0.5; });
+        //        }
+        //        else
+        //        {
+        //            checkedToogle = new RelayCommand<object>(p => { MainWindow x = new MainWindow(); x.Content.Opacity = 1; });
+        //        }
+        //        return checkedToogle;
 
-            }
-        }
+        //    }
+        //}
 
 
         // Select ViewModel
@@ -113,10 +113,10 @@ namespace TourDulich.ViewModel
                     SelectedViewModel = new AdminViewModel();
                     break;
                 case "Tour":
-                    SelectedViewModel = new TourViewModel(tourDuLichService);
+                    SelectedViewModel = new TourViewModel();
                     break;
                 case "Tour Group":
-                   //SelectedViewModel = new DoanDuLichViewModel();
+                   SelectedViewModel = new DoanDuLichViewModel();
                     break;
                 case "Tourist Attraction":
                     SelectedViewModel = new TouristAttractionViewModel();
@@ -127,7 +127,9 @@ namespace TourDulich.ViewModel
                 case "Cost":
                     SelectedViewModel = new CostViewModel();
                     break;
-                
+                case "User":
+                    SelectedViewModel = new NhanVienViewModel();
+                    break;
                 case "Staff":
                     SelectedViewModel = new NhanVienViewModel();
                     break;
@@ -135,7 +137,7 @@ namespace TourDulich.ViewModel
                     SelectedViewModel = new StatisticsViewModel();
                     break;
                 default:
-                   // SelectedViewModel = new TourViewModel(ITourDuLichService tourDuLichService);
+                    SelectedViewModel = new AdminViewModel();
                     break;
             }
         }

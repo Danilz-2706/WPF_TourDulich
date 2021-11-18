@@ -86,7 +86,7 @@
                             VerticalAlignment="Center"
                             Margin="0,0,20,0"
                             Style="{StaticResource CloseBtn_Style}"
-                            Command="{Binding Close_ThemNV, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
+                            Command="{Binding Close_ThemNV, UpdateSourceTrigger=PropertyChanged }"
                             CommandParameter="{Binding ElementName=ThemNhanVien}"/>
         </Grid>
 
@@ -101,7 +101,7 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
                                 Margin="0 0 20 0"
-                                Command="{Binding Reset}"
+                                Command="{Binding Reset, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="Trở lại">
                     <TextBlock Text="Hoàn tác"/>
                 </Button>
@@ -113,7 +113,7 @@
                                 BorderBrush="#C4C4C4"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
-                                Command="{Binding Save , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                Command="{Binding Save , UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="Xác nhận">
                     <TextBlock Text="Lưu"/>
                 </Button>
@@ -136,7 +136,7 @@
                                 CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
                                 HorizontalAlignment="Right">
                         <TextBox
-                                Text="{Binding AddTenNhanVien,UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"
+                                Text="{Binding AddTenNhanVien,UpdateSourceTrigger=PropertyChanged}"
                                 IsEnabled="True"
                                 VerticalAlignment="Top"
                                 MaxHeight="60"
@@ -156,7 +156,7 @@
                                 CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
                                 HorizontalAlignment="Right">
                         <TextBox
-                                Text="{Binding AddNhiemVu,UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}"
+                                Text="{Binding AddNhiemVu,UpdateSourceTrigger=PropertyChanged}"
                                 IsEnabled="True"
                                 VerticalAlignment="Top"
                                 MaxHeight="60"

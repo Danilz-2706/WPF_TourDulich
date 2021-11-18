@@ -100,7 +100,7 @@ namespace TourDulich.ViewModel
         public ICommand Close_DoanChiTiet { get; set; }
 
         #endregion
-        
+        public DoanDuLichViewModel() { }
         public DoanDuLichViewModel(IDoanDuLichService doanDuLichService, ITourDuLichService tourDuLichService, INhanVienService nhanVienService) {
             this.doanDuLichService = doanDuLichService;
             this.tourDuLichService = tourDuLichService;

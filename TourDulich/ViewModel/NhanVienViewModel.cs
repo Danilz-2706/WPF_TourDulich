@@ -29,6 +29,9 @@ namespace TourDulich.ViewModel
         public ICommand DeleteCommand { get; set; }
         public ICommand Reset { get; set; }
 
+        private ICommand _EditCommand;
+        public ICommand EditCommand { get => _EditCommand; set => _EditCommand = value; }
+
        
         public ICommand _Save { get; set; }
         public ICommand Save { get => _Save; set => _Save = value; }
@@ -63,7 +66,7 @@ namespace TourDulich.ViewModel
         #endregion
 
         private ObservableCollection<NhanVien> _list;
-        public ObservableCollection<NhanVien> List { get => _list; set { _list = value;} }
+        public ObservableCollection<NhanVien> List { get => _list; set { _list = value;  } }
         public NhanVienViewModel()
         {
 
@@ -82,47 +85,76 @@ namespace TourDulich.ViewModel
             Reset = new RelayCommand<object>(p => { return true; }, p => { AddTenNhanVien = null; AddNhiemVu = null; });
             Save = new RelayCommand<object>(p => 
             {
-                return !string.IsNullOrEmpty(AddTenNhanVien) && !string.IsNullOrEmpty(AddNhiemVu);
+                return !string.IsNullOrEmpty(AddTenNhanVien) ;
             }, p => 
             {
                 var nv = new NhanVien() { TenNhanVien = AddTenNhanVien};
                 nhanVienService.Create(nv);
+                List = new ObservableCollection<NhanVien>(this.nhanVienService.GetDTOs());
+                //List.Add(this.nhanVienService.Get(nv.MaNhanVien));
+                
                 //Khúc này là khúc cần reload lại lên View. 
                 // Có 2 hướng xử lý
                 // 1 - Kiễm tra kỹ mode biding đúng chưa -> tui nghĩ là ổn. Vì để TwoWay là cái check dễ nhất. TowWay mà ko chạy được thì các Mode khác sẽ chạy ko được....
                 // 2 - kiểm tra các biến trong lớp nhân viên khi được set thuộc tính thì có bắt được sự kiện hay ko. 
                 // Tui đang kiểm tra lại cái cách 2.
 
-                List.Add(nv);
 
             });
 
+            EditCommand = new RelayCommand<object>(p =>
+            {
+                return !string.IsNullOrEmpty(TenNhanVien)||SelectedItem == null;
+            }, p =>
+            {
+                var nv = new NhanVien() { TenNhanVien = TenNhanVien, MaNhanVien=SelectedItem.MaNhanVien};
+                if (nhanVienService.Update(nv))
+                {
+                    int a = 0;
+                    foreach (var i in List)
+                    {
+                        if (i.MaNhanVien == nv.MaNhanVien)
+                        {
+                            List.Remove(this.nhanVienService.Get(nv.MaNhanVien));
+                            List.Insert(a, this.nhanVienService.Get(nv.MaNhanVien));
+                            break;
+                        }
+                        else
+                        {
+                            a++;
+                        }
+                    }
+                }
+                
+            });
 
-            //EditCommand = new RelayCommand<object>(p =>
-            //{
-            //    return !string.IsNullOrEmpty(TenNhanVien);
-            //}, p =>
-            //{
-            //    ....................
-
-      
 
 
-            //});
+
+            DeleteCommand = new RelayCommand<object>(p =>
+            {
+                return !string.IsNullOrEmpty(TenNhanVien);
+            }, p =>
+            {
+                var nv = new NhanVien() { MaNhanVien = SelectedItem.MaNhanVien };
+
+                if (nhanVienService.Delete(nv.MaNhanVien))
+                {
+                    foreach (var i in List)
+                    {
+                        if (i.MaNhanVien == nv.MaNhanVien)
+                        {
+                            List.Remove(i);
+                            break;
+                        }
+                    }
+                }
 
 
-            //DeleteCommand = new RelayCommand<object>(p =>
-            //{
-            //    return !string.IsNullOrEmpty(TenNhanVien);
-            //}, p =>
-            //{
-            //    var nv = new NhanVien() { MaNhanVien = SelectedItem.MaNhanVien };
-            //    nhanVienService.Delete(nv.MaNhanVien);
-
-            //    List.Remove(nv);
 
 
-            //});
+
+            });
             #endregion
         }
 

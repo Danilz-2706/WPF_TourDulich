@@ -145,7 +145,7 @@
 
                             <!--// Display Menu Button//-->
                             <ToggleButton   x:Name="tg_btn"
-                                        Grid.Column="0"
+                                           Grid.Column="0"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Left"
                                         Margin="7 0 7 0"

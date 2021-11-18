@@ -132,13 +132,13 @@
 
             <!--//List Tour//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView ItemsSource="{Binding List, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                    <ListView x:Name="list" ItemsSource="{Binding List, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView>
 
                             <GridView.Columns>
-                                <GridViewColumn Header="Mã Nhân Viên" DisplayMemberBinding="{Binding MaNhanVien}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNhanVien}"></GridViewColumn>
+                                <GridViewColumn Header="Mã Nhân Viên" DisplayMemberBinding="{Binding MaNhanVien, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNhanVien, UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"></GridViewColumn>
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
@@ -172,7 +172,7 @@
                                 <TextBlock  Text="TÊN NHÂN VIÊN"  Style="{StaticResource tbName}"/>
 
                                 <TextBox Style="{StaticResource tblIfo1}"
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                             IsEnabled ="True"
                                              Text="{Binding TenNhanVien, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </StackPanel>
@@ -209,6 +209,7 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Margin="5 0 5 0"
                                 IsChecked="False"
+                                          Command="{Binding EditCommand}"
                                 ToolTip="Sửa">
                                 <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
 
