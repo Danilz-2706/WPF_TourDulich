@@ -135,6 +135,8 @@ namespace TourDulich.ViewModel
                         {
                             List.Remove(this.nhanVienService.Get(nv.MaNhanVien));
                             List.Insert(a, this.nhanVienService.Get(nv.MaNhanVien));
+                            MessageBox.Show($"Bạn sửa nhân viên: Mã {nv.MaNhanVien} - Tên: {nv.TenNhanVien}");
+
                             break;
                         }
                         else
