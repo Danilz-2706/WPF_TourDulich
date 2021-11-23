@@ -15,19 +15,79 @@ namespace TourDulich.ViewModel
 {
     public class DoanDuLichViewModel:BaseViewModel
     {
+        #region Khai báo các Service để dùng trong Đoàn
         private readonly IDoanDuLichService doanDuLichService;
+        private readonly ITourDuLichService tourDuLichService;
+        private readonly INhanVienService nhanVienService;
+        #endregion
 
+        #region Biến của các ô con để lấy dữ liệu được tham chiếu
         public int MaDoan { get; set; }
+        public TourDuLich Tour { get; set; }
+        public NoiDungTour NoiDungTour { get; set; }
         public string TenDoan { get; set; }
+        public DateTime? NgayKhoiHanh { get; set; }
+        public DateTime? NgayKetThuc { get; set; }
         public long DoanhThu { get; set; }
-        public string NoiDung { get; set; }
-        public DateTime? NgayDi { get; set; }
-        public DateTime? NgayVe { get; set; }
+        public ICollection<ChiTietDoan> ChiTietDoans { get; set; }
+        public ICollection<Khach> Khaches { get; set; }
+        public ICollection<Domain.Entities.ChiPhi> ChiPhis { get; set; }
+        public ICollection<PhanBoNhanVienDoan> PhanBoNhanVienDoans { get; set; }
+        public ICollection<NhanVien> NhanViens { get; set; }
+
+        private TourDuLich _SelectedTour;
+        public TourDuLich SelectedTour
+        {
+            get => _SelectedTour;
+            set
+            {
+                _SelectedTour = value;
+
+            }
+        }
+
+        #endregion
+
+        #region Lấy giá trị được chọn tham chiếu qua các ô cần dùng
+        private DoanDuLich _SelectedItem;
+        public DoanDuLich SelectedItem
+        {
+            get => _SelectedItem;
+            set
+            {
+                _SelectedItem = value;
+                if (SelectedItem != null)
+                {
+                    MaDoan = SelectedItem.MaDoan;
+                    TenDoan = SelectedItem.TenDoan;
+                    NoiDungTour = SelectedItem.NoiDungTour;
+                    NgayKhoiHanh = SelectedItem.NgayKhoiHanh;
+                    NgayKetThuc = SelectedItem.NgayKetThuc;
+                    DoanhThu = SelectedItem.DoanhThu;
+
+                    SelectedTour = SelectedItem.Tour;
+                    NhanViens = SelectedItem.NhanViens;
+                }
+            }
+        }
+        #endregion
+
+        #region Danh sách Đoàn, Tour, Nhân viên, Chi phí, Khách hàng
+        private ObservableCollection<TourDuLich> _listTour;
+
+        public ObservableCollection<TourDuLich> ListTour { get => _listTour; set { _listTour = value; } }
+
+        private ObservableCollection<NhanVien> _listNhanvien;
+
+        public ObservableCollection<NhanVien> ListNhanvien { get => _listNhanvien; set { _listNhanvien = value; } }
+
         private ObservableCollection<DoanDuLich> _list;
 
         public ObservableCollection<DoanDuLich> ListGroup { get => _list; set { _list = value; } }
-        #region commands
-        
+        #endregion
+
+        #region Các biến dùng để mở và đóng các view con
+
         public ICommand AddCommand { get; set; }
         public ICommand ShowCommand { get; set; }
         public ICommand DoanThemNV { get; set; }
@@ -38,27 +98,39 @@ namespace TourDulich.ViewModel
         public ICommand Close_DoanThemKH { get; set; }
         public ICommand Close_DoanThemCP { get; set; }
         public ICommand Close_DoanChiTiet { get; set; }
+
         #endregion
-        public DoanDuLichViewModel(IDoanDuLichService doanDuLichService) {
+        public DoanDuLichViewModel() { }
+        public DoanDuLichViewModel(IDoanDuLichService doanDuLichService, ITourDuLichService tourDuLichService, INhanVienService nhanVienService) {
             this.doanDuLichService = doanDuLichService;
+            this.tourDuLichService = tourDuLichService;
+            this.nhanVienService = nhanVienService;
             ListGroup = new ObservableCollection<DoanDuLich>(this.doanDuLichService.GetDTOs());
+            ListTour = new ObservableCollection<TourDuLich>(this.tourDuLichService.GetDTOs());
+            ListNhanvien = new ObservableCollection<NhanVien>(this.nhanVienService.GetDTOs());
 
+            #region Thực hiện các chức năng
 
-            #region Commands
             AddCommand = new RelayCommand<object>(p => { return true; }, p => { Add(); });
-            ShowCommand = new RelayCommand<object>(p => { return true; }, p => { Show(); });
-            DoanThemNV = new RelayCommand<object>(p => { return true; }, p => { ShowThemNV(); });
-            DoanThemKH = new RelayCommand<object>(p => { return true; }, p => { ShowThemKH(); });
-            DoanThemCP = new RelayCommand<object>(p => { return true; }, p => { ShowThemCP(); });
-            
-
             Close_DoanThem = new RelayCommand<object>(p =>      { return true; }, p => { CloseThem(p); });
-            Close_DoanThemNV = new RelayCommand<object>(p =>    { return true; }, p => { CloseThemNV(p); });
-            Close_DoanThemKH = new RelayCommand<object>(p => { return true; }, p => { CloseThemKH(p); });
-            Close_DoanThemCP = new RelayCommand<object>(p => { return true; }, p => { CloseThemCP(p); });
+
+            ShowCommand = new RelayCommand<object>(p => { return true; }, p => { Show(); });
             Close_DoanChiTiet = new RelayCommand<object>(p => { return true; }, p => { CloseChiTiet(p); });
+            
+            DoanThemNV = new RelayCommand<object>(p => { return true; }, p => { ShowThemNV(); });
+            Close_DoanThemNV = new RelayCommand<object>(p =>    { return true; }, p => { CloseThemNV(p); });
+            
+            DoanThemKH = new RelayCommand<object>(p => { return true; }, p => { ShowThemKH(); });
+            Close_DoanThemKH = new RelayCommand<object>(p => { return true; }, p => { CloseThemKH(p); });
+            
+            DoanThemCP = new RelayCommand<object>(p => { return true; }, p => { ShowThemCP(); });
+            Close_DoanThemCP = new RelayCommand<object>(p => { return true; }, p => { CloseThemCP(p); });
+
             #endregion
         }
+
+
+        #region Open View Child
         private void Add() { DoanDuLich_Them x = new DoanDuLich_Them(); x.ShowDialog(); }
         private void CloseThem(object obj) { DoanDuLich_Them x = obj as DoanDuLich_Them; x.Close();  }
 
@@ -76,48 +148,9 @@ namespace TourDulich.ViewModel
         private void ShowThemCP() { DoanDuLich_ThemChiPhi x = new DoanDuLich_ThemChiPhi(); x.ShowDialog(); }
         private void CloseThemCP(object obj) { DoanDuLich_ThemChiPhi x = obj as DoanDuLich_ThemChiPhi; x.Close();  }
 
-        //private TourDuLichDTO _SelectedTour;
-        //public TourDuLichDTO SelectedTour
-        //{
-        //    get => _SelectedTour;
-        //    set
-        //    {
-        //        _SelectedTour = value;
+        #endregion
 
-        //    }
-        //}
 
-        //private List<NhanVienDTO> _Nhanvien;
-        //public List<NhanVienDTO> NhanVien
-        //{
-        //    get => _Nhanvien;
-        //    set
-        //    {
-        //        _Nhanvien = value;
 
-        //    }
-        //}
-
-        //private DoanDuLichDTO _SelectedItem;
-        //public DoanDuLichDTO SelectedItem
-        //{
-        //    get => _SelectedItem;
-        //    set
-        //    {
-        //        _SelectedItem = value;
-        //        if(SelectedItem != null)
-        //        {
-        //            MaDoan = SelectedItem.MaDoan;
-        //            TenDoan = SelectedItem.TenDoan;
-        //            NgayDi = SelectedItem.NgayKhoiHanh;
-        //            NgayVe = SelectedItem.NgayKetThuc;
-        //            DoanhThu = SelectedItem.DoanhThu;
-
-        //            //NoiDung = SelectedItem.NoiDung;
-        //            //SelectedTour = SelectedItem.T;
-        //            //NhanVien = SelectedItem.NhanVien;
-        //        }
-        //    }
-        //}
     }
 }

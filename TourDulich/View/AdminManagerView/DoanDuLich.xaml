@@ -142,8 +142,8 @@
                                     <GridViewColumn Header="Mã Đoàn" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
                                     <GridViewColumn Header="Tên Tour" DisplayMemberBinding="{Binding Tour.TenGoi}"></GridViewColumn>
                                     <GridViewColumn Header="Tên Đoàn" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
-                                    <GridViewColumn Header="Ngày đi" DisplayMemberBinding="{Binding NgayDi, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
-                                    <GridViewColumn Header="Ngày về" DisplayMemberBinding="{Binding NgayVe, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày đi" DisplayMemberBinding="{Binding NgayKhoiHanh, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày về" DisplayMemberBinding="{Binding NgayKetThuc, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                                     <GridViewColumn Header="Doanh thu" DisplayMemberBinding="{Binding DoanhThu}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
@@ -206,9 +206,9 @@
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="TÊN TOUR"  Style="{StaticResource tbName}"/>
                                     <ComboBox
-                                                ItemsSource="{Binding Tour}"
-                                                DisplayMemberPath="Ten"
-                                                SelectedValue="{Binding SelectedTour ,UpdateSourceTrigger=PropertyChanged}"
+                                                ItemsSource="{Binding ListTour}"
+                                                DisplayMemberPath="TenGoi"
+                                                SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                 IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                                 IsEditable="{Binding ElementName=edit, Path=IsChecked}"
                                                 Style="{StaticResource CbblIfo1}"
@@ -223,12 +223,12 @@
                                     <Border Margin="10 0 10 0"
                                             CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
                                             HorizontalAlignment="Stretch">
-                                        <ListView ItemsSource="{Binding NhanVien}" MaxHeight="220">
+                                        <ListView ItemsSource="{Binding NhanViens}" MaxHeight="220">
                                             <ListView.View>
                                                 <GridView>
-                                                    <GridViewColumn Header="Mã NV" DisplayMemberBinding="{Binding MaNV,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNV1,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                                    <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding ChucVu,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                                    <GridViewColumn Header="Mã NV" DisplayMemberBinding="{Binding MaNhanVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNhanVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                                    <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding NhiemVu,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                                 </GridView>
                                             </ListView.View>
                                         </ListView>
@@ -244,14 +244,14 @@
                                     <DatePicker
                                         Margin="10 0 5 0"
                                         IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                        SelectedDate="{Binding NgayDi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedDate="{Binding NgayKhoiHanh, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
                                                 Grid.Column="0"
                                                 materialDesign:HintAssist.Hint="Ngày đi"
                                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
                                     <DatePicker
                                         Margin="5 0 10 0"
                                         IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                        SelectedDate="{Binding NgayVe, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedDate="{Binding NgayKetThuc, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
 
                                                 Grid.Column="1"
                                                 materialDesign:HintAssist.Hint="Ngày về"
@@ -272,13 +272,14 @@
                                             CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
                                             HorizontalAlignment="Stretch">
                                         <TextBox 
+                                            
                                                 TextWrapping="Wrap"
                                                 VerticalAlignment="Top"
                                                 IsEnabled="False"
                                                 AcceptsReturn="True"
                                                 Margin="10 5 10 0"
                                                 FontSize="14"
-                                                Text="{Binding NoiDung,UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding NoiDungTour,UpdateSourceTrigger=PropertyChanged}"
                                                 materialDesign:HintAssist.Hint="Nội dung đang trống"
                                                 />
                                     </Border>

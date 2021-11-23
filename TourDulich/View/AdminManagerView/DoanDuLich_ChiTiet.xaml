@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourDulich.View.AdminManagerView"
+        xmlns:vm="clr-namespace:TourDulich.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Name="ViewThemDoan"
@@ -12,10 +13,12 @@
         Title="Đoàn_Thêm" Height="732" Width="1000" 
         ResizeMode="NoResize"
         
-        DataContext="{Binding Path=DoanDuLichViewModel,Source={StaticResource ServiceLocator} }"
+        
         
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
+    <!--//Set DataContext//-->
+    
     <Window.Resources>
         <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Height" Value="10"></Setter>
@@ -177,14 +180,14 @@
                         <DatePicker
                                         Margin="10 0 5 0" 
                         IsEnabled="True"
-                                        SelectedDate="{Binding NgayDi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedDate="{Binding NgayKhoiHanh, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
                                                 Grid.Column="0"
                                                 materialDesign:HintAssist.Hint="Ngày đi"
                                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
                         <DatePicker
                                         Margin="5 0 10 0"
                                         IsEnabled="True"
-                                        SelectedDate="{Binding NgayVe, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedDate="{Binding NgayKetThuc, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
 
                                                 Grid.Column="1"
                                                 materialDesign:HintAssist.Hint="Ngày về"

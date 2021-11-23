@@ -23,10 +23,13 @@ namespace TourDulich.ViewModel
         public int MaTour { get; set; }
         public string TenGoi { get; set; }
         public string DacDiem { get; set; }
-        public ObservableCollection<TourDuLich> ListTour { get; set; }
         public LoaiHinhDuLich LoaiHinh { get; set; }
         public int MaLoaiHinh { get; set; }
         public DateTime? NgayVe { get; set; }
+
+
+        private ObservableCollection<TourDuLich> _List;
+        public ObservableCollection<TourDuLich> ListTour { get => _List; set { _List = value; } }
 
 
 
@@ -44,7 +47,6 @@ namespace TourDulich.ViewModel
             ListTour = new ObservableCollection<TourDuLich>(this.tourDuLichService.GetDTOs());
             
 
-
             //// Commands  -  Add - Edit - Delete - ...... //
             #region Commands
             AddTour = new RelayCommand<object>(p => { return true; }, p => { Add(); });
@@ -57,7 +59,7 @@ namespace TourDulich.ViewModel
             #endregion
         }
 
-        
+        public TourViewModel() { }
 
         private void Add() { TourManagerAdd x = new TourManagerAdd(); x.ShowDialog();}
         private void Edit() { TourManagerEdit x = new TourManagerEdit(); x.ShowDialog(); }

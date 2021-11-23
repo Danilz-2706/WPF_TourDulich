@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourDulich.View.AdminManager" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             Name="nhanvienView"
              DataContext="{Binding Source={StaticResource ServiceLocator}, Path=NhanVienViewModel}"
              >
 
@@ -130,22 +131,21 @@
             </Grid>
 
             <!--//List Tour//-->
-            <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-
-                <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
+                <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
+                    <ListView x:Name="list" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView>
 
                             <GridView.Columns>
                                 <GridViewColumn Header="Mã Nhân Viên" DisplayMemberBinding="{Binding MaNhanVien}"></GridViewColumn>
-                                <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNhanVien}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNhanVien}"></GridViewColumn>
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </Grid>
-                <Grid Grid.Row="1" Grid.Column="1">
+                </Grid>
 
+                <Grid Grid.Row="1" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10.25*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
@@ -158,14 +158,13 @@
                                 <GradientStop Color="#FFFFAB6F" Offset="0.925"/>
                             </LinearGradientBrush>
                         </Grid.Background>
-                        
+
                         <StackPanel  VerticalAlignment="Center">
-
-
                             <!--//MÃ NHÂN VIÊN//-->
                             <Grid Margin="0 8 0 16">
                                 <TextBlock  Text="MÃ NHÂN VIÊN"  Style="{StaticResource tbName}"/>
-                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaNhanVien,UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" 
+                                         Text="{Binding MaNhanVien}"/>
                             </Grid>
 
                             <!--//TÊN NHÂN VIÊN//-->
@@ -173,10 +172,8 @@
                                 <TextBlock  Text="TÊN NHÂN VIÊN"  Style="{StaticResource tbName}"/>
 
                                 <TextBox Style="{StaticResource tblIfo1}"
-                                             
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                             
-                                             Text="{Binding TenNhanVien,UpdateSourceTrigger=PropertyChanged}"/>
+                                             IsEnabled ="True"
+                                             Text="{Binding TenNhanVien, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </StackPanel>
                     </Grid>
@@ -196,7 +193,7 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="10 0 5 0"
-                                Command="{Binding AddCommand}"
+                                Command="{Binding AddCommand , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Thêm">
 
@@ -212,11 +209,11 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Margin="5 0 5 0"
                                 IsChecked="False"
+                                Command="{Binding EditCommand, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="Sửa">
-                                <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
-
+                                <TextBlock x:Name="sua" Text="Sửa" Style="{StaticResource fontText}"/>
                             </ToggleButton>
-
+                            
                             <!--//Xóa//-->
                             <Button
                                 Grid.Column="2"
@@ -224,7 +221,7 @@
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Command="{Binding DeleteCommand}"
+                                Command="{Binding DeleteCommand, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="5 0 5 0"
                                 ToolTip="Xóa">
                                 <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>
@@ -233,7 +230,7 @@
                         </Grid>
 
                     </StackPanel>
-                </Grid>
+                </Grid>                 
             </Grid>
         </materialDesign:Card>
     </Grid>
