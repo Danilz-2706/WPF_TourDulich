@@ -38,6 +38,7 @@ namespace Infrastructure.Persistence
                 {
                     j.ToTable("PhanBoNhanVien_Doan");
                     j.HasKey(pb => new { pb.MaDoan, pb.MaNhanVien });
+                    j.HasData(new PhanBoNhanVienDoan { MaDoan = 1, MaNhanVien = 1, NhiemVu = "Tài xế" });
                 }
 
                 );
