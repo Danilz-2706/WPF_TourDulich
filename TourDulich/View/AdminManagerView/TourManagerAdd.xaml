@@ -11,6 +11,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         WindowStyle="None"
+       DataContext="{Binding Path=TourViewModel ,Source={StaticResource ServiceLocator} }"
         Name="ViewAddTour"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">

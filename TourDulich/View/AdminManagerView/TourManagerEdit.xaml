@@ -12,7 +12,7 @@
         Background="Transparent"
         
         WindowStyle="None"
-        DataContext="{StaticResource tvm}"
+        DataContext="{Binding Path=TourViewModel ,Source={StaticResource ServiceLocator} }"
         Name="ViewEditTour"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">

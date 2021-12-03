@@ -29,14 +29,15 @@
             <Setter Property="Margin" Value="0 0 10 0"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
-        <Style x:Key="tblIf1o" TargetType="TextBox">
+        <Style x:Key="tblIfo1" TargetType="TextBox">
+            <Setter Property="MinHeight" Value="25"/>
             <Setter Property="Height" Value="auto"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Width" Value="190"/>
             <Setter Property="Background" Value="#fff"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Margin" Value="0 0 10 0"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="14"/>
         </Style>
         <Style x:Key="tbName" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -173,96 +174,46 @@
                                 </StackPanel.Background>
 
 
-                                <!--//MÃ ĐOÀN//-->
+                                <!--//Mã Tour//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="Mã Tour"  Style="{StaticResource tbName}"/>
-                                    <TextBox  IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBox  IsEnabled="False" 
+                                              Text="{Binding MaTour,UpdateSourceTrigger=PropertyChanged}"
+                                               Style="{StaticResource tblIfo1}"
+                                              />
                                 </Grid>
 
-                                <!--//TÊN ĐOÀN//-->
+                                <!--//Tên Gọi //-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="Tên Gọi"  Style="{StaticResource tbName}"/>
 
                                     <TextBox
                                              
                                              IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                             
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                              Style="{StaticResource tblIfo1}"
+                                             Text="{Binding TenGoi,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
-                                <!--//TÊN TOUR//-->
+                                <!--//Đặc Điểm//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="Đặc Điểm"  Style="{StaticResource tbName}"/>
-                                    <ComboBox
-                                                ItemsSource="{Binding Tour}"
-                                                DisplayMemberPath="Ten"
-                                                SelectedValue="{Binding SelectedTour ,UpdateSourceTrigger=PropertyChanged}"
-                                                IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                                IsEditable="{Binding ElementName=edit, Path=IsChecked}"
-                                                
-                                                materialDesign:HintAssist.HintOpacity=".26">
-                                    </ComboBox>
+                                    <TextBox
+                                             
+                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                              Style="{StaticResource tblIfo1}"
+                                             Text="{Binding DacDiem,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
-                                <!--//NHÂN VIÊN DẪN ĐOÀN//-->
-                                
-                                    <StackPanel Margin="0 5 0 8">
-                                        <TextBlock  Text="Điểm Tham Quan : "  Style="{StaticResource tbName}"/>
+                                <!--//Mã Loại Hình //-->
 
-                                        
-                                    </StackPanel>
-                                
-
-                                <!--//NGÀY ĐI - NGÀY VỀ//-->
-                                <Grid Margin="0 5 0 8">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <DatePicker
-                                        Margin="10 0 5 0"
-                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                        SelectedDate="{Binding NgayDi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
-                                                Grid.Column="0"
-                                                materialDesign:HintAssist.Hint="Ngày đi"
-                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
-                                    <DatePicker
-                                        Margin="5 0 10 0"
-                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                        SelectedDate="{Binding NgayVe, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
-
-                                                Grid.Column="1"
-                                                materialDesign:HintAssist.Hint="Ngày về"
-                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                                </Grid>
-
-                                <!--//DOANH THU//-->
-                                <Grid Margin="0 5 0 8">
-                                    <TextBlock  Text="Loại Hình"  Style="{StaticResource tbName}"/>
-                                    <TextBox  IsEnabled="False" Text="{Binding DoanhThu,UpdateSourceTrigger=PropertyChanged}"/>
-                                </Grid>
-
-                                <!--//NỘI DUNG//-->
                                 <StackPanel Margin="0 5 0 8">
-                                    <TextBlock  Text="Giá Tour : "  Style="{StaticResource tbName}"/>
+                                    <TextBlock  Text="Mã Loại Hình : "  Style="{StaticResource tbName}"/>
+                                    <TextBox Text="{Binding MaLoaiHinh,UpdateSourceTrigger=PropertyChanged}"
+                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                              Style="{StaticResource tblIfo1}"></TextBox>
 
-                                    <Border Margin="10 0 10 0"
-                                            CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
-                                            HorizontalAlignment="Stretch">
-                                        <TextBox 
-                                                TextWrapping="Wrap"
-                                                VerticalAlignment="Top"
-                                                IsEnabled="False"
-                                                AcceptsReturn="True"
-                                                Margin="10 5 10 0"
-                                                FontSize="14"
-                                                Text="{Binding NoiDung,UpdateSourceTrigger=PropertyChanged}"
-                                                materialDesign:HintAssist.Hint="Nội dung đang trống"
-                                                />
-                                    </Border>
+
                                 </StackPanel>
-
-
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>
@@ -325,7 +276,7 @@
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Command="{Binding ChitietTour}"
+                                Command="{Binding }"
                                 Margin="5 0 10 0"
                                 ToolTip="Chi tiết đoàn">
                                 <TextBlock Text="Chi Tiết Tour" Style="{StaticResource fontText}"/>

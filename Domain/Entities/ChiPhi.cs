@@ -11,5 +11,6 @@ namespace Domain.Entities
         public long SoTien { get; set; }
         public int MaLoaiChiPhi { get; set; }
         public LoaiChiPhi LoaiChiPhi { get; set; }
+        public string TenLoaiChiPhi { get; set; }
     }
 }
