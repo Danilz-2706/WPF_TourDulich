@@ -130,7 +130,7 @@
                 </ComboBox>
             </Grid>
 
-            <!--//List Tour//-->
+            <!--//List Nhân Viên//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
                     <ListView x:Name="list" ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
@@ -193,7 +193,7 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="10 0 5 0"
-                                Command="{Binding AddCommand , UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                Command="{Binding AddCommand , UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Thêm">
 

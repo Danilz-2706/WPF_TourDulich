@@ -258,7 +258,6 @@
                             Margin="0 4 0 4"
                             Background="#eff0f3"
                             Name="Content">
-
                         <Image x:Name="BG" Source="/Assets/Icon/DT1__UI--icon/bg.png" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
                             <Image.RenderTransform>
                                 <TransformGroup>

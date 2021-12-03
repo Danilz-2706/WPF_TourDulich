@@ -25,15 +25,6 @@ namespace TourDulich
             InitializeComponent();
         }
 
-        //private void tg_btn_Unchecked(object sender, RoutedEventArgs e)
-        //{
-        //    Content.Opacity = 1;
-        //}
-
-        //private void tg_btn_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    Content.Opacity = 0.5;
-        //}
-
+       
     }
 }

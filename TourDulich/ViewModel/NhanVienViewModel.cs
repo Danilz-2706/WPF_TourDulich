@@ -33,8 +33,8 @@ namespace TourDulich.ViewModel
         private ICommand _EditCommand;
         public ICommand EditCommand { get => _EditCommand; set => _EditCommand = value; }
 
-       
-        public ICommand _Save { get; set; }
+
+        private ICommand _Save;
         public ICommand Save { get => _Save; set => _Save = value; }
 
         // Các biến trong ViewChild_Add
@@ -69,7 +69,7 @@ namespace TourDulich.ViewModel
 
 
         private ObservableCollection<NhanVien> _list;
-        public ObservableCollection<NhanVien> List { get => _list; set { _list = value;  } }
+        public  ObservableCollection<NhanVien> List { get => _list; set { _list = value;  } }
 
         public NhanVienViewModel()
         {
@@ -101,8 +101,8 @@ namespace TourDulich.ViewModel
                 {
                     var nv = new NhanVien() { TenNhanVien = AddTenNhanVien};
                     nhanVienService.Create(nv);
-                    CloseThem(p);
                     List.Add(nv);
+                    CloseThem(p);
                     MessageBox.Show($"Bạn đã thêm nhân viên: Mã {nv.MaNhanVien} - Tên: {nv.TenNhanVien}");
 
                 }

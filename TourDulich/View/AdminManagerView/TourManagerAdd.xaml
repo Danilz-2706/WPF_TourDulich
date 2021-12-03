@@ -11,7 +11,6 @@
         AllowsTransparency="True"
         Background="Transparent"
         WindowStyle="None"
-        DataContext="{StaticResource tvm}"
         Name="ViewAddTour"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">

@@ -129,10 +129,8 @@
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Chi Phí" DisplayMemberBinding="{Binding MaChiPhi}"></GridViewColumn>
-                                    <GridViewColumn Header="Mã đoàn" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                    <GridViewColumn Header="Số tiền" DisplayMemberBinding="{Binding SoTien}"></GridViewColumn>
-                                    <GridViewColumn Header="Mã loại chi phí" DisplayMemberBinding="{Binding MaLoaiChiPhi}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã Chi Phí" DisplayMemberBinding="{Binding MaLoaiChiPhi}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã đoàn" DisplayMemberBinding="{Binding TenLoaiChiPhi}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -158,31 +156,23 @@
 
                             <!--//MÃ NHÂN VIÊN//-->
                             <Grid Margin="0 8 0 16">
-                                <TextBlock  Text="MÃ CHI PHÍ"  Style="{StaticResource tbName}"/>
-                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock  Text="MÃ LOẠI CHI PHÍ"  Style="{StaticResource tbName}"/>
+                                <TextBox Style="{StaticResource tblIfo1}" 
+                                         IsEnabled="False" 
+                                         Text="{Binding MaLoaiChiPhi,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
 
                             <!--//TÊN NHÂN VIÊN//-->
                             <Grid Margin="0 16 0 8">
-                                <TextBlock  Text="TÊN CHI PHÍ"  Style="{StaticResource tbName}"/>
+                                <TextBlock  Text="TÊN LOẠI CHI PHÍ"  Style="{StaticResource tbName}"/>
 
                                 <TextBox Style="{StaticResource tblIfo1}"
                                              
                                              IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                             Text="{Binding TenLoaiChiPhi,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
 
-                            <!--//TÊN NHÂN VIÊN//-->
-                            <Grid Margin="0 16 0 8">
-                                <TextBlock  Text="GIÁ TIỀN"  Style="{StaticResource tbName}"/>
-
-                                <TextBox Style="{StaticResource tblIfo1}"
-                                             
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                             
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
-                            </Grid>
                         </StackPanel>
                     </Grid>
 
@@ -244,4 +234,5 @@
             </Grid>
         </materialDesign:Card>
     </Grid>
+
 </UserControl>

@@ -7,12 +7,11 @@
         xmlns:vm="clr-namespace:TourDulich.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Name="ViewThemDoan"
+        Name="ViewChiTietDoan"
         AllowsTransparency="True"
         Background="Transparent"
-        Title="Đoàn_Thêm" Height="732" Width="1000" 
+        Height="732" Width="1000" 
         ResizeMode="NoResize"
-        
         
         
         WindowStyle="None"
@@ -94,7 +93,7 @@
                             Margin="0,0,20,0"
                             Style="{StaticResource CloseBtn_Style}"
                             Command="{Binding Close_DoanChiTiet}"
-                            CommandParameter="{Binding ElementName=ViewThemDoan}"/>
+                            CommandParameter="{Binding ElementName=ViewChiTietDoan}"/>
         </Grid>
         <!--//Footer//-->
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Background="#fffaf7">
@@ -161,10 +160,13 @@
                     <Grid Margin="0 5 0 8">
                         <TextBlock  Text="Chọn Tour"  Style="{StaticResource tbName}"/>
                         <ComboBox
-                                ItemsSource="{Binding Tour}"
-                                DisplayMemberPath="Ten"
-                                SelectedValue="{Binding SelectedTour ,UpdateSourceTrigger=PropertyChanged}"
-                               IsEditable="True"
+                                ItemsSource="{Binding ListTour}"
+                                                DisplayMemberPath="TenGoi"
+                                        
+                                                SelectedItem="{Binding SelectedTour,UpdateSourceTrigger=PropertyChanged}"
+                                                SelectedValue="{Binding SelectedTour.TenGoi,UpdateSourceTrigger=PropertyChanged}"
+                                                SelectedValuePath="TenGoi"
+                            IsEditable="True"
                             
                                 Style="{StaticResource CbblIfo1}"
                                 materialDesign:HintAssist.HintOpacity=".26">
@@ -204,32 +206,13 @@
 
                     <!--//Khách sạn//-->
                     <Grid Margin="0 5 0 8">
-                        <TextBlock  Text="Khách sạn"  Style="{StaticResource tbName}"/>
-                        <Border Margin="0 0 10 0"
-                                Width="160" 
-                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
-                                HorizontalAlignment="Right">
-                            <TextBox
-                                IsEnabled="True"
-                                VerticalAlignment="Top"
-                                MaxHeight="60"
-                                FontSize="12"
-                                Margin="10 0 0 0"
-                                AcceptsReturn="True"
-                                TextWrapping="Wrap"
-                                VerticalScrollBarVisibility="Auto"
-                                materialDesign:HintAssist.Hint="Nhập giá"/>
-                        </Border>
-                    </Grid>
-
-                    <!--//Hành trình//-->
-                    <Grid Margin="0 5 0 8">
                         <TextBlock  Text="Hành trình"  Style="{StaticResource tbName}"/>
                         <Border Margin="0 0 10 0"
                                 Width="160" 
                                 CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
                                 HorizontalAlignment="Right">
                             <TextBox
+                                Text="{Binding SelectedNoiDungTour.HanhTrinh,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                 IsEnabled="True"
                                 VerticalAlignment="Top"
                                 MaxHeight="60"
@@ -242,6 +225,27 @@
                         </Border>
                     </Grid>
 
+                    <!--//Hành trình//-->
+                    <Grid Margin="0 5 0 8">
+                        <TextBlock  Text="Khách sạn"  Style="{StaticResource tbName}"/>
+                        <Border Margin="0 0 10 0"
+                                Width="160" 
+                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
+                                HorizontalAlignment="Right">
+                            <TextBox
+                                Text="{Binding SelectedNoiDungTour.KhachSan,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEnabled="True"
+                                VerticalAlignment="Top"
+                                MaxHeight="60"
+                                FontSize="12"
+                                Margin="10 0 0 0"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto"
+                                materialDesign:HintAssist.Hint="Nhập khách sạn"/>
+                        </Border>
+                    </Grid>
+
                     <!--//Địa điểm tham quan//-->
                     <Grid Margin="0 5 0 8">
                         <TextBlock  Text="Địa điểm tham quan"  Style="{StaticResource tbName}"/>
@@ -250,6 +254,7 @@
                                 CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
                                 HorizontalAlignment="Right">
                             <TextBox
+                                Text="{Binding SelectedNoiDungTour.DiaDiemThamQuan,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                 IsEnabled="True"
                                 VerticalAlignment="Top"
                                 MaxHeight="60"
@@ -266,7 +271,8 @@
 
                     <Grid Margin="0 5 0 8">
                         <TextBlock  Text="Doanh thu"  Style="{StaticResource tbName}"/>
-                        <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding DoanhThu,UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" 
+                                 Text="{Binding DoanhThu,UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
@@ -295,6 +301,7 @@
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
                                 Command="{Binding DoanThemKH}"
+                                CommandParameter="{Binding ElementName=ViewChiTietDoan}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Thêm">
                         <TextBlock Text="Thêm"/>
@@ -305,13 +312,13 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
-                                Command="{Binding Đoàn_XoaKhachhang}"
+                                Command="{Binding DoanXoaKH}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Xóa">
                         <TextBlock Text="Xóa"/>
                     </Button>
                 </Grid>
-                <ListView MaxHeight="463">
+                <ListView MaxHeight="463" ItemsSource="{Binding SelectedPhanBoKhach, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedChooseKH,UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView AllowsColumnReorder="True">
                             <GridView.ColumnHeaderContainerStyle>
@@ -322,10 +329,11 @@
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
                             <GridView.Columns>
-                                <GridViewColumn Width="170" Header="Mã KH" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                <GridViewColumn Width="170" Header="Tên KH" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="Giới tính" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
-                                <GridViewColumn Width="155" Header="Số điện thoại" DisplayMemberBinding="{Binding NgayDi}"></GridViewColumn>
+                                <GridViewColumn Width="90" Header="Mã KH" DisplayMemberBinding="{Binding Khach.MaKhachHang}"></GridViewColumn>
+                                <GridViewColumn Width="150" Header="Tên KH" DisplayMemberBinding="{Binding Khach.HoTen}"></GridViewColumn>
+                                <GridViewColumn Width="100" Header="Giới tính" DisplayMemberBinding="{Binding Khach.GioiTinh}"></GridViewColumn>
+                                <GridViewColumn Width="100" Header="Vai trò" DisplayMemberBinding="{Binding Khach.VaiTro}"></GridViewColumn>
+                                <GridViewColumn Width="155" Header="Số điện thoại" DisplayMemberBinding="{Binding Khach.SDT}"></GridViewColumn>
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
@@ -361,7 +369,8 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
-                                Command="{Binding DoanThemNV}"
+                                Command="{Binding DoanThemNV, UpdateSourceTrigger=PropertyChanged}"
+                                CommandParameter="{Binding ElementName=ViewChiTietDoan}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Thêm">
                             <TextBlock Text="Thêm"/>
@@ -372,13 +381,15 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
-                                Command="{Binding Đoàn_XoaNhanVien}"
+                                Command="{Binding DoanXoaNV}"
+                                CommandParameter="{Binding ElementName=ViewChiTietDoan}"
+                            
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Xóa">
                             <TextBlock Text="Xóa"/>
                         </Button>
                     </Grid>
-                    <ListView ItemsSource="{Binding NhanVien}" MaxHeight="140">
+                    <ListView ItemsSource="{Binding SelectedPhanBoNhanVienDoan, UpdateSourceTrigger=PropertyChanged}" MaxHeight="140" SelectedItem="{Binding SelectedChooseNV, UpdateSourceTrigger=PropertyChanged}">
                             <ListView.View>
                             <GridView AllowsColumnReorder="True" >
                                 <GridView.ColumnHeaderContainerStyle>
@@ -389,9 +400,9 @@
                                     </Style>
                                 </GridView.ColumnHeaderContainerStyle>
                                 <GridView.Columns>
-                                    <GridViewColumn Width="148" Header="Mã NV" DisplayMemberBinding="{Binding MaNV}"></GridViewColumn>
-                                    <GridViewColumn Width="148" Header="Tên NV" DisplayMemberBinding="{Binding TenNV1}"></GridViewColumn>
-                                    <GridViewColumn Width="148" Header="Nhiệm vụ" DisplayMemberBinding="{Binding ChucVu}"></GridViewColumn>
+                                    <GridViewColumn Width="148" Header="Mã NV" DisplayMemberBinding="{Binding MaNhanVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Width="148" Header="Tên NV" DisplayMemberBinding="{Binding NhanVien.TenNhanVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Width="148" Header="Nhiệm vụ" DisplayMemberBinding="{Binding NhiemVu,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                     </GridView.Columns>
                                 </GridView>
                             </ListView.View>
@@ -422,6 +433,7 @@
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
                                 Command="{Binding DoanThemCP}"
+                                CommandParameter="{Binding ElementName=ViewChiTietDoan}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Thêm">
                             <TextBlock Text="Thêm"/>
@@ -432,13 +444,13 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
-                                Command="{Binding Đoàn_XoaChiPhi}"
+                                Command="{Binding DoanXoaCP}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Xóa">
                             <TextBlock Text="Xóa"/>
                         </Button>
                     </Grid>
-                    <ListView MaxHeight="150">
+                    <ListView MaxHeight="150" ItemsSource="{Binding SelectedChiPhi, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedChooseCP, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="True" >
                                 <GridView.ColumnHeaderContainerStyle>
@@ -449,9 +461,8 @@
                                     </Style>
                                 </GridView.ColumnHeaderContainerStyle>
                                 <GridView.Columns>
-                                    <GridViewColumn Width="148" Header="Tên" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                    <GridViewColumn Width="148" Header="Loại" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
-                                    <GridViewColumn Width="148" Header="Số tiền" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
+                                    <GridViewColumn Width="222" Header="Loại" DisplayMemberBinding="{Binding LoaiChiPhi.TenLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Width="222" Header="Số tiền" DisplayMemberBinding="{Binding SoTien}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>

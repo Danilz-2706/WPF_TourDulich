@@ -12,8 +12,6 @@
         Title="Đoàn_Thêm" Height="732" Width="1000" 
         ResizeMode="NoResize"
         
-        DataContext="{Binding Path=DoanDuLichViewModel,Source={StaticResource ServiceLocator} }"
-        
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -51,26 +49,25 @@
         </Style>
         <Style x:Key="tbName" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Width" Value="70"/>
+            <Setter Property="Width" Value="120"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Margin" Value="10 0 0 0"/>
             <Setter Property="FontSize" Value="12"/>
         </Style>
         <!--//End//-->
     </Window.Resources>
-    <Grid Background="#ffefe6" Width="900" Height="580" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Grid Background="#ffefe6" Width="500" Height="500" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.Effect>
             <DropShadowEffect BlurRadius="25" ShadowDepth="8" Direction="270" Color="#BBBBBB"/>
         </Grid.Effect>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="0.08*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="0.25*"></RowDefinition>
+            <RowDefinition Height="0.08*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--//header//-->
@@ -104,7 +101,8 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
                                 Margin="0 0 20 0"
-                                Command="{Binding iiiiiiiiiiiiiiiiiii}"
+                                Command="{Binding Reset, UpdateSourceTrigger=PropertyChanged}"
+                    CommandParameter="{Binding ElementName=ViewAddDoan}"
                                 ToolTip="Trở lại">
                     <TextBlock Text="Hoàn tác"/>
                 </Button>
@@ -116,7 +114,8 @@
                                 BorderBrush="#C4C4C4"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
-                                Command="{Binding kkkkkkkkkkkkkkkk}"
+                                Command="{Binding Save , UpdateSourceTrigger=PropertyChanged}"
+                                CommandParameter="{Binding ElementName=ViewAddDoan}"
                                 ToolTip="Xác nhận">
                     <TextBlock Text="Lưu"/>
                 </Button>
@@ -129,19 +128,18 @@
 
         <!--//Thông tin đoàn//-->
 
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Border Background="#e38b5c" Width="1" HorizontalAlignment="Right"></Border>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" >
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel Margin=" 0 4 0 0">
+                <StackPanel Margin="40 0">
                     <!--//TÊN ĐOÀN//-->
-                    <Grid Margin="0 5 0 8">
+                    <Grid Margin="0 16 0 8">
                         <TextBlock  Text="Tên Đoàn"  Style="{StaticResource tbName}"/>
                         <Border Margin="0 0 10 0"
                                 Width="160" 
                                 CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
                                 HorizontalAlignment="Right">
                             <TextBox
-                                Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"
+                                Text="{Binding AddTenDoan,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                 IsEnabled="True"
                                 VerticalAlignment="Top"
                                 MaxHeight="60"
@@ -155,57 +153,50 @@
                     </Grid>
 
                     <!--//TÊN TOUR//-->
-                    <Grid Margin="0 5 0 8">
+                    <Grid Margin="0 8 0 8">
                         <TextBlock  Text="Chọn Tour"  Style="{StaticResource tbName}"/>
                         <ComboBox
-                                ItemsSource="{Binding Tour}"
-                                DisplayMemberPath="Ten"
-                                SelectedValue="{Binding SelectedTour ,UpdateSourceTrigger=PropertyChanged}"
-                               IsEditable="True"
+                                ItemsSource="{Binding ListTour}"
+                                DisplayMemberPath="TenGoi"
+                                SelectedValue="{Binding AddSelectedTour ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                IsEditable="True"
                                 Style="{StaticResource CbblIfo1}"
                                 materialDesign:HintAssist.HintOpacity=".26">
                         </ComboBox>
                     </Grid>
 
                     <!--//NGÀY ĐI - NGÀY VỀ//-->
-                    <Grid Margin="0 5 0 8">
+                    <Grid Margin="0 8 0 8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <DatePicker
-                                        Margin="10 0 5 0" 
-                        IsEnabled="True"
-                                        SelectedDate="{Binding NgayDi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
-                                                Grid.Column="0"
-                                                materialDesign:HintAssist.Hint="Ngày đi"
-                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
+                                    Margin="10 0 5 0" 
+                                    IsEnabled="True"
+                                    SelectedDate="{Binding AddNgayKhoiHanh, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    Grid.Column="0"
+                                    materialDesign:HintAssist.Hint="Ngày đi"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
                         <DatePicker
-                                        Margin="5 0 10 0"
-                                        IsEnabled="True"
-                                        SelectedDate="{Binding NgayVe, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
-
-                                                Grid.Column="1"
-                                                materialDesign:HintAssist.Hint="Ngày về"
-                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                    </Grid>
-
-                    <!--//Giá//-->
-                    <Grid Margin="0 5 0 8">
-                        <TextBlock  Text="Giá"  Style="{StaticResource tbName}"/>
-                        <TextBox Style="{StaticResource tblIfo1}" 
-                             IsEnabled="False" 
-                             />
+                                    Margin="5 0 10 0"
+                                    IsEnabled="True"
+                                    SelectedDate="{Binding AddNgayKetThuc, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    Grid.Column="1"
+                                    materialDesign:HintAssist.Hint="Ngày về"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </Grid>
 
                     <!--//Khách sạn//-->
-                    <Grid Margin="0 5 0 8">
+                    <Grid Margin="0 8 0 8">
                         <TextBlock  Text="Khách sạn"  Style="{StaticResource tbName}"/>
                         <Border Margin="0 0 10 0"
                                 Width="160" 
                                 CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
                                 HorizontalAlignment="Right">
                             <TextBox
+                                
+                                Text="{Binding AddKhachSan,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"
                                 IsEnabled="True"
                                 VerticalAlignment="Top"
                                 MaxHeight="60"
@@ -214,18 +205,19 @@
                                 AcceptsReturn="True"
                                 TextWrapping="Wrap"
                                 VerticalScrollBarVisibility="Auto"
-                                materialDesign:HintAssist.Hint="Nhập giá"/>
+                                materialDesign:HintAssist.Hint="Nhập khách sạn"/>
                         </Border>
                     </Grid>
 
                     <!--//Hành trình//-->
-                    <Grid Margin="0 5 0 8">
+                    <Grid Margin="0 8 0 8">
                         <TextBlock  Text="Hành trình"  Style="{StaticResource tbName}"/>
                         <Border Margin="0 0 10 0"
                                 Width="160" 
                                 CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
                                 HorizontalAlignment="Right">
                             <TextBox
+                                Text="{Binding AddHanhTrinh,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"
                                 IsEnabled="True"
                                 VerticalAlignment="Top"
                                 MaxHeight="60"
@@ -239,13 +231,14 @@
                     </Grid>
 
                     <!--//Địa điểm tham quan//-->
-                    <Grid Margin="0 5 0 8">
+                    <Grid Margin="0 8 0 8">
                         <TextBlock  Text="Địa điểm tham quan"  Style="{StaticResource tbName}"/>
                         <Border Margin="0 0 10 0"
                                 Width="160" 
                                 CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
                                 HorizontalAlignment="Right">
                             <TextBox
+                                Text="{Binding AddDiemThamQuan,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"
                                 IsEnabled="True"
                                 VerticalAlignment="Top"
                                 MaxHeight="60"
@@ -257,203 +250,9 @@
                                 materialDesign:HintAssist.Hint="Nhập điểm tham quan"/>
                         </Border>
                     </Grid>
-
-                    <!--//DOANH THU//-->
-
-                    <Grid Margin="0 5 0 8">
-                        <TextBlock  Text="Doanh thu"  Style="{StaticResource tbName}"/>
-                        <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding DoanhThu,UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
+                    
                 </StackPanel>
             </ScrollViewer>
-        </Grid>
-
-        <!--//Danh sách khách hàng//-->
-        <Grid Grid.Column="1" Grid.Row="1">
-            <StackPanel Margin=" 0 4 0 0">
-                <Grid Margin=" 0 0 0 4">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" 
-                               Text="Danh sách khách hàng"
-                               FontWeight="Bold"
-                               FontSize="14"
-                               VerticalAlignment="Center"
-                               Margin="10 0 0 0"
-                               />
-                    <Button
-                        Grid.Column="1"
-                                Background="#C4C4C4"
-                                Foreground="#000"
-                                BorderBrush="#C4C4C4"
-                                Margin="5 0 5 0"
-                                Command="{Binding DoanThemKH}"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                ToolTip="Thêm">
-                        <TextBlock Text="Thêm"/>
-                    </Button>
-                    <Button
-                        Grid.Column="2"
-                                Background="#C4C4C4"
-                                Foreground="#000"
-                                BorderBrush="#C4C4C4"
-                                Margin="5 0 5 0"
-                                Command="{Binding Đoàn_XoaKhachhang}"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                ToolTip="Xóa">
-                        <TextBlock Text="Xóa"/>
-                    </Button>
-                </Grid>
-                <ListView MaxHeight="463">
-                    <ListView.View>
-                        <GridView AllowsColumnReorder="True">
-                            <GridView.ColumnHeaderContainerStyle>
-                                <Style TargetType="GridViewColumnHeader">
-                                    <Setter Property="Height" Value="30"/>
-                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                </Style>
-                            </GridView.ColumnHeaderContainerStyle>
-                            <GridView.Columns>
-                                <GridViewColumn Width="170" Header="Mã KH" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                <GridViewColumn Width="170" Header="Tên KH" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="Giới tính" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
-                                <GridViewColumn Width="155" Header="Số điện thoại" DisplayMemberBinding="{Binding NgayDi}"></GridViewColumn>
-                            </GridView.Columns>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.ColumnSpan="2" Grid.Row="2" Margin=" 0 5 0 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <!--//Danh sách nhân viên//-->
-            <Grid Grid.Column="0">
-                <Border Background="#e38b5c" Width="1" HorizontalAlignment="Right"></Border>
-                <StackPanel>
-                    <Grid Margin="0 0 0 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" 
-                               Text="Danh sách nhân viên"
-                               FontSize="14"
-                                   FontWeight="Bold"
-                               VerticalAlignment="Center"
-                               Margin="10 0 0 0"
-                               />
-                        <Button
-                        Grid.Column="1"
-                                Background="#C4C4C4"
-                                Foreground="#000"
-                                BorderBrush="#C4C4C4"
-                                Margin="5 0 5 0"
-                                Command="{Binding DoanThemNV}"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                ToolTip="Thêm">
-                            <TextBlock Text="Thêm"/>
-                        </Button>
-                        <Button
-                        Grid.Column="2"
-                                Background="#C4C4C4"
-                                Foreground="#000"
-                                BorderBrush="#C4C4C4"
-                                Margin="5 0 5 0"
-                                Command="{Binding Đoàn_XoaNhanVien}"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                ToolTip="Xóa">
-                            <TextBlock Text="Xóa"/>
-                        </Button>
-                    </Grid>
-                    <ListView ItemsSource="{Binding NhanVien}" MaxHeight="150">
-                        <ListView.View>
-                            <GridView AllowsColumnReorder="True" >
-                                <GridView.ColumnHeaderContainerStyle>
-                                    <Style TargetType="GridViewColumnHeader">
-                                        <Setter Property="Height" Value="30"/>
-                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                    </Style>
-                                </GridView.ColumnHeaderContainerStyle>
-                                <GridView.Columns>
-                                    <GridViewColumn Width="148" Header="Mã NV" DisplayMemberBinding="{Binding MaNV}"></GridViewColumn>
-                                    <GridViewColumn Width="148" Header="Tên NV" DisplayMemberBinding="{Binding TenNV1}"></GridViewColumn>
-                                    <GridViewColumn Width="148" Header="Nhiệm vụ" DisplayMemberBinding="{Binding ChucVu}"></GridViewColumn>
-                                </GridView.Columns>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </StackPanel>
-            </Grid>
-
-            <!--//Danh sách chi phí//-->
-            <Grid Grid.Column="1">
-                <StackPanel>
-                    <Grid Margin="0 0 0 4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" 
-                                   FontWeight="Bold"
-                               Text="Danh sách chi phí"
-                               FontSize="14"
-                               VerticalAlignment="Center"
-                               Margin="10 0 0 0"
-                               />
-                        <Button
-                        Grid.Column="1"
-                                Background="#C4C4C4"
-                                Foreground="#000"
-                                BorderBrush="#C4C4C4"
-                                Margin="5 0 5 0"
-                                Command="{Binding DoanThemCP}"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                ToolTip="Thêm">
-                            <TextBlock Text="Thêm"/>
-                        </Button>
-                        <Button
-                        Grid.Column="2"
-                                Background="#C4C4C4"
-                                Foreground="#000"
-                                BorderBrush="#C4C4C4"
-                                Margin="5 0 5 0"
-                                Command="{Binding Đoàn_XoaChiPhi}"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                ToolTip="Xóa">
-                            <TextBlock Text="Xóa"/>
-                        </Button>
-                    </Grid>
-                    <ListView MaxHeight="150">
-                        <ListView.View>
-                            <GridView AllowsColumnReorder="True" >
-                                <GridView.ColumnHeaderContainerStyle>
-                                    <Style TargetType="GridViewColumnHeader">
-                                        <Setter Property="Height" Value="30"/>
-                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                    </Style>
-                                </GridView.ColumnHeaderContainerStyle>
-                                <GridView.Columns>
-                                    <GridViewColumn Width="148" Header="Tên" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                    <GridViewColumn Width="148" Header="Loại" DisplayMemberBinding="{Binding Tour.Ten}"></GridViewColumn>
-                                    <GridViewColumn Width="148" Header="Số tiền" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
-                                </GridView.Columns>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </StackPanel>
-            </Grid>
         </Grid>
 
     </Grid>

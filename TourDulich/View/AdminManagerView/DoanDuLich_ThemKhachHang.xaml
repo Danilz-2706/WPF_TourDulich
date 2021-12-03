@@ -5,21 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:TourDulich.View.AdminManagerView"
+        xmlns:sys="clr-namespace:Domain.Entities.Enum;assembly=Domain"
         mc:Ignorable="d"
         Name="ThemKhachHang"
         AllowsTransparency="True"
         Background="Transparent"
         Height="732" Width="1000" 
         ResizeMode="NoResize"
-        
-        DataContext="{Binding Path=DoanDuLichViewModel,Source={StaticResource ServiceLocator} }"
-        
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
-
+   
     <Window.Resources>
+        
+
         <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Height" Value="10"></Setter>
+        </Style>
+        <Style x:Key="fontText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="sizeCombobox" TargetType="ComboBox">
+            <Setter Property="Height" Value="20"/>
         </Style>
         <!--//Info - name - value //-->
         <!--//Start//-->
@@ -51,7 +57,8 @@
             <Setter Property="FontSize" Value="14"/>
         </Style>
         <Style x:Key="tbName" TargetType="TextBlock">
-            <Setter Property="Width" Value="120"/>
+            <Setter Property="Width" Value="110"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Margin" Value="10 0 0 0"/>
             <Setter Property="FontSize" Value="16"/>
@@ -59,13 +66,13 @@
         </Style>
         <!--//End//-->
     </Window.Resources>
-    <Grid Background="#ffefe6" Width="550" Height="380" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Grid Background="#ffefe6" Width="800" Height="380" VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.Effect>
             <DropShadowEffect BlurRadius="25" ShadowDepth="8" Direction="270" Color="#BBBBBB"/>
         </Grid.Effect>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="7*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -75,7 +82,7 @@
                     Grid.ColumnSpan="2"
                     Background="#ff8e3c">
 
-            <TextBlock Text="T H Ê M - K H Á C H - H À N G"
+            <TextBlock Text="T H Ê M - K H Á C H - H À N G - V À O - Đ O À N"
                        Margin="0"
                        Style="{StaticResource HeaderStyleViewChild}"/>
 
@@ -101,9 +108,9 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
                                 Margin="0 0 20 0"
-                                Command="{Binding iiiiiiiiiiiiiiiiiii}"
+                                Command="{Binding AddKHn}"
                                 ToolTip="Trở lại">
-                    <TextBlock Text="Hoàn tác"/>
+                    <TextBlock Text="Thêm tiếp"/>
                 </Button>
 
                 <!--//Lưu//-->
@@ -113,10 +120,10 @@
                                 BorderBrush="#C4C4C4"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
-                    
-                                Command="{Binding kkkkkkkkkkkkkkkk}"
+                                Command="{Binding AddKH, UpdateSourceTrigger=PropertyChanged}"
+                                CommandParameter="{Binding ElementName=ThemKhachHang}"
                                 ToolTip="Xác nhận">
-                    <TextBlock Text="Lưu"/>
+                    <TextBlock Text="Thêm 1 lần"/>
                 </Button>
 
 
@@ -127,43 +134,123 @@
 
         <!--//Container//-->
         <Grid Grid.Row="1">
-            <StackPanel Margin=" 0 4 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Height="auto">
+            <Grid>
+                <!--//Layout//-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="8*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-                
-                <!--//TÊN NHÂN VIÊN//-->
-                <Grid Margin="0 16 0 16">
-                    <TextBlock  Text="Tên khách hàng:"  Style="{StaticResource tbName}"/>
-                    <Border Margin="0 0 10 0"
-                                Width="160" 
-                                CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,2" 
-                                HorizontalAlignment="Right">
-                        <TextBox
-                                Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"
-                                IsEnabled="True"
-                                VerticalAlignment="Top"
-                                MaxHeight="60"
-                                FontSize="12"
-                                Margin="10 0 0 0"
-                                AcceptsReturn="True"
-                                TextWrapping="Wrap"
-                                VerticalScrollBarVisibility="Auto"
-                                materialDesign:HintAssist.Hint="Nhập tên khách hàng"/>
-                    </Border>
-                </Grid>
-
-                <!--//CHỨC VỤ//-->
-                <Grid Margin="0 16 0 8">
-                    <TextBlock  Text="Chức vụ: "  Style="{StaticResource tbName}"/>
+                <!--//Search//-->
+                <Grid Grid.Row="0" Grid.Column="0" Background="#ff8e3c">
+                    <TextBlock  Text="Tìm kiếm" 
+                                    Margin="55 0 0 0" 
+                                    Width="70"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                Foreground="#eff0f3"
+                                    Style="{StaticResource fontText}"></TextBlock>
                     <ComboBox
-                                ItemsSource="{Binding NhanVien}"
-                                DisplayMemberPath="ChucVu"
-                                SelectedValue="{Binding TenNV1 ,UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource CbblIfo1}"
-                        IsEditable="True"
-                                materialDesign:HintAssist.HintOpacity=".26">
+                                    materialDesign:HintAssist.Hint="Search"
+                                    IsEditable="True"
+                                    VerticalContentAlignment="Center"
+                                    Background="#fff"
+                                    VerticalAlignment="Center" Margin="125,0,92,0"
+                                    materialDesign:HintAssist.HintOpacity=".26"  
+                                    Style="{StaticResource sizeCombobox}">
                     </ComboBox>
+                    <Grid Background="#ff7a1a"  Width="20" Height="20"
+                              Margin="0 0 70 0"
+                              HorizontalAlignment="Right">
+                        <Image  Source="/Assets/Icon/DT1__UI--icon/search.png"
+                                    Width="20" Height="20"/>
+                    </Grid>
                 </Grid>
-            </StackPanel>
+
+                <!--//Filter//-->
+                <Grid Grid.Row="0" Grid.Column="1" Background="#ff8e3c">
+
+                </Grid>
+
+                <!--//List Nhân Viên//-->
+                <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
+                    <ListView  ItemsSource="{Binding ListKhach, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItemKhach, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                                    <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
+                                    <GridViewColumn Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh}"></GridViewColumn>
+                                    <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
+                                    <GridViewColumn Header="Quốc tịch" DisplayMemberBinding="{Binding QuocTich}"></GridViewColumn>
+                                    <GridViewColumn Header="CMND" DisplayMemberBinding="{Binding SoCMND}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <!--//Info//-->
+                    <Grid>
+                        <Grid.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFFF8E3C" Offset="0.372"/>
+                                <GradientStop Color="#FFFFAB6F" Offset="0.925"/>
+                            </LinearGradientBrush>
+                        </Grid.Background>
+
+                        <StackPanel  VerticalAlignment="Center">
+                            <!--//MÃ KHÁCH HÀNG//-->
+                            <Grid Margin="0 8 0 16">
+                                <TextBlock  Text="MÃ KHÁCH HÀNG"  Style="{StaticResource tbName}"/>
+                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" 
+                                         Text="{Binding MaKhachHang}"/>
+                            </Grid>
+
+                            <!--//TÊN KHÁCH HÀNG//-->
+                            <Grid Margin="0 8 0 16">
+                                <TextBlock  Text="TÊN KHÁCH HÀNG"  Style="{StaticResource tbName}"/>
+                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" 
+                                         Text="{Binding HoTen}"/>
+                            </Grid>
+
+
+                            <!--//SỐ ĐIỆN THOẠI//-->
+                            <Grid Margin="0 16 0 8">
+                                <TextBlock  Text="SỐ ĐIỆN THOẠI"  Style="{StaticResource tbName}"/>
+
+                                <TextBox Style="{StaticResource tblIfo1}"
+                                             IsEnabled ="False"
+                                             Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Grid>
+                            <!--//VAI TRÒ//-->
+                            <Grid Margin="0 16 0 8">
+                                
+                                <TextBlock  Text="VAI TRÒ"  Style="{StaticResource tbName}"/>
+                                <!--<ComboBox
+                                            ItemsSource="{Binding VaiTro1 }"
+                                            DisplayMemberPath="GetValues"
+                                            
+                                            IsEditable="True"
+                                            Style="{StaticResource CbblIfo1}"
+                                            materialDesign:HintAssist.HintOpacity=".26">
+                                </ComboBox>-->
+                                <TextBox Style="{StaticResource tblIfo1}"
+                                             IsEnabled ="True"
+                                             Text="{Binding VaiTro1, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+
+
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
+
 </Window>
