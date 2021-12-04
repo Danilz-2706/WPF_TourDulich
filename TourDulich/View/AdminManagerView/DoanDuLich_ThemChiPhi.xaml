@@ -92,7 +92,7 @@
                             VerticalAlignment="Center"
                             Margin="0,0,20,0"
                             Style="{StaticResource CloseBtn_Style}"
-                            Command="{Binding Close_DoanThemNV}"
+                            Command="{Binding Close_DoanThemCP}"
                             CommandParameter="{Binding ElementName=DoanThemChiPhi}"/>
         </Grid>
 

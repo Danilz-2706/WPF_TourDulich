@@ -3,13 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TourDulich.View.AdminManager" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:TourDulich.View.AdminManager" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:GenderEnum1="clr-namespace:System;assembly=mscorlib"
+             xmlns:GenderEnum="clr-namespace:Domain.Entities.Enum;assembly=Domain"
              mc:Ignorable="d" 
+             Name="khachhangView"
              DataContext="{Binding Source={StaticResource ServiceLocator}, Path=KhachHangViewModel}"
              >
 
     <!--//Resource//-->
     <UserControl.Resources>
+        <ObjectDataProvider x:Key="objData" 
+                            ObjectType="{x:Type GenderEnum1:Enum}" 
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="GenderEnum:Gender"/>
+            </ObjectDataProvider.MethodParameters>
+            
+        </ObjectDataProvider>
+        
+        
+        
         <!--//Size - TextBlock//-->
         <Style x:Key="fontText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="16"/>
@@ -132,12 +147,11 @@
                 <!--//List Tour//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
 
-                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
+                    <ListView ItemsSource="{Binding List, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         <ListView.View>
                             <GridView>
 
                                 <GridView.Columns>
-                                    <GridViewColumn Header="Mã Khách Hàng" DisplayMemberBinding="{Binding MaKhachHang}"></GridViewColumn>
                                     <GridViewColumn Header="Họ Tên" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
                                     <GridViewColumn Header="CMND" DisplayMemberBinding="{Binding SoCMND}"></GridViewColumn>
                                     <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding DiaChi}"></GridViewColumn>
@@ -170,7 +184,8 @@
                                 <!--//MÃ KH//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="MÃ KHÁCH HÀNG: "  Style="{StaticResource tbName}"/>
-                                    <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaKhachHang,UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" 
+                                             Text="{Binding MaKhachHang,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
                                 <!--//TÊN ĐOÀN//-->
@@ -178,8 +193,6 @@
                                     <TextBlock  Text="TÊN KHÁCH HÀNG: "  Style="{StaticResource tbName}"/>
 
                                     <TextBox Style="{StaticResource tblIfo1}"
-                                             
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
                                              Text="{Binding HoTen,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
@@ -189,8 +202,6 @@
                                     <TextBlock  Text="CMND: "  Style="{StaticResource tbName}"/>
 
                                     <TextBox Style="{StaticResource tblIfo1}"
-                                             
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
                                              Text="{Binding SoCMND,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
@@ -202,8 +213,6 @@
 
                                     <TextBox Style="{StaticResource tblIfo1}"
                                              
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                             
                                              Text="{Binding DiaChi,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
@@ -211,12 +220,13 @@
                                 <!--//GIỚI TÍNH//-->
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="GIỚI TÍNH"  Style="{StaticResource tbName}"/>
+                                    
                                     <ComboBox
-                                                ItemsSource="{Binding Tour}"
-                                                DisplayMemberPath="Ten"
-                                                SelectedValue="{Binding SelectedTour ,UpdateSourceTrigger=PropertyChanged}"
-                                                IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                                IsEditable="{Binding ElementName=edit, Path=IsChecked}"
+                                                ItemsSource="{Binding Source={StaticResource objData}}"
+                                        
+                                                
+                                                SelectedItem="{Binding Gender,UpdateSourceTrigger=PropertyChanged}"
+                                                
                                                 Style="{StaticResource CbblIfo1}"
                                                 materialDesign:HintAssist.HintOpacity=".26">
                                     </ComboBox>
@@ -228,9 +238,7 @@
 
                                     <TextBox Style="{StaticResource tblIfo1}"
                                              
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                             
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                             Text="{Binding SDT,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
                                 <!--//QUỐC TỊCH//-->
@@ -238,9 +246,6 @@
                                     <TextBlock  Text="QUỐC TỊCH: "  Style="{StaticResource tbName}"/>
 
                                     <TextBox Style="{StaticResource tblIfo1}"
-                                             
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                             
                                              Text="{Binding QuocTich,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
                                 
@@ -265,7 +270,7 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="10 0 5 0"
-                                Command="{Binding AddCommand}"
+                                Command="{Binding AddCommand , UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Thêm">
 
@@ -273,18 +278,147 @@
                             </Button>
 
                             <!--//Sửa//-->
-                            <ToggleButton x:Name="edit"
+                            <ToggleButton 
+                                x:Name="edit" 
                                 Grid.Column="1"   
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
+                                Command="{Binding EditCommand, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Margin="5 0 5 0"
-                                IsChecked="False"
                                 ToolTip="Sửa">
-                                <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
+                                <TextBlock x:Name="sua" Text="Sửa" Style="{StaticResource fontText}"/>
+                                <!--<ToggleButton.Triggers>
+                                    
+                                    --><!--// Checked //--><!--
+                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                
+                                                <DoubleAnimation Storyboard.TargetName ="Luu"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="0" To="65"
+                                                                Duration="0:0:0.2">
 
+                                                </DoubleAnimation>
+
+                                                <DoubleAnimation Storyboard.TargetName ="Khoiphuc"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="0" To="65"
+                                                                Duration="0:0:0.2">
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName ="edit"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="65" To="0"
+                                                                Duration="0:0:0.2">
+                                                </DoubleAnimation>
+                                                
+                                                
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    
+                                </ToggleButton.Triggers>-->
                             </ToggleButton>
+                            <!--//Lưu//--><!--
+                            <ToggleButton 
+                                x:Name="Luu"
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                Width="0"
+                                BorderBrush="#C4C4C4"
+                                Background="#C4C4C4"
+                                Foreground="#000"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Margin="2.5 0 5 0"
+                                IsChecked="False"
+                                Command="{Binding EditSaveCommand, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTip="Sửa">
+                                <TextBlock Text="Lưu" Style="{StaticResource fontText}"/>
+                                <ToggleButton.Triggers>
+
+                                    --><!--// Checked //--><!--
+                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName ="Luu"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="65" To="0"
+                                                                Duration="0:0:0.2">
+
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName ="Khoiphuc"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="65" To="0"
+                                                                Duration="0:0:0.2">
+
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName ="edit"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="0" To="65"
+                                                                Duration="0:0:0.2">
+
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </ToggleButton.Triggers>
+                            </ToggleButton>
+                            --><!--//Khôi phục//--><!--
+                            <ToggleButton 
+                                x:Name="Khoiphuc"
+                                HorizontalAlignment="Left"
+                                Width="0"
+                                Grid.Column="1"   
+                                BorderBrush="#C4C4C4"
+                                Background="#C4C4C4"
+                                Foreground="#000"
+                                IsEnabled="False"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Margin="5 0 2.5 0"
+                                Command="{Binding EditResetCommand, UpdateSourceTrigger=PropertyChanged}"
+                                CommandParameter="{Binding ElementName=edit}"
+                                ToolTip="Sửa">
+                                <TextBlock Text="Hủy" Style="{StaticResource fontText}"/>
+                                <ToggleButton.Triggers>
+
+                                    --><!--// Checked //--><!--
+                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName ="Luu"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="65" To="0"
+                                                                Duration="0:0:0.2">
+
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName ="Khoiphuc"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="65" To="0"
+                                                                Duration="0:0:0.2">
+
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName ="edit"
+                                                                Storyboard.TargetProperty="Width"
+                                                                BeginTime="0:0:0"
+                                                                From="0" To="65"
+                                                                Duration="0:0:0.2">
+
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </ToggleButton.Triggers>
+                            </ToggleButton>-->
 
                             <!--//Xóa//-->
                             <Button
@@ -293,7 +427,7 @@
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Command="{Binding DeleteCommand}"
+                                Command="{Binding DeleteCommand, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="5 0 5 0"
                                 ToolTip="Xóa">
                                 <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>

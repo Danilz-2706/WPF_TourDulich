@@ -330,10 +330,10 @@
                             </GridView.ColumnHeaderContainerStyle>
                             <GridView.Columns>
                                 <GridViewColumn Width="90" Header="Mã KH" DisplayMemberBinding="{Binding Khach.MaKhachHang}"></GridViewColumn>
-                                <GridViewColumn Width="150" Header="Tên KH" DisplayMemberBinding="{Binding Khach.HoTen}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="Giới tính" DisplayMemberBinding="{Binding Khach.GioiTinh}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="Vai trò" DisplayMemberBinding="{Binding Khach.VaiTro}"></GridViewColumn>
-                                <GridViewColumn Width="155" Header="Số điện thoại" DisplayMemberBinding="{Binding Khach.SDT}"></GridViewColumn>
+                                <GridViewColumn Width="150" Header="Tên KH" DisplayMemberBinding="{Binding Khach. HoTen}"></GridViewColumn>
+                                <GridViewColumn Width="100" Header="Giới tính" DisplayMemberBinding="{Binding Khach. GioiTinh}"></GridViewColumn>
+                                <GridViewColumn Width="100" Header="Vai trò" DisplayMemberBinding="{Binding VaiTro}"></GridViewColumn>
+                                <GridViewColumn Width="155" Header="Số điện thoại" DisplayMemberBinding="{Binding Khach. SDT}"></GridViewColumn>
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
@@ -450,7 +450,7 @@
                             <TextBlock Text="Xóa"/>
                         </Button>
                     </Grid>
-                    <ListView MaxHeight="150" ItemsSource="{Binding SelectedChiPhi, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedChooseCP, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView MaxHeight="150" ItemsSource="{Binding SelectedChiPhi, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedChooseCP, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView AllowsColumnReorder="True" >
                                 <GridView.ColumnHeaderContainerStyle>

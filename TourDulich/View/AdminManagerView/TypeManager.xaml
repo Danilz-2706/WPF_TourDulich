@@ -157,7 +157,7 @@
                             <!--//MÃ NHÂN VIÊN//-->
                             <Grid Margin="0 8 0 16">
                                 <TextBlock  Text="MÃ LOẠI HÌNH"  Style="{StaticResource tbName}"/>
-                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaLoaiHinh,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
 
                             <!--//TÊN NHÂN VIÊN//-->
@@ -166,9 +166,8 @@
 
                                 <TextBox Style="{StaticResource tblIfo1}"
                                              
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                              
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                             Text="{Binding TenLoaiHinh,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </StackPanel>
                     </Grid>
@@ -188,7 +187,7 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="10 0 5 0"
-                                Command="{Binding AddCommand}"
+                                Command="{Binding AddCommand , UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Thêm">
 
@@ -204,9 +203,9 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Margin="5 0 5 0"
                                 IsChecked="False"
+                                Command="{Binding EditCommand, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="Sửa">
-                                <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
-
+                                <TextBlock x:Name="sua" Text="Sửa" Style="{StaticResource fontText}"/>
                             </ToggleButton>
 
                             <!--//Xóa//-->
@@ -216,7 +215,7 @@
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Command="{Binding DeleteCommand}"
+                                Command="{Binding DeleteCommand, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="5 0 5 0"
                                 ToolTip="Xóa">
                                 <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>

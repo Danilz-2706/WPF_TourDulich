@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:TourDulich.View.AdminManagerView"
-        xmlns:sys="clr-namespace:Domain.Entities.Enum;assembly=Domain"
+        xmlns:GenderEnum1="clr-namespace:System;assembly=mscorlib"
+        xmlns:GenderEnum="clr-namespace:Domain.Entities.Enum;assembly=Domain"
         mc:Ignorable="d"
         Name="ThemKhachHang"
         AllowsTransparency="True"
@@ -16,7 +17,14 @@
         WindowStartupLocation="CenterScreen">
    
     <Window.Resources>
-        
+        <ObjectDataProvider x:Key="objData" 
+                            ObjectType="{x:Type GenderEnum1:Enum}" 
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="GenderEnum:VaiTro"/>
+            </ObjectDataProvider.MethodParameters>
+
+        </ObjectDataProvider>
 
         <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Height" Value="10"></Setter>
@@ -232,17 +240,17 @@
                             <Grid Margin="0 16 0 8">
                                 
                                 <TextBlock  Text="VAI TRÒ"  Style="{StaticResource tbName}"/>
-                                <!--<ComboBox
-                                            ItemsSource="{Binding VaiTro1 }"
-                                            DisplayMemberPath="GetValues"
-                                            
-                                            IsEditable="True"
-                                            Style="{StaticResource CbblIfo1}"
-                                            materialDesign:HintAssist.HintOpacity=".26">
-                                </ComboBox>-->
-                                <TextBox Style="{StaticResource tblIfo1}"
-                                             IsEnabled ="True"
-                                             Text="{Binding VaiTro1, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ComboBox
+                                                ItemsSource="{Binding Source={StaticResource objData}}"
+                                        
+                                                
+                                                SelectedItem="{Binding AddVaiTro,UpdateSourceTrigger=PropertyChanged}"
+                                                
+                                        
+                                                IsEditable="{Binding ElementName=edit, Path=IsChecked}"
+                                                Style="{StaticResource CbblIfo1}"
+                                                materialDesign:HintAssist.HintOpacity=".26">
+                                </ComboBox>
                             </Grid>
                         </StackPanel>
                     </Grid>

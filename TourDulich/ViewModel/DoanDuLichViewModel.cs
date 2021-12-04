@@ -95,9 +95,19 @@ namespace TourDulich.ViewModel
         public int MaKhachHang { get; set; }
         public string HoTen { get; set; }
         public string SDT { get; set; }
+        public VaiTro Vaitro { get; set; }
 
-        //private VaiTro VaiTro2;
-        //public VaiTro VaiTro1 { get => Enum.GetValues(VaiTr); set => VaiTro2=value; }
+
+        private VaiTro _AddVaiTro;
+        public VaiTro AddVaiTro
+        {
+            get => _AddVaiTro;
+            set
+            {
+                _AddVaiTro = value;
+
+            }
+        }
 
         private Khach _SelectedItemKhach;
         public Khach SelectedItemKhach
@@ -111,7 +121,7 @@ namespace TourDulich.ViewModel
                     MaKhachHang = SelectedItemKhach.MaKhachHang;
                     HoTen = SelectedItemKhach.HoTen;
                     SDT = SelectedItemKhach.SDT;
-                    //VaiTro1 = SelectedItemKhach.VaiTro;
+                    Vaitro = SelectedItemKhach.VaiTro;
                 }
             }
         }
@@ -346,9 +356,7 @@ namespace TourDulich.ViewModel
             
 
             ListChiPhi = new ObservableCollection<Domain.Entities.ChiPhi>(this.chiPhiService.GetDTOs());
-            listLoaiChiPhi = new ObservableCollection<LoaiChiPhi>(this.loaiChiPhiService.GetDTOs());
 
-            ListKhach = new ObservableCollection<Khach>(this.khachService.GetDTOs());
 
             //VaiTro1 = new VaiTro();
             #region Thực hiện các chức năng
@@ -603,6 +611,9 @@ namespace TourDulich.ViewModel
             CloseChiTiet(p);
             DoanDuLich_ThemKhachHang x = new DoanDuLich_ThemKhachHang();
             x.DataContext = this;
+            ListKhach = new ObservableCollection<Khach>(this.khachService.GetDTOs());
+
+
             x.ShowDialog(); 
         }
         private void DoanThemKhachHang()
@@ -626,7 +637,9 @@ namespace TourDulich.ViewModel
 
             }, p =>
             {
-                var ctd = new ChiTietDoan() { MaDoan = SelectedItem.MaDoan, MaKhachHang = SelectedItemKhach.MaKhachHang };
+                var ctd = new ChiTietDoan() { MaDoan = SelectedItem.MaDoan, MaKhachHang = SelectedItemKhach.MaKhachHang, VaiTro=AddVaiTro };
+                
+                    chiTietDoanService.Create(ctd);
 
                 ctd.Khach = SelectedItemKhach;
                 SelectedPhanBoKhach.Add(ctd);
@@ -655,9 +668,11 @@ namespace TourDulich.ViewModel
                         a++;
                     }
                 }
+                
             });
             AddKHn = new RelayCommand<DoanDuLich_ThemKhachHang>(p =>
             {
+
                 if (SelectedItemNhanVien != null)
                 {
                     foreach (var i in SelectedItem.ChiTietDoans)
@@ -675,6 +690,7 @@ namespace TourDulich.ViewModel
             }, p =>
             {
                 var ctd = new ChiTietDoan() { MaDoan = SelectedItem.MaDoan, MaKhachHang = SelectedItemKhach.MaKhachHang };
+                chiTietDoanService.Create(ctd);
 
                 ctd.Khach = SelectedItemKhach;
                 SelectedPhanBoKhach.Add(ctd);
@@ -712,6 +728,8 @@ namespace TourDulich.ViewModel
             CloseChiTiet(p);
             DoanDuLich_ThemChiPhi x = new DoanDuLich_ThemChiPhi(); 
             x.DataContext = this;
+            listLoaiChiPhi = new ObservableCollection<LoaiChiPhi>(this.loaiChiPhiService.GetDTOs());
+
             x.ShowDialog(); 
         }
         private void DoanThemChiPhi()

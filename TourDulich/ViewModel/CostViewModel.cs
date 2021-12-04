@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using TourDulich.Model;
+using TourDulich.View.AdminManagerView;
 
 namespace TourDulich.ViewModel
 {
@@ -79,8 +80,8 @@ namespace TourDulich.ViewModel
             #region Commands
 
             #region Add
-            //AddCommand = new RelayCommand<object>(p => { return true; }, p => { Add(); });
-            //Close_ThemLCP = new RelayCommand<object>(p => { return true; }, p => { CloseThem(p); });
+            AddCommand = new RelayCommand<object>(p => { return true; }, p => { Add(); });
+            Close_ThemLCP = new RelayCommand<object>(p => { return true; }, p => { CloseThem(p); });
 
             //ViewChild
             //Reset
@@ -97,7 +98,7 @@ namespace TourDulich.ViewModel
                     var lcp = new LoaiChiPhi() { TenLoaiChiPhi = AddTenLoaiChiPhi };
                     loaiChiPhiService.Create(lcp);
                     List.Add(lcp);
-                    //CloseThem(p);
+                    CloseThem(p);
                     MessageBox.Show($"Bạn đã thêm loại chi phí: Mã {lcp.MaLoaiChiPhi} - Tên: {lcp.TenLoaiChiPhi}");
 
                 }
@@ -179,15 +180,13 @@ namespace TourDulich.ViewModel
             #endregion
         }
 
-    //    private void Add()
-    //    {
-    //        NhanVien_Them x = new NhanVien_Them();
-    //        x.DataContext = this;
-    //        x.ShowDialog();
-    //        AddTenNhanVien = null;
-    //        AddNhiemVu = null;
-    //    }
-    //    private void CloseThem(object obj) { NhanVien_Them x = obj as NhanVien_Them; x.Close(); }
-    //}
-}
+        private void Add()
+        {
+            ChiPhi_Them x = new ChiPhi_Them();
+            x.DataContext = this;
+            x.ShowDialog();
+            AddTenLoaiChiPhi = null;
+        }
+        private void CloseThem(object obj) { ChiPhi_Them x = obj as ChiPhi_Them; x.Close(); }
+    }
 }
