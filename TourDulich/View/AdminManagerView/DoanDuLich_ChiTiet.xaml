@@ -389,7 +389,7 @@
                             <TextBlock Text="Xóa"/>
                         </Button>
                     </Grid>
-                    <ListView ItemsSource="{Binding SelectedPhanBoNhanVienDoan, UpdateSourceTrigger=PropertyChanged}" MaxHeight="140" SelectedItem="{Binding SelectedChooseNV, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView ItemsSource="{Binding SelectedPhanBoNhanVienDoan, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" MaxHeight="140" SelectedItem="{Binding SelectedChooseNV, UpdateSourceTrigger=PropertyChanged}">
                             <ListView.View>
                             <GridView AllowsColumnReorder="True" >
                                 <GridView.ColumnHeaderContainerStyle>

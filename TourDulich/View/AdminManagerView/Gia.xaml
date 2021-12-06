@@ -39,6 +39,15 @@
             <Setter Property="Margin" Value="0 0 10 0"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
+        <Style x:Key="CbblIfo1" TargetType="ComboBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
         <Style x:Key="tblIfo1" TargetType="TextBox">
             <Setter Property="MinHeight" Value="25"/>
             <Setter Property="Height" Value="auto"/>
@@ -120,20 +129,15 @@
 
 
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem}">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
                                     <GridViewColumn Header="Mã Giá" DisplayMemberBinding="{Binding MaGia}"></GridViewColumn>
-                                    <GridViewColumn Header="Mã Tour" DisplayMemberBinding="{Binding MaTour}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Tour" DisplayMemberBinding="{Binding TourDuLich.TenGoi}"></GridViewColumn>
                                     <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding ThanhTien}"></GridViewColumn>
-                                    <GridViewColumn Header="Thời gian kết thúc" DisplayMemberBinding="{Binding ThoiGianBatDau}"></GridViewColumn>
-                                    <GridViewColumn Header="Thời gian bắt đầu" DisplayMemberBinding="{Binding ThoiGianKetThuc}"></GridViewColumn>
+                                    <GridViewColumn Header="Thời gian kết thúc" DisplayMemberBinding="{Binding ThoiGianBatDau, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Header="Thời gian bắt đầu" DisplayMemberBinding="{Binding ThoiGianKetThuc, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
@@ -159,8 +163,22 @@
 
                             <!--//MÃ NHÂN VIÊN//-->
                             <Grid Margin="0 8 0 16">
-                                <TextBlock  Text="MÃ CHI PHÍ"  Style="{StaticResource tbName}"/>
-                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock  Text="MÃ GIÁ"  Style="{StaticResource tbName}"/>
+                                <TextBox Style="{StaticResource tblIfo1}" IsEnabled="False" Text="{Binding MaGia,UpdateSourceTrigger=PropertyChanged}"/>
+                            </Grid>
+                            <!--//TÊN TOUR//-->
+                            <Grid Margin="0 5 0 8">
+                                <TextBlock  Text="TÊN TOUR"  Style="{StaticResource tbName}"/>
+
+                                <ComboBox
+                                                ItemsSource="{Binding ListTour}"
+                                                DisplayMemberPath="TenGoi"
+                                        
+                                                SelectedItem="{Binding SelectedTour,UpdateSourceTrigger=PropertyChanged}"
+                                                SelectedValue="{Binding SelectedTour.TenGoi,UpdateSourceTrigger=PropertyChanged}"
+                                                SelectedValuePath="TenGoi"
+                                                Style="{StaticResource CbblIfo1}"
+                                                materialDesign:HintAssist.HintOpacity=".26"/>
                             </Grid>
 
                             <!--//NGÀY ĐI - NGÀY VỀ//-->
@@ -171,15 +189,13 @@
                                 </Grid.ColumnDefinitions>
                                 <DatePicker
                                         Margin="10 0 5 0"
-                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                        SelectedDate="{Binding NgayDi, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedDate="{Binding ThoiGianBatDau, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
                                                 Grid.Column="0"
                                                 materialDesign:HintAssist.Hint="Ngày đi"
                                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
                                 <DatePicker
                                         Margin="5 0 10 0"
-                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                        SelectedDate="{Binding NgayVe, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedDate="{Binding ThoiGianKetThuc, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
 
                                                 Grid.Column="1"
                                                 materialDesign:HintAssist.Hint="Ngày về"
@@ -193,9 +209,7 @@
 
                                 <TextBox Style="{StaticResource tblIfo1}"
                                              
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                             
-                                             Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
+                                             Text="{Binding ThanhTien,UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </StackPanel>
                     </Grid>
@@ -215,7 +229,7 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="10 0 5 0"
-                                Command="{Binding AddCommand}"
+                                Command="{Binding AddCommand , UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Thêm">
 
@@ -231,9 +245,9 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Margin="5 0 5 0"
                                 IsChecked="False"
+                                Command="{Binding EditCommand, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="Sửa">
-                                <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
-
+                                <TextBlock x:Name="sua" Text="Sửa" Style="{StaticResource fontText}"/>
                             </ToggleButton>
 
                             <!--//Xóa//-->
@@ -243,7 +257,7 @@
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Command="{Binding DeleteCommand}"
+                                Command="{Binding DeleteCommand, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="5 0 5 0"
                                 ToolTip="Xóa">
                                 <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>

@@ -134,7 +134,7 @@
                 <!--//List Tour//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
 
-                    <ListView ItemsSource="{Binding ListGroup}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged,Mode=OneWayToSource}">
+                    <ListView ItemsSource="{Binding ListGroup, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
 

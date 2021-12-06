@@ -176,7 +176,7 @@
 
                 <!--//List Nhân Viên//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView  ItemsSource="{Binding ListNhanvien, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItemNhanVien, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView  ItemsSource="{Binding ListNhanvien, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedItemNhanVien, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
 

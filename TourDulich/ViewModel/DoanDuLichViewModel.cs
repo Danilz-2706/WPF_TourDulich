@@ -52,8 +52,8 @@ namespace TourDulich.ViewModel
             }
         }
 
-        private NoiDungTour _SelectedNoiDungTour;
-        public NoiDungTour SelectedNoiDungTour
+        private NoiDungTour? _SelectedNoiDungTour;
+        public NoiDungTour? SelectedNoiDungTour
         {
             get => _SelectedNoiDungTour;
             set
@@ -69,8 +69,8 @@ namespace TourDulich.ViewModel
         public int MaNhanVien { get; set; }
         public string TenNhanVien { get; set; }
         public string NhiemVu { get; set; }
-        private NhanVien _SelectedItemNhanVien;
-        public NhanVien SelectedItemNhanVien
+        private NhanVien? _SelectedItemNhanVien;
+        public NhanVien? SelectedItemNhanVien
         {
             get => _SelectedItemNhanVien;
             set
@@ -109,8 +109,8 @@ namespace TourDulich.ViewModel
             }
         }
 
-        private Khach _SelectedItemKhach;
-        public Khach SelectedItemKhach
+        private Khach? _SelectedItemKhach;
+        public Khach? SelectedItemKhach
         {
             get => _SelectedItemKhach;
             set
@@ -164,8 +164,8 @@ namespace TourDulich.ViewModel
         #endregion
 
 
-        private PhanBoNhanVienDoan _SelectedChooseNV;
-        public PhanBoNhanVienDoan SelectedChooseNV
+        private PhanBoNhanVienDoan? _SelectedChooseNV;
+        public PhanBoNhanVienDoan? SelectedChooseNV
         {
             get => _SelectedChooseNV;
             set
@@ -174,8 +174,8 @@ namespace TourDulich.ViewModel
 
             }
         }
-        private ChiTietDoan _SelectedChooseKH;
-        public ChiTietDoan SelectedChooseKH
+        private ChiTietDoan? _SelectedChooseKH;
+        public ChiTietDoan? SelectedChooseKH
         {
             get => _SelectedChooseKH;
             set
@@ -250,11 +250,7 @@ namespace TourDulich.ViewModel
                     SelectedTour = SelectedItem.Tour;
                     SelectedNoiDungTour = SelectedItem.NoiDungTour;
 
-                    SelectedPhanBoNhanVienDoan = SelectedItem.PhanBoNhanVienDoans;
-                    SelectedPhanBoKhach = SelectedItem.ChiTietDoans;
                     
-
-                    SelectedChiPhi = SelectedItem.ChiPhis;
                 }
             }
         }
@@ -349,18 +345,13 @@ namespace TourDulich.ViewModel
             this.loaiChiPhiService = loaiChiPhiService;
             this.phanBoNhanVienDoanService = phanBoNhanVienDoanService;
             this.chiTietDoanService = chiTietDoanService;
+
             ListGroup = new ObservableCollection<DoanDuLich>(this.doanDuLichService.GetDTOs());
             ListTour = new ObservableCollection<TourDuLich>(this.tourDuLichService.GetDTOs());
 
-            ListChiTietDoan = new ObservableCollection<ChiTietDoan>();
-            
-
-            ListChiPhi = new ObservableCollection<Domain.Entities.ChiPhi>(this.chiPhiService.GetDTOs());
-
-
-            //VaiTro1 = new VaiTro();
             #region Thực hiện các chức năng
             // Thêm //
+            
             AddCommand = new RelayCommand<object>(p => { return true; }, p => { Add(); });
             AddNew();
             Close_DoanThem = new RelayCommand<object>(p => { return true; }, p => {AddNew(); CloseThem(p); });
@@ -391,22 +382,15 @@ namespace TourDulich.ViewModel
             #endregion
         }
 
-        
-
-
-
-
         #region Open View Child
-
 
         #region Hàm thực hiện chức năng Thêm đoàn
         //Thêm Đoàn
         private void Add() 
-        { 
+        {
             DoanDuLich_Them x = new DoanDuLich_Them();
             x.DataContext = this;
             x.ShowDialog();
-
         }
         private void AddNew()
         {
@@ -420,36 +404,68 @@ namespace TourDulich.ViewModel
                 return !string.IsNullOrEmpty(AddTenDoan) && AddSelectedTour != null && AddNgayKhoiHanh != null && AddNgayKetThuc != null && !string.IsNullOrEmpty(AddKhachSan) && !string.IsNullOrEmpty(AddHanhTrinh) && !string.IsNullOrEmpty(AddDiemThamQuan);
             }, p =>
             {
-                var ddl = new DoanDuLich() { TenDoan = AddTenDoan, MaTour = AddSelectedTour.MaTour, NgayKhoiHanh = (DateTime)AddNgayKhoiHanh, NgayKetThuc = (DateTime)AddNgayKetThuc};
-                doanDuLichService.Create(ddl);
-
-                var ndt = new NoiDungTour() { KhachSan = AddKhachSan, HanhTrinh = AddHanhTrinh, DiaDiemThamQuan = AddDiemThamQuan, MaDoan = this.doanDuLichService.Get(ddl.MaDoan).MaDoan };
-                noiDungTourService.Create(ndt);
+                //try
+                //{
+                    var ddl = new DoanDuLich() { TenDoan = AddTenDoan, MaTour = AddSelectedTour.MaTour, NgayKhoiHanh = (DateTime)AddNgayKhoiHanh, NgayKetThuc = (DateTime)AddNgayKetThuc };
+                    if (this.doanDuLichService.Create(ddl))
+                    {
+                        var ndt = new NoiDungTour() { KhachSan = AddKhachSan, HanhTrinh = AddHanhTrinh, DiaDiemThamQuan = AddDiemThamQuan, MaDoan = this.doanDuLichService.Get(ddl.MaDoan).MaDoan };
+                        if (this.noiDungTourService.Create(ndt))
+                        {
+                            ddl.NoiDungTour = ndt;
+                            //ListGroup.Add(this.doanDuLichService.Get(ddl.MaDoan));
+                            CloseThem(p);
+                            MessageBox.Show($"Bạn đã thêm đoàn du lịch mới: Tên đoàn {ddl.TenDoan} - Ngày khởi hành: {ddl.NgayKhoiHanh} - Ngày kết thúc: {ddl.NgayKetThuc}");
+                    }
+                    }
+                //}
+                //catch
+                //{
+                //    MessageBox.Show("Lỗi ở thêm Đoàn Du Lịch");
+                //}
                 
-                ddl.NoiDungTour = ndt;
-                CloseThem(p);
-                ListGroup.Add(ddl);
-
-                MessageBox.Show($"Bạn đã thêm đoàn du lịch mới: Tên đoàn {ddl.TenDoan} - Ngày khởi hành: {ddl.NgayKhoiHanh} - Ngày kết thúc: {ddl.NgayKetThuc}");
-
             });
         }
-        private void CloseThem(object obj) { DoanDuLich_Them x = obj as DoanDuLich_Them; x.Close();  }
+        private void CloseThem(object obj) 
+        { 
+            DoanDuLich_Them x = obj as DoanDuLich_Them; 
+            x.Close();
+            AddTenDoan = null;
+            AddSelectedTour = null;
+            AddNgayKhoiHanh = null;
+            AddNgayKetThuc = null;
+            AddKhachSan = null;
+            SelectedItem = null;
+            AddHanhTrinh = null;
+            AddDiemThamQuan = null;
+            ListGroup = new ObservableCollection<DoanDuLich>(doanDuLichService.GetDTOs());
+        }
         #endregion
 
-
-
         #region Bên trong Chi Tiết Đoàn
+
+        #region Chi tiết chính
         private void Show()
         {
             DoanDuLich_ChiTiet x = new DoanDuLich_ChiTiet();
             x.DataContext = this;
+            SelectedPhanBoNhanVienDoan = SelectedItem.PhanBoNhanVienDoans;
+            SelectedPhanBoKhach = SelectedItem.ChiTietDoans;
+            SelectedChiPhi = SelectedItem.ChiPhis;
             x.ShowDialog();
         }
-        private void CloseChiTiet(object obj) { DoanDuLich_ChiTiet x = obj as DoanDuLich_ChiTiet; x.Close(); 
+        private void CloseChiTiet(object obj) 
+        { 
+            DoanDuLich_ChiTiet x = obj as DoanDuLich_ChiTiet;
+            x.Close(); 
+            SelectedPhanBoNhanVienDoan = null;
+            SelectedPhanBoKhach = null;
+            SelectedChiPhi = null;
         }
+        #endregion
 
-
+        #region Thêm nhân viên vô đoàn
+        
         private void ShowThemNV(object p) 
         {
             CloseChiTiet(p);
@@ -457,20 +473,23 @@ namespace TourDulich.ViewModel
             x.DataContext = this;
             ListNhanvien = new ObservableCollection<NhanVien>(this.nhanVienService.GetDTOs());
             x.ShowDialog();
-
         }
         private void DoanThemNhanVien()
         {
-            
             AddNV = new RelayCommand<DoanDuLich_ThemNhanVien>(p =>
             {
                 if (SelectedItemNhanVien != null)
                 {
-                    foreach (var i in SelectedItem.PhanBoNhanVienDoans)
+                    if (SelectedItem.PhanBoNhanVienDoans.Count() == 0) return true;
+                    else
                     {
-                        if (SelectedItemNhanVien.MaNhanVien == i.MaNhanVien) { return false; }
+                        foreach (var i in SelectedItem.PhanBoNhanVienDoans)
+                        {
+                            if (SelectedItemNhanVien.MaNhanVien == i.MaNhanVien) { return false; }
+                        }
+                        return true;
                     }
-                    return true;
+                        
                 }
                 else
                 {
@@ -478,47 +497,56 @@ namespace TourDulich.ViewModel
                 }
             }, p =>
             {
-                var pbnv = new PhanBoNhanVienDoan() { MaDoan = SelectedItem.MaDoan, MaNhanVien = SelectedItemNhanVien.MaNhanVien, NhiemVu = NhiemVu };
-
-                pbnv.NhanVien= SelectedItemNhanVien;
-                SelectedPhanBoNhanVienDoan.Add(pbnv);
-
-                CloseThemNV(p);
-                MessageBox.Show($"Bạn đã thêm nhân viên: Tên nhân viên {TenNhanVien} - Nhiệm vụ: {pbnv.NhiemVu} ");
-                
-                Show();
-
-                var ddl1 = SelectedItem;
-                ddl1.PhanBoNhanVienDoans.Add(pbnv);
-
-                int a = 0;
-                foreach (var i in ListGroup)
+                try
                 {
-                    if (i.MaDoan == ddl1.MaDoan)
+                    var pbnv = new PhanBoNhanVienDoan() { MaDoan = this.doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaNhanVien = SelectedItemNhanVien.MaNhanVien, NhiemVu = NhiemVu };
+                    if (phanBoNhanVienDoanService.Create(pbnv))
                     {
-                        ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                        SelectedItem = null;
-                        ListGroup.Insert(a, ddl1);
-                        SelectedItem = ddl1;
-                        break;
-                    }
-                    else
-                    {
-                        a++;
+                        pbnv.NhanVien = SelectedItemNhanVien;
+                        CloseThemNV(p);
+                        MessageBox.Show($"Bạn đã thêm nhân viên: Tên nhân viên {TenNhanVien} - Nhiệm vụ: {pbnv.NhiemVu} ");
+                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
+                        ddl1.PhanBoNhanVienDoans.Add(pbnv);
+                        Show();
+
+                        int a = 0;
+                        foreach (var i in ListGroup)
+                        {
+                            if (i.MaDoan == ddl1.MaDoan)
+                            {
+                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
+                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
+                                SelectedItem = ddl1;
+                                SelectedItemNhanVien = null;
+                                break;
+                            }
+                            else
+                            {
+                                a++;
+                            }
+                        }
                     }
                 }
-                //phanBoNhanVienDoanService.Create(pbnv);
+                catch
+                {
+                    MessageBox.Show("Lỗi ở thêm NHÂN VIÊN - Đoàn Du Lịch");
+                }
 
             });
             AddNVn = new RelayCommand<DoanDuLich_ThemNhanVien>(p =>
             {
                 if (SelectedItemNhanVien != null)
                 {
-                    foreach (var i in SelectedItem.PhanBoNhanVienDoans)
+                    if (SelectedItem.PhanBoNhanVienDoans.Count() == 0) return true;
+                    else
                     {
-                        if (SelectedItemNhanVien.MaNhanVien == i.MaNhanVien) { return false; }
+                        foreach (var i in SelectedItem.PhanBoNhanVienDoans)
+                        {
+                            if (SelectedItemNhanVien.MaNhanVien == i.MaNhanVien) { return false; }
+                        }
+                        return true;
                     }
-                    return true;
+                    
                 }
                 else
                 {
@@ -526,33 +554,38 @@ namespace TourDulich.ViewModel
                 }
             }, p =>
             {
-                var pbnv = new PhanBoNhanVienDoan() { MaDoan = SelectedItem.MaDoan, MaNhanVien = SelectedItemNhanVien.MaNhanVien, NhiemVu = NhiemVu };
-                //phanBoNhanVienDoanService.Create(pbnv);
-
-                pbnv.NhanVien = SelectedItemNhanVien;
-                SelectedPhanBoNhanVienDoan.Add(pbnv);
-
-                MessageBox.Show($"Bạn đã thêm nhân viên: Tên nhân viên {TenNhanVien} - Nhiệm vụ: {pbnv.NhiemVu} ");
-
-                var ddl1 = SelectedItem;
-                ddl1.PhanBoNhanVienDoans.Add(pbnv);
-
-                int a = 0;
-                foreach (var i in ListGroup)
+                try
                 {
-                    if (i.MaDoan == ddl1.MaDoan)
+                    var pbnv = new PhanBoNhanVienDoan() { MaDoan = this.doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaNhanVien = SelectedItemNhanVien.MaNhanVien, NhiemVu = NhiemVu };
+                    if (phanBoNhanVienDoanService.Create(pbnv))
                     {
-                        ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                        SelectedItem = null;
-                        ListGroup.Insert(a, ddl1);
-                        SelectedItem = ddl1;
-                        break;
-                    }
-                    else
-                    {
-                        a++;
+                        pbnv.NhanVien = SelectedItemNhanVien;
+                        MessageBox.Show($"Bạn đã thêm nhân viên: Tên nhân viên {TenNhanVien} - Nhiệm vụ: {pbnv.NhiemVu} ");
+                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
+                        ddl1.PhanBoNhanVienDoans.Add(pbnv);
+                        int a = 0;
+                        foreach (var i in ListGroup)
+                        {
+                            if (i.MaDoan == ddl1.MaDoan)
+                            {
+                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
+                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
+                                SelectedItem = ddl1;
+                                SelectedItemNhanVien = null;
+
+                                break;
+                            }
+                            else
+                            {
+                                a++;
+                            }
+                        }
                     }
                 }
+                catch
+                {
+                    MessageBox.Show("Lỗi ở thêm NHÂN VIÊN - Đoàn Du Lịch");
+                }     
             });
         }
         private void DoanXoaNhanVien()
@@ -591,145 +624,155 @@ namespace TourDulich.ViewModel
             //}
             //);
         }
-        private void CloseThemNV(object obj) { DoanDuLich_ThemNhanVien x = obj as DoanDuLich_ThemNhanVien; x.Close();  }
+        private void CloseThemNV(object obj) 
+        { 
+            DoanDuLich_ThemNhanVien x = obj as DoanDuLich_ThemNhanVien;
+            x.Close();
+            SelectedItemNhanVien = null;
+            NhiemVu = null;
+            SelectedPhanBoNhanVienDoan = SelectedItem.PhanBoNhanVienDoans;
 
+        }
+        #endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
+        #region Thêm khách hàng vô đoàn
         private void ShowThemKH(object p) 
         {
             CloseChiTiet(p);
             DoanDuLich_ThemKhachHang x = new DoanDuLich_ThemKhachHang();
             x.DataContext = this;
             ListKhach = new ObservableCollection<Khach>(this.khachService.GetDTOs());
-
-
             x.ShowDialog(); 
         }
         private void DoanThemKhachHang()
         {
             AddKH = new RelayCommand<DoanDuLich_ThemKhachHang>(p =>
             {
-                if (SelectedItemNhanVien != null)
+                if (SelectedItemKhach != null)
                 {
-                    foreach (var i in SelectedItem.ChiTietDoans)
+                    if (SelectedItem.ChiTietDoans.Count() == 0) return true;
+                    else
                     {
-                        if (SelectedItemKhach.MaKhachHang == i.MaKhachHang) { return false; }
-                    }
-                    return true;
+                        foreach (var i in SelectedItem.ChiTietDoans)
+                        {
+                            if (SelectedItemKhach.MaKhachHang == i.MaKhachHang) { return false; }
+                        }
+                        return true;
+                    }    
                 }
                 else
                 {
                     return MaKhachHang != 0 && !string.IsNullOrEmpty(HoTen) && !string.IsNullOrEmpty(SDT);
-
                 }
-
-
             }, p =>
             {
-                var ctd = new ChiTietDoan() { MaDoan = SelectedItem.MaDoan, MaKhachHang = SelectedItemKhach.MaKhachHang, VaiTro=AddVaiTro };
-                
-                    chiTietDoanService.Create(ctd);
-
-                ctd.Khach = SelectedItemKhach;
-                SelectedPhanBoKhach.Add(ctd);
-
-                CloseThemKH(p);
-                MessageBox.Show($"Bạn đã thêm khách hàng: Tên khách hàng {HoTen}");
-
-                Show();
-
-                var ddl1 = SelectedItem;
-                ddl1.ChiTietDoans.Add(ctd);
-
-                int a = 0;
-                foreach (var i in ListGroup)
+                try
                 {
-                    if (i.MaDoan == ddl1.MaDoan)
+                    var ctd = new ChiTietDoan() { MaDoan = this.doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaKhachHang = SelectedItemKhach.MaKhachHang, VaiTro = AddVaiTro };
+                    if (chiTietDoanService.Create(ctd))
                     {
-                        ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                        SelectedItem = null;
-                        ListGroup.Insert(a, ddl1);
-                        SelectedItem = ddl1;
-                        break;
-                    }
-                    else
-                    {
-                        a++;
+                        ctd.Khach = SelectedItemKhach;
+                        CloseThemKH(p);
+                        MessageBox.Show($"Bạn đã thêm khách hàng: Tên khách hàng {HoTen}");
+
+                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
+                        ddl1.ChiTietDoans.Add(ctd);
+                        Show();
+
+                        int a = 0;
+                        foreach (var i in ListGroup)
+                        {
+                            if (i.MaDoan == ddl1.MaDoan)
+                            {
+                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
+                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
+                                SelectedItem = ddl1;
+                                SelectedItemKhach = null;
+                                break;
+                            }
+                            else
+                            {
+                                a++;
+                            }
+                        }
                     }
                 }
-                
+                catch
+                {
+                    MessageBox.Show("Lỗi ở thêm KHÁCH HÀNG - Đoàn Du Lịch");
+                } 
             });
             AddKHn = new RelayCommand<DoanDuLich_ThemKhachHang>(p =>
             {
 
-                if (SelectedItemNhanVien != null)
+                if (SelectedItemKhach != null)
                 {
-                    foreach (var i in SelectedItem.ChiTietDoans)
+                    if (SelectedItem.ChiTietDoans.Count() == 0) return true;
+                    else
                     {
-                        if (SelectedItemKhach.MaKhachHang == i.MaKhachHang) { return false; }
+                        foreach (var i in SelectedItem.ChiTietDoans)
+                        {
+                            if (SelectedItemKhach.MaKhachHang == i.MaKhachHang) { return false; }
+                        }
+                        return true;
                     }
-                    return true;
                 }
                 else
                 {
                     return MaKhachHang != 0 && !string.IsNullOrEmpty(HoTen) && !string.IsNullOrEmpty(SDT);
-
                 }
-
             }, p =>
             {
-                var ctd = new ChiTietDoan() { MaDoan = SelectedItem.MaDoan, MaKhachHang = SelectedItemKhach.MaKhachHang };
-                chiTietDoanService.Create(ctd);
-
-                ctd.Khach = SelectedItemKhach;
-                SelectedPhanBoKhach.Add(ctd);
-
-                MessageBox.Show($"Bạn đã thêm khách hàng: Tên khách hàng {HoTen}");
-
-                var ddl1 = SelectedItem;
-                ddl1.ChiTietDoans.Add(ctd);
-
-                int a = 0;
-                foreach (var i in ListGroup)
+                try
                 {
-                    if (i.MaDoan == ddl1.MaDoan)
+                    var ctd = new ChiTietDoan() { MaDoan = this.doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaKhachHang = SelectedItemKhach.MaKhachHang, VaiTro = AddVaiTro };
+                    if (chiTietDoanService.Create(ctd))
                     {
-                        ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                        SelectedItem = null;
-                        ListGroup.Insert(a, ddl1);
-                        SelectedItem = ddl1;
-                        break;
+                        ctd.Khach = SelectedItemKhach;
+                        MessageBox.Show($"Bạn đã thêm khách hàng: Tên khách hàng {HoTen}");
+                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
+                        ddl1.ChiTietDoans.Add(ctd);
+                        int a = 0;
+                        foreach (var i in ListGroup)
+                        {
+                            if (i.MaDoan == ddl1.MaDoan)
+                            {
+                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
+                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
+                                SelectedItem = ddl1;
+                                SelectedItemKhach = null;
+
+                                break;
+                            }
+                            else
+                            {
+                                a++;
+                            }
+                        }
                     }
-                    else
-                    {
-                        a++;
-                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Lỗi ở thêm KHÁCH HÀNG - Đoàn Du Lịch");
                 }
             });
         }
         private void DoanXoaKhachHang() { }
-        private void CloseThemKH(object obj) { DoanDuLich_ThemKhachHang x = obj as DoanDuLich_ThemKhachHang; x.Close();  }
+        private void CloseThemKH(object obj) 
+        { 
+            DoanDuLich_ThemKhachHang x = obj as DoanDuLich_ThemKhachHang; 
+            x.Close();
+            SelectedItemKhach = null;
+        }
+        #endregion
 
-
-
+        #region Thêm chi phí vô đoàn
         private void ShowThemCP(object p) 
         {
             CloseChiTiet(p);
             DoanDuLich_ThemChiPhi x = new DoanDuLich_ThemChiPhi(); 
             x.DataContext = this;
             listLoaiChiPhi = new ObservableCollection<LoaiChiPhi>(this.loaiChiPhiService.GetDTOs());
-
             x.ShowDialog(); 
         }
         private void DoanThemChiPhi()
@@ -737,73 +780,77 @@ namespace TourDulich.ViewModel
             AddCP = new RelayCommand<DoanDuLich_ThemChiPhi>(p =>
             {
                 return MaLoaiChiPhi != 0 && !string.IsNullOrEmpty(TenLoaiChiPhi) && SoTien > 0;
-
             }, p =>
             {
-                var cp = new Domain.Entities.ChiPhi() { MaDoan = SelectedItem.MaDoan, MaLoaiChiPhi = SelectedItemLoaiChiPhi.MaLoaiChiPhi, SoTien = SoTien };
-                chiPhiService.Create(cp);
-
-                cp.LoaiChiPhi = SelectedItemLoaiChiPhi;
-                SelectedChiPhi.Add(cp);
-
-                CloseThemCP(p);
-                MessageBox.Show($"Bạn đã thêm chi phí: Tên chi phí {cp.LoaiChiPhi.TenLoaiChiPhi} - Số tiền: {SoTien}");
-
-
-                Show();
-
-                var ddl1 = SelectedItem;
-                ddl1.ChiPhis.Add(cp);
-
-                int a = 0;
-                foreach (var i in ListGroup)
+                try
                 {
-                    if (i.MaDoan == ddl1.MaDoan)
+                    var cp = new Domain.Entities.ChiPhi() { MaDoan = this.doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaLoaiChiPhi = SelectedItemLoaiChiPhi.MaLoaiChiPhi, SoTien = SoTien };
+                    if (chiPhiService.Create(cp))
                     {
-                        ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                        SelectedItem = null;
-                        ListGroup.Insert(a, ddl1);
-                        SelectedItem = ddl1;
-                        break;
-                    }
-                    else
-                    {
-                        a++;
+                        cp.LoaiChiPhi = SelectedItemLoaiChiPhi;
+                        CloseThemCP(p);
+                        MessageBox.Show($"Bạn đã thêm chi phí: Tên chi phí {cp.LoaiChiPhi.TenLoaiChiPhi} - Số tiền: {SoTien}");
+                        Show();
+                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
+                        ddl1.ChiPhis.Add(cp);
+                        int a = 0;
+                        foreach (var i in ListGroup)
+                        {
+                            if (i.MaDoan == ddl1.MaDoan)
+                            {
+                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
+                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
+                                SelectedItem = ddl1;
+                                break;
+                            }
+                            else
+                            {
+                                a++;
+                            }
+                        }
                     }
                 }
+                catch
+                {
+                    MessageBox.Show("Lỗi ở thêm CHI PHÍ - Đoàn Du Lịch");
+                }
+                
             });
             AddCPn = new RelayCommand<DoanDuLich_ThemChiPhi>(p =>
             {
                 return MaLoaiChiPhi != 0 && !string.IsNullOrEmpty(TenLoaiChiPhi) && SoTien >0;
-
             }, p =>
             {
-                var cp = new Domain.Entities.ChiPhi() { MaDoan = SelectedItem.MaDoan, MaLoaiChiPhi= SelectedItemLoaiChiPhi.MaLoaiChiPhi, SoTien = SoTien };
-                chiPhiService.Create(cp);
-
-                cp.LoaiChiPhi = SelectedItemLoaiChiPhi;
-                SelectedChiPhi.Add(cp);
-
-                MessageBox.Show($"Bạn đã thêm chi phí: Tên chi phí {cp.LoaiChiPhi.TenLoaiChiPhi} - Số tiền: {SoTien}");
-
-                var ddl1 = SelectedItem;
-                ddl1.ChiPhis.Add(cp);
-
-                int a = 0;
-                foreach (var i in ListGroup)
+                try
                 {
-                    if (i.MaDoan == ddl1.MaDoan)
+                    var cp = new Domain.Entities.ChiPhi() { MaDoan = this.doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaLoaiChiPhi = SelectedItemLoaiChiPhi.MaLoaiChiPhi, SoTien = SoTien };
+                    if (chiPhiService.Create(cp))
                     {
-                        ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                        SelectedItem = null;
-                        ListGroup.Insert(a, ddl1);
-                        SelectedItem = ddl1;
-                        break;
-                    }
-                    else
-                    {
-                        a++;
-                    }
+                        cp.LoaiChiPhi = SelectedItemLoaiChiPhi;
+                        MessageBox.Show($"Bạn đã thêm chi phí: Tên chi phí {cp.LoaiChiPhi.TenLoaiChiPhi} - Số tiền: {SoTien}");
+                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
+                        ddl1.ChiPhis.Add(cp);
+                        int a = 0;
+                        foreach (var i in ListGroup)
+                        {
+                            if (i.MaDoan == ddl1.MaDoan)
+                            {
+                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
+                                SelectedItem = null;
+                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
+                                SelectedItem = ddl1;
+                                break;
+                            }
+                            else
+                            {
+                                a++;
+                            }
+                        }
+                    }       
+                }
+                catch
+                {
+                    MessageBox.Show("Lỗi ở thêm CHI PHÍ - Đoàn Du Lịch");
                 }
             });
 
@@ -815,39 +862,51 @@ namespace TourDulich.ViewModel
                 return SelectedChooseCP != null;
             }, p =>
             {
-                var cp = new Domain.Entities.ChiPhi() { MaChiPhi = SelectedChooseCP.MaChiPhi };
-                chiPhiService.Delete(cp.MaChiPhi);
-
-                //MessageBox.Show($"Bạn đã xóa chi phí: Tên chi phí {SelectedChooseCP.LoaiChiPhi.TenLoaiChiPhi} - Số tiền: {SelectedChooseCP.SoTien} ");
-                SelectedChiPhi.Remove(cp);
-
-                var ddl1 = SelectedItem;
-                ddl1.ChiPhis.Remove(cp);
-
-                int a = 0;
-                foreach (var i in ListGroup)
+                try
                 {
-                    if (i.MaDoan == ddl1.MaDoan)
+                    var cp = new Domain.Entities.ChiPhi() { MaChiPhi = SelectedChooseCP.MaChiPhi };
+                    if (chiPhiService.Delete(cp.MaChiPhi))
                     {
-                        ListGroup.Remove(i);
-                        SelectedItem = null;
-                        ListGroup.Insert(a, ddl1);
-                        SelectedItem = ddl1;
-                        break;
-                    }
-                    else
-                    {
-                        a++;
+                        MessageBox.Show($"Bạn đã xóa chi phí: Tên chi phí {SelectedChooseCP.LoaiChiPhi.TenLoaiChiPhi} - Số tiền: {SelectedChooseCP.SoTien} ");
+                        SelectedChiPhi.Remove(cp);
+                        var ddl1 = SelectedItem;
+                        ddl1.ChiPhis.Remove(cp);
+                        int a = 0;
+                        foreach (var i in ListGroup)
+                        {
+                            if (i.MaDoan == ddl1.MaDoan)
+                            {
+                                ListGroup.Remove(i);
+                                SelectedItem = null;
+                                ListGroup.Insert(a, ddl1);
+                                SelectedItem = ddl1;
+                                break;
+                            }
+                            else
+                            {
+                                a++;
+                            }
+                        }
                     }
                 }
-
+                catch
+                {
+                    MessageBox.Show("Lỗi ở xóa CHI PHÍ - Đoàn Du Lịch");
+                }
             }
             );
         }
-        private void CloseThemCP(object obj) { DoanDuLich_ThemChiPhi x = obj as DoanDuLich_ThemChiPhi; x.Close();  }
+        private void CloseThemCP(object obj) 
+        { 
+            DoanDuLich_ThemChiPhi x = obj as DoanDuLich_ThemChiPhi; 
+            x.Close();
+            SelectedItemLoaiChiPhi = null;
+        }
         #endregion
-        
-        
+
+        #endregion
+
+
         #endregion
     }
 }

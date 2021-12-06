@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace TourDulich.View.AdminManagerView
 {
     /// <summary>
-    /// Interaction logic for EditCost.xaml
+    /// Interaction logic for Gia_Them.xaml
     /// </summary>
-    public partial class EditCost : Window
+    public partial class Gia_Them : Window
     {
-        public EditCost()
+        public Gia_Them()
         {
             InitializeComponent();
         }
