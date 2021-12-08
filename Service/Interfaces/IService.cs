@@ -6,7 +6,7 @@ namespace Service.Interfaces
     {
         IEnumerable<T> GetDTOs();
         bool Create(T dto);
-        T Get(int id);
+        T Get(params object[] keyValues);
         bool Update(T dto);
         bool Delete(int id);
     }

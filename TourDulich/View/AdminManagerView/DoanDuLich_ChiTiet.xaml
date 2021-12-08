@@ -461,6 +461,7 @@
                                     </Style>
                                 </GridView.ColumnHeaderContainerStyle>
                                 <GridView.Columns>
+                                    <GridViewColumn Width="222" Header="Mã" DisplayMemberBinding="{Binding LoaiChiPhi.MaLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                     <GridViewColumn Width="222" Header="Loại" DisplayMemberBinding="{Binding LoaiChiPhi.TenLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                     <GridViewColumn Width="222" Header="Số tiền" DisplayMemberBinding="{Binding SoTien}"></GridViewColumn>
                                 </GridView.Columns>

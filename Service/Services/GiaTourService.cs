@@ -23,9 +23,9 @@ namespace Service.Services
             giaTourRepository.Add(dto);
             return true;
         }
-        public GiaTour Get(int id)
+        public GiaTour Get(params object[] keyValues)
         {
-            return giaTourRepository.GetBy(id);
+            return giaTourRepository.GetBy(keyValues);
         }
 
         public bool Update(GiaTour dto)
@@ -45,6 +45,11 @@ namespace Service.Services
         {
            
            return giaTourRepository.GetAll();
+        }
+
+        public IEnumerable<GiaTour> GetDTOsByMaTour(int id)
+        {
+            return giaTourRepository.GetAll().Where(x => x.MaTour == id);
         }
     }
 }

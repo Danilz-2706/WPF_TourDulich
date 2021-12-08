@@ -24,9 +24,9 @@ namespace Service.Services
             return true;
         }
 
-        public NhanVien Get(int maNV)
+        public NhanVien Get(params object[] keyValues)
         {
-            return nhanVienRepository.GetBy(maNV);
+            return nhanVienRepository.GetBy(keyValues);
         }
 
         public bool Update(NhanVien dto)

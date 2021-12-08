@@ -22,9 +22,9 @@ namespace Service.Services
             return true;
         }
 
-        public DiemThamQuan Get(int id)
+        public DiemThamQuan Get(params object[] keyValues)
         {
-            return diemThamQuanRepository.GetBy(id);
+            return diemThamQuanRepository.GetBy(keyValues);
         }
 
         public bool Update(DiemThamQuan dto)

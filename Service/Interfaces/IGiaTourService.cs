@@ -9,5 +9,6 @@ namespace Service.Interfaces
 {
     public interface IGiaTourService : IService<GiaTour>
     {
+        IEnumerable<GiaTour> GetDTOsByMaTour(int id);
     }
 }

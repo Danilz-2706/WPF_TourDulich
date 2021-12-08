@@ -24,9 +24,9 @@ namespace Service.Services
             return true;
         }
 
-        public NoiDungTour Get(int id)
+        public NoiDungTour Get(params object[] keyValues)
         {
-            return noiDungTourRepository.GetBy(id);
+            return noiDungTourRepository.GetBy(keyValues);
         }
 
         public bool Update(NoiDungTour dto)

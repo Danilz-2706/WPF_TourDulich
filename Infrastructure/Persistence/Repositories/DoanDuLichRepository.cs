@@ -14,12 +14,63 @@ namespace Infrastructure.Persistence.Repositories
 
         public override IEnumerable<DoanDuLich> GetAll()
         {
-            /*context.DoanDuLiches.ToList().ForEach(x => {
-                x.TenTour = x.Tour.TenGoi; 
-            });*/
 
             return context.DoanDuLiches.Include(d => d.ChiTietDoans).Include(c => c.ChiPhis).Include(nv => nv.PhanBoNhanVienDoans)
                 .Include(ntd => ntd.NoiDungTour).Include(t => t.Tour).Include(k => k.Khaches).Include(nv => nv.NhanViens).ToList();
+        }
+
+        public IEnumerable<Khach> GetKhachsByDoan(int id)
+        {
+            var list = (from doan in context.DoanDuLiches
+                        where doan.MaDoan == id
+                        from ctd in doan.ChiTietDoans
+                        from kh in doan.Khaches
+                        where kh.MaKhachHang == ctd.MaKhachHang
+                        select new Khach
+                        {
+                            MaKhachHang = kh.MaKhachHang,
+                            HoTen = kh.HoTen,
+                            SoCMND = kh.SoCMND,
+                            DiaChi = kh.DiaChi,
+                            GioiTinh = kh.GioiTinh,
+                            SDT = kh.SDT,
+                            QuocTich = kh.QuocTich,
+                            VaiTro = ctd.VaiTro
+                        }).AsNoTracking().ToList();
+            return list;
+        }
+
+        public IEnumerable<NhanVien> GetNVsByDoan(int id)
+        {
+            var list = (from doan in context.DoanDuLiches
+                        where doan.MaDoan == id
+                        from nv in doan.NhanViens
+                        from pbnv in doan.PhanBoNhanVienDoans
+                        where nv.MaNhanVien == pbnv.MaNhanVien
+                        select new NhanVien
+                        {
+                            MaNhanVien = nv.MaNhanVien,
+                            TenNhanVien = nv.TenNhanVien,
+                            NhiemVu = pbnv.NhiemVu
+                        }).AsNoTracking().ToList();
+            return list;
+        }
+
+        public IEnumerable<ChiPhi> GetCPsByDoan(int id)
+        {
+            var list = (from doan in context.DoanDuLiches
+                        where doan.MaDoan == id
+                        from cp in doan.ChiPhis
+                        where cp.MaLoaiChiPhi == cp.LoaiChiPhi.MaLoaiChiPhi
+                        select new ChiPhi
+                        {
+                            MaChiPhi = cp.MaChiPhi,
+                            MaDoan = cp.MaDoan,
+                            SoTien = cp.SoTien,
+                            MaLoaiChiPhi = cp.MaLoaiChiPhi,
+                            TenLoaiChiPhi = cp.LoaiChiPhi.TenLoaiChiPhi
+                        }).AsNoTracking().ToList();
+            return list;
         }
 
         public IEnumerable<DoanDuLich> GetDoans()
@@ -81,6 +132,16 @@ namespace Infrastructure.Persistence.Repositories
             var c = context.DoanDuLiches.Count();
             return c;
         }
-        
+        public void UpdateDoanhThu(int id)
+        {
+            var doan = context.DoanDuLiches.Find(id);
+
+            var giaTour = context.GiaTours.Where(x => (doan.MaTour == x.MaTour) && doan.NgayKhoiHanh >= x.ThoiGianBatDau &&
+            doan.NgayKhoiHanh <= x.ThoiGianKetThuc).Select(x => x).FirstOrDefault();
+
+            context.Entry(doan).Collection(kh => kh.Khaches).Load();
+            doan.DoanhThu = doan.Khaches.Count() * giaTour.ThanhTien;
+            context.SaveChanges();
+        }
     }
 }

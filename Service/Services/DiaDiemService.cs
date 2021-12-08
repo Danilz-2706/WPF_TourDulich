@@ -24,9 +24,9 @@ namespace Service.Services
             return true;
         }
 
-        public DiaDiem Get(int maDD)
+        public DiaDiem Get(params object[] keyValues)
         {
-            var dd = diaDiemRepository.GetBy(maDD);
+            var dd = diaDiemRepository.GetBy(keyValues);
             return dd;
         }
         public bool Update(DiaDiem dto)

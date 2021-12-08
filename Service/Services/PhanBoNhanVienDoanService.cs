@@ -22,9 +22,9 @@ namespace Service.Services
             return true;
         }
 
-        public PhanBoNhanVienDoan Get(int id)
+        public PhanBoNhanVienDoan Get(params object[] keyValues)
         {
-            return phanBoNhanVienDoanRepository.GetBy(id);
+            return phanBoNhanVienDoanRepository.GetBy(keyValues);
         }
 
         public bool Update(PhanBoNhanVienDoan dto)

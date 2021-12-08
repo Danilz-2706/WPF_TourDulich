@@ -22,9 +22,9 @@ namespace Infrastructure.Persistence.Repositories
             return context.Set<T>().ToList();
         }
 
-        public T GetBy(int id)
+        public T GetBy(params object[] keyValues)
         {
-            return context.Set<T>().Find(id);
+            return context.Set<T>().Find(keyValues);
         }
 
         public void Add(T entity)
@@ -39,9 +39,9 @@ namespace Infrastructure.Persistence.Repositories
             context.SaveChanges();
         }
 
-        public void Update(T entity, int id)
+        public void Update(T entity, params object[] keyValues)
         {
-            T exist = context.Set<T>().Find(id);
+            T exist = context.Set<T>().Find(keyValues);
             context.Entry(exist).CurrentValues.SetValues(entity);
             context.SaveChanges();
         }

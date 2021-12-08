@@ -24,9 +24,9 @@ namespace Service.Services
             return true;
         }
 
-        public LoaiChiPhi Get(int maLCP)
+        public LoaiChiPhi Get(params object[] keyValues)
         {
-            return loaiChiPhiRepository.GetBy(maLCP);
+            return loaiChiPhiRepository.GetBy(keyValues);
         } 
 
         public bool Update(LoaiChiPhi dto)

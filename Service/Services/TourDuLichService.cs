@@ -23,9 +23,9 @@ namespace Service.Services
             tourDuLichRepository.Add(dto);
             return true;
         }
-        public TourDuLich Get(int id)
+        public TourDuLich Get(params object[] keyValues)
         {
-            return tourDuLichRepository.GetBy(id);
+            return tourDuLichRepository.GetBy(keyValues);
         }
 
         public bool Update(TourDuLich dto)
@@ -43,7 +43,6 @@ namespace Service.Services
 
         public IEnumerable<TourDuLich> GetDTOs()
         {
-            
             return tourDuLichRepository.GetAll();
         }
     }

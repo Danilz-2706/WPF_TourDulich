@@ -7,13 +7,13 @@ namespace Domain.Interfaces
     {
         IEnumerable<T> GetAll();
 
-        T GetBy(int id);
+        T GetBy(params object[] keyValues);
 
         void Add(T entity);
 
         void Update(T entity);
 
-        void Update(T entity, int id);
+        void Update(T entity, params object[] keyValues);
 
         void Delete(T entity);
     }

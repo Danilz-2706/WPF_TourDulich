@@ -24,9 +24,9 @@ namespace Service.Services
             return true;
         }
 
-        public LoaiHinhDuLich Get(int maLH)
+        public LoaiHinhDuLich Get(params object[] keyValues)
         {
-            return loaiHinhDuLichRepository.GetBy(maLH);
+            return loaiHinhDuLichRepository.GetBy(keyValues);
         }
 
         public bool Update(LoaiHinhDuLich dto)

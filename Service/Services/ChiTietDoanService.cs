@@ -22,9 +22,9 @@ namespace Service.Services
             return true;
         }
 
-        public ChiTietDoan Get(int id)
+        public ChiTietDoan Get(params object[] keyValues)
         {
-            return chiTietDoanRepository.GetBy(id);
+            return chiTietDoanRepository.GetBy(keyValues);
         }
 
         public bool Update(ChiTietDoan dto)

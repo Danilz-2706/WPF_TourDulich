@@ -25,9 +25,9 @@ namespace Service.Services
             return true;
         }
 
-        public Khach Get(int id)
+        public Khach Get(params object[] keyValues)
         {
-            return khachRepository.GetBy(id);
+            return khachRepository.GetBy(keyValues);
         }
 
         public bool Update(Khach dto)

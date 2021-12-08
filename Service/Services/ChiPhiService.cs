@@ -22,9 +22,9 @@ namespace Service.Services
             return true;
         }
 
-        public ChiPhi Get(int maCP)
+        public ChiPhi Get(params object[] keyValues)
         {
-            var chiPhi = chiPhiRepository.GetBy(maCP);
+            var chiPhi = chiPhiRepository.GetBy(keyValues);
             return chiPhi;
         }
 

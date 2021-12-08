@@ -12,22 +12,10 @@ namespace Service.Services
     public class DoanDuLichService : IDoanDuLichService
     {
         private readonly IDoanDuLichRepository doanDuLichRepository;
-        private readonly INoiDungTourRepository noiDungTourRepository;
-        private readonly IKhachRepository khachRepository;
-        private readonly IChiTietDoanRepository chiTietDoanRepository;
-        private readonly INhanVienRepository nhanVienRepository;
-        private readonly ILoaiChiPhiRepository loaiChiPhiRepository;
 
-        public DoanDuLichService(IDoanDuLichRepository doanDuLichRepository,INoiDungTourRepository noiDungTourRepository,
-            IKhachRepository khachRepository,IChiTietDoanRepository chiTietDoanRepository, 
-            INhanVienRepository nhanVienRepository, ILoaiChiPhiRepository loaiChiPhiRepository)
+        public DoanDuLichService(IDoanDuLichRepository doanDuLichRepository)
         {
             this.doanDuLichRepository = doanDuLichRepository;
-            this.noiDungTourRepository = noiDungTourRepository;
-            this.khachRepository = khachRepository;
-            this.chiTietDoanRepository = chiTietDoanRepository;
-            this.nhanVienRepository = nhanVienRepository;
-            this.loaiChiPhiRepository = loaiChiPhiRepository;
         }
 
         #region Đoàn Du Lịch
@@ -38,9 +26,9 @@ namespace Service.Services
             return true;
         }
 
-        public DoanDuLich Get(int maDoan)
+        public DoanDuLich Get(params object[] keyValues)
         {
-            return doanDuLichRepository.GetBy(maDoan);
+            return doanDuLichRepository.GetBy(keyValues);
         }
 
         public bool Update(DoanDuLich dto)
@@ -58,42 +46,28 @@ namespace Service.Services
 
         public IEnumerable<DoanDuLich> GetDTOs()
         {
-            //List<DoanDuLich> list = new ();
-            //list.Add(new DoanDuLich());
-            //list.Add(new DoanDuLich());
-            //list.Add(new DoanDuLich());
-            //return list;
             return doanDuLichRepository.GetAll();
         }
 
-        #endregion
-
-        #region Nội Dung Tour
-
-        public bool CreateNDT(NoiDungTour dto)
+        public IEnumerable<Khach> GetKhachsByDoan(int id)
         {
-            noiDungTourRepository.Add(dto);
-            return true;
+            return doanDuLichRepository.GetKhachsByDoan(id);
         }
 
-        public NoiDungTour GetNDT(int id)
+        public IEnumerable<NhanVien> GetNVsByDoan(int id)
         {
-            return noiDungTourRepository.GetBy(id);
+            return doanDuLichRepository.GetNVsByDoan(id);
         }
 
-        public bool UpdateNDT(NoiDungTour dto)
+        public IEnumerable<ChiPhi> GetCPsByDoan(int id)
         {
-            noiDungTourRepository.Update(dto, dto.MaDoan);
-            return true;
+            return doanDuLichRepository.GetCPsByDoan(id);
         }
 
-        public bool DeleteNDT(int id)
+        public void UpdateDoanhThu(int id)
         {
-            var ndt = noiDungTourRepository.GetBy(id);
-            noiDungTourRepository.Delete(ndt);
-            return true;
+            doanDuLichRepository.UpdateDoanhThu(id);
         }
-
         #endregion
 
     }
