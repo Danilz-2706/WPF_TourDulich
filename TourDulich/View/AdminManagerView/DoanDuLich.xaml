@@ -137,10 +137,9 @@
                     <ListView ItemsSource="{Binding ListGroup, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
-
                                 <GridView.Columns>
                                     <GridViewColumn Header="Mã Đoàn" DisplayMemberBinding="{Binding MaDoan}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Tour" DisplayMemberBinding="{Binding Tour.TenGoi}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Tour" DisplayMemberBinding="{Binding TenTour}"></GridViewColumn>
                                     <GridViewColumn Header="Tên Đoàn" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
                                     <GridViewColumn Header="Ngày đi" DisplayMemberBinding="{Binding NgayKhoiHanh, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                                     <GridViewColumn Header="Ngày về" DisplayMemberBinding="{Binding NgayKetThuc, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
@@ -195,9 +194,8 @@
                                     <ComboBox
                                                 ItemsSource="{Binding ListTour}"
                                                 DisplayMemberPath="TenGoi"
-                                        
-                                                SelectedItem="{Binding SelectedTour,UpdateSourceTrigger=PropertyChanged}"
-                                                SelectedValue="{Binding SelectedTour.TenGoi,UpdateSourceTrigger=PropertyChanged}"
+                                                SelectedItem="{Binding TenTour,UpdateSourceTrigger=PropertyChanged}"
+                                                SelectedValue="{Binding TenTour,UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedValuePath="TenGoi"
                                                 IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
                                                 IsEditable="{Binding ElementName=edit, Path=IsChecked}"
@@ -211,11 +209,11 @@
                                     <Border Margin="10 0 10 0"
                                             CornerRadius="4" Background="#ECF0F1" Padding="0,0,0,4" 
                                             HorizontalAlignment="Stretch">
-                                        <ListView ItemsSource="{Binding SelectedItem.PhanBoNhanVienDoans, UpdateSourceTrigger=PropertyChanged}" MaxHeight="220">
+                                        <ListView ItemsSource="{Binding SelectedPhanBoNhanVienDoan, UpdateSourceTrigger=PropertyChanged}" MaxHeight="220">
                                             <ListView.View>
                                                 <GridView>
                                                     <GridViewColumn Header="Mã NV" DisplayMemberBinding="{Binding MaNhanVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding NhanVien.TenNhanVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                                    <GridViewColumn Header="Tên Nhân Viên" DisplayMemberBinding="{Binding TenNhanVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                                     <GridViewColumn Header="Nhiệm vụ" DisplayMemberBinding="{Binding NhiemVu,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                                 </GridView>
                                             </ListView.View>

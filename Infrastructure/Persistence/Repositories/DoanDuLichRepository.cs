@@ -15,8 +15,17 @@ namespace Infrastructure.Persistence.Repositories
         public override IEnumerable<DoanDuLich> GetAll()
         {
 
-            return context.DoanDuLiches.Include(d => d.ChiTietDoans).Include(c => c.ChiPhis).Include(nv => nv.PhanBoNhanVienDoans)
-                .Include(ntd => ntd.NoiDungTour).Include(t => t.Tour).Include(k => k.Khaches).Include(nv => nv.NhanViens).ToList();
+            return context.DoanDuLiches.Select(x => new DoanDuLich
+            {
+                MaDoan = x.MaDoan,
+                MaTour = x.MaTour,
+                TenDoan = x.TenDoan,
+                NoiDungTour = x.NoiDungTour,
+                NgayKhoiHanh = x.NgayKhoiHanh,
+                NgayKetThuc = x.NgayKetThuc,
+                DoanhThu = x.DoanhThu,
+                TenTour = x.Tour.TenGoi
+            }).ToList();
         }
 
         public IEnumerable<Khach> GetKhachsByDoan(int id)
@@ -139,8 +148,10 @@ namespace Infrastructure.Persistence.Repositories
             var giaTour = context.GiaTours.Where(x => (doan.MaTour == x.MaTour) && doan.NgayKhoiHanh >= x.ThoiGianBatDau &&
             doan.NgayKhoiHanh <= x.ThoiGianKetThuc).Select(x => x).FirstOrDefault();
 
+            var chiPhi = context.ChiPhis.Where(x => x.MaDoan == id).Sum(x => x.SoTien);
+
             context.Entry(doan).Collection(kh => kh.Khaches).Load();
-            doan.DoanhThu = doan.Khaches.Count() * giaTour.ThanhTien;
+            doan.DoanhThu = (doan.Khaches.Count() * giaTour.ThanhTien) - chiPhi;
             context.SaveChanges();
         }
     }

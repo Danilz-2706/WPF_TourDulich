@@ -178,7 +178,7 @@
 
                 <!--//List Nhân Viên//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
-                    <ListView  ItemsSource="{Binding listLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItemLoaiChiPhi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView  ItemsSource="{Binding ListLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItemLoaiChiPhi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
 

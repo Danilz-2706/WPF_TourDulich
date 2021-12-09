@@ -166,8 +166,7 @@
                                                 SelectedItem="{Binding SelectedTour,UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedValue="{Binding SelectedTour.TenGoi,UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedValuePath="TenGoi"
-                            IsEditable="True"
-                            
+                                IsEditable="True"
                                 Style="{StaticResource CbblIfo1}"
                                 materialDesign:HintAssist.HintOpacity=".26">
                         </ComboBox>
@@ -199,7 +198,8 @@
                     <!--//Giá//-->
                     <Grid Margin="0 5 0 8">
                         <TextBlock  Text="Giá"  Style="{StaticResource tbName}"/>
-                        <TextBox Style="{StaticResource tblIfo1}" 
+                        <TextBox Style="{StaticResource tblIfo1}"
+                             Text="{Binding SelectedTour.ThanhTien,UpdateSourceTrigger = PropertyChanged}" 
                              IsEnabled="False" 
                              />
                     </Grid>
@@ -329,11 +329,11 @@
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
                             <GridView.Columns>
-                                <GridViewColumn Width="90" Header="Mã KH" DisplayMemberBinding="{Binding Khach.MaKhachHang}"></GridViewColumn>
-                                <GridViewColumn Width="150" Header="Tên KH" DisplayMemberBinding="{Binding Khach. HoTen}"></GridViewColumn>
-                                <GridViewColumn Width="100" Header="Giới tính" DisplayMemberBinding="{Binding Khach. GioiTinh}"></GridViewColumn>
+                                <GridViewColumn Width="90" Header="Mã KH" DisplayMemberBinding="{Binding MaKhachHang}"></GridViewColumn>
+                                <GridViewColumn Width="150" Header="Tên KH" DisplayMemberBinding="{Binding HoTen}"></GridViewColumn>
+                                <GridViewColumn Width="100" Header="Giới tính" DisplayMemberBinding="{Binding GioiTinh}"></GridViewColumn>
                                 <GridViewColumn Width="100" Header="Vai trò" DisplayMemberBinding="{Binding VaiTro}"></GridViewColumn>
-                                <GridViewColumn Width="155" Header="Số điện thoại" DisplayMemberBinding="{Binding Khach. SDT}"></GridViewColumn>
+                                <GridViewColumn Width="155" Header="Số điện thoại" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
@@ -401,7 +401,7 @@
                                 </GridView.ColumnHeaderContainerStyle>
                                 <GridView.Columns>
                                     <GridViewColumn Width="148" Header="Mã NV" DisplayMemberBinding="{Binding MaNhanVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                    <GridViewColumn Width="148" Header="Tên NV" DisplayMemberBinding="{Binding NhanVien.TenNhanVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Width="148" Header="Tên NV" DisplayMemberBinding="{Binding TenNhanVien,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                     <GridViewColumn Width="148" Header="Nhiệm vụ" DisplayMemberBinding="{Binding NhiemVu,UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                     </GridView.Columns>
                                 </GridView>
@@ -461,8 +461,8 @@
                                     </Style>
                                 </GridView.ColumnHeaderContainerStyle>
                                 <GridView.Columns>
-                                    <GridViewColumn Width="222" Header="Mã" DisplayMemberBinding="{Binding LoaiChiPhi.MaLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                    <GridViewColumn Width="222" Header="Loại" DisplayMemberBinding="{Binding LoaiChiPhi.TenLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Width="222" Header="Mã" DisplayMemberBinding="{Binding MaLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Width="222" Header="Loại" DisplayMemberBinding="{Binding TenLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                     <GridViewColumn Width="222" Header="Số tiền" DisplayMemberBinding="{Binding SoTien}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>

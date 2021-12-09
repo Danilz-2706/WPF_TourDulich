@@ -26,7 +26,7 @@ namespace TourDulich.ViewModel
         private readonly INoiDungTourService noiDungTourService;
         private readonly IChiPhiService chiPhiService;
         private readonly ILoaiChiPhiService loaiChiPhiService;
-
+        private readonly IGiaTourService giaTourService;
         private readonly IKhachService khachService;
         private readonly IChiTietDoanService chiTietDoanService;
         #endregion
@@ -38,8 +38,18 @@ namespace TourDulich.ViewModel
         public string TenDoan { get; set; }
         public DateTime? NgayKhoiHanh { get; set; }
         public DateTime? NgayKetThuc { get; set; }
+        public string TenTour { get; set; }
         public long DoanhThu { get; set; }
-        public TourDuLich SelectedTour { get; set; }
+        public TourDuLich _SelectedTour;
+        public TourDuLich SelectedTour {
+            get => _SelectedTour; 
+            set
+            {
+                _SelectedTour = value;
+                _SelectedTour.ThanhTien = giaTourService.GetDTOs().Where(x => (SelectedItem.MaTour == x.MaTour) && SelectedItem.NgayKhoiHanh >= x.ThoiGianBatDau &&
+            SelectedItem.NgayKhoiHanh <= x.ThoiGianKetThuc).Select(x => x.ThanhTien).FirstOrDefault();
+            } 
+        }
         public NoiDungTour? SelectedNoiDungTour { get; set; }
         #endregion
 
@@ -125,9 +135,9 @@ namespace TourDulich.ViewModel
         public PhanBoNhanVienDoan? SelectedChooseNV { get; set; }
         public ChiTietDoan? SelectedChooseKH { get; set; }
         public Domain.Entities.ChiPhi SelectedChooseCP { get; set; }
-        public ICollection<PhanBoNhanVienDoan> SelectedPhanBoNhanVienDoan { get; set; }
-        ICollection<ChiTietDoan> SelectedPhanBoKhach { get; set; }
-        public ICollection<Domain.Entities.ChiPhi> SelectedChiPhi { get; set; }
+        public ObservableCollection<NhanVien> SelectedPhanBoNhanVienDoan { get; set; }
+        public ObservableCollection<Khach> SelectedPhanBoKhach { get; set; }
+        public ObservableCollection<Domain.Entities.ChiPhi> SelectedChiPhi { get; set; }
 
         #endregion
 
@@ -146,7 +156,8 @@ namespace TourDulich.ViewModel
                     NgayKhoiHanh = SelectedItem.NgayKhoiHanh;
                     NgayKetThuc = SelectedItem.NgayKetThuc;
                     DoanhThu = SelectedItem.DoanhThu;
-                    SelectedTour = SelectedItem.Tour;
+                    TenTour = SelectedItem.TenTour;
+                    SelectedPhanBoNhanVienDoan = new ObservableCollection<NhanVien>(doanDuLichService.GetNVsByDoan(SelectedItem.MaDoan).ToList());
                     SelectedNoiDungTour = SelectedItem.NoiDungTour;
                 }
             }
@@ -173,7 +184,7 @@ namespace TourDulich.ViewModel
         public ObservableCollection<DoanDuLich> ListGroup { get; set; }
         public ObservableCollection<NoiDungTour> ListNoiDung { get; set; }
         public ObservableCollection<Domain.Entities.ChiPhi> ListChiPhi { get; set; }
-        public ObservableCollection<LoaiChiPhi> listLoaiChiPhi { get; set; }
+        public ObservableCollection<LoaiChiPhi> ListLoaiChiPhi { get; set; }
         public ObservableCollection<Khach> ListKhach { get; set; }
         public ObservableCollection<ChiTietDoan> ListChiTietDoan { get; set; }
         #endregion
@@ -197,7 +208,11 @@ namespace TourDulich.ViewModel
         #endregion
         public DoanDuLichViewModel() { }
 
-        public DoanDuLichViewModel(IDoanDuLichService doanDuLichService, ITourDuLichService tourDuLichService, INhanVienService nhanVienService, INoiDungTourService noiDungTourService, IChiPhiService chiPhiService, IKhachService khachService, IPhanBoNhanVienDoanService phanBoNhanVienDoanService, IChiTietDoanService chiTietDoanService, ILoaiChiPhiService loaiChiPhiService) {
+        public DoanDuLichViewModel(IDoanDuLichService doanDuLichService, ITourDuLichService tourDuLichService,
+            INhanVienService nhanVienService, INoiDungTourService noiDungTourService,
+            IChiPhiService chiPhiService, IKhachService khachService, IPhanBoNhanVienDoanService phanBoNhanVienDoanService,
+            IChiTietDoanService chiTietDoanService, ILoaiChiPhiService loaiChiPhiService
+            ,IGiaTourService giaTourService) {
             this.doanDuLichService = doanDuLichService;
             this.tourDuLichService = tourDuLichService;
             this.nhanVienService = nhanVienService;
@@ -205,11 +220,12 @@ namespace TourDulich.ViewModel
             this.khachService = khachService;
             this.chiPhiService = chiPhiService;
             this.loaiChiPhiService = loaiChiPhiService;
+            this.giaTourService = giaTourService;
             this.phanBoNhanVienDoanService = phanBoNhanVienDoanService;
             this.chiTietDoanService = chiTietDoanService;
 
-            ListGroup = new ObservableCollection<DoanDuLich>(this.doanDuLichService.GetDTOs());
-            ListTour = new ObservableCollection<TourDuLich>(this.tourDuLichService.GetDTOs());
+            ListGroup = new ObservableCollection<DoanDuLich>(doanDuLichService.GetDTOs());
+            ListTour = new ObservableCollection<TourDuLich>(tourDuLichService.GetDTOs());
 
             #region Thực hiện các chức năng
             // Thêm //
@@ -311,9 +327,10 @@ namespace TourDulich.ViewModel
         {
             DoanDuLich_ChiTiet x = new DoanDuLich_ChiTiet();
             x.DataContext = this;
-            SelectedPhanBoNhanVienDoan = SelectedItem.PhanBoNhanVienDoans;
-            SelectedPhanBoKhach = SelectedItem.ChiTietDoans;
-            SelectedChiPhi = SelectedItem.ChiPhis;
+            SelectedTour = tourDuLichService.Get(SelectedItem.MaTour);
+            //SelectedPhanBoNhanVienDoan = doanDuLichService.GetNVsByDoan(SelectedItem.MaDoan).ToList();
+            SelectedPhanBoKhach = new ObservableCollection<Khach>(doanDuLichService.GetKhachsByDoan(SelectedItem.MaDoan).ToList());
+            SelectedChiPhi = new ObservableCollection<Domain.Entities.ChiPhi>(doanDuLichService.GetCPsByDoan(SelectedItem.MaDoan).ToList());
             x.ShowDialog();
         }
         private void CloseChiTiet(object obj) 
@@ -323,6 +340,7 @@ namespace TourDulich.ViewModel
             SelectedPhanBoNhanVienDoan = null;
             SelectedPhanBoKhach = null;
             SelectedChiPhi = null;
+            ListGroup = new ObservableCollection<DoanDuLich>(doanDuLichService.GetDTOs());
         }
         #endregion
 
@@ -367,26 +385,6 @@ namespace TourDulich.ViewModel
                         pbnv.NhanVien = SelectedItemNhanVien;
                         CloseThemNV(p);
                         MessageBox.Show($"Bạn đã thêm nhân viên: Tên nhân viên {TenNhanVien} - Nhiệm vụ: {pbnv.NhiemVu} ");
-                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
-                        ddl1.PhanBoNhanVienDoans.Add(pbnv);
-                        Show();
-
-                        int a = 0;
-                        foreach (var i in ListGroup)
-                        {
-                            if (i.MaDoan == ddl1.MaDoan)
-                            {
-                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
-                                SelectedItem = ddl1;
-                                SelectedItemNhanVien = null;
-                                break;
-                            }
-                            else
-                            {
-                                a++;
-                            }
-                        }
                     }
                 }
                 catch
@@ -415,27 +413,6 @@ namespace TourDulich.ViewModel
                     {
                         //pbnv.NhanVien = SelectedItemNhanVien;
                         MessageBox.Show($"Bạn đã thêm nhân viên: Tên nhân viên {TenNhanVien} - Nhiệm vụ: {SelectedItemNhanVien.NhiemVu} ");
-
-
-                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
-                        ddl1.PhanBoNhanVienDoans.Add(pbnv);
-                        int a = 0;
-                        foreach (var i in ListGroup)
-                        {
-                            if (i.MaDoan == ddl1.MaDoan)
-                            {
-                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
-                                SelectedItem = ddl1;
-                                SelectedItemNhanVien = null;
-
-                                break;
-                            }
-                            else
-                            {
-                                a++;
-                            }
-                        }
                     }
                 }
                 catch
@@ -484,10 +461,13 @@ namespace TourDulich.ViewModel
         { 
             DoanDuLich_ThemNhanVien x = obj as DoanDuLich_ThemNhanVien;
             x.Close();
+            if(SelectedItemNhanVien != null)
+            {
+                SelectedPhanBoNhanVienDoan = new ObservableCollection<NhanVien>(doanDuLichService.GetNVsByDoan(SelectedItem.MaDoan).ToList());
+            }
             SelectedItemNhanVien = null;
             NhiemVu = null;
-            SelectedPhanBoNhanVienDoan = SelectedItem.PhanBoNhanVienDoans;
-
+            
         }
         #endregion
 
@@ -497,7 +477,7 @@ namespace TourDulich.ViewModel
             CloseChiTiet(p);
             DoanDuLich_ThemKhachHang x = new DoanDuLich_ThemKhachHang();
             x.DataContext = this;
-            ListKhach = new ObservableCollection<Khach>(this.khachService.GetDTOs());
+            ListKhach = new ObservableCollection<Khach>(khachService.GetDTOs());
             x.ShowDialog(); 
         }
         private void DoanThemKhachHang()
@@ -514,41 +494,21 @@ namespace TourDulich.ViewModel
                 }
             }, p =>
             {
-                /*try
-                {*/
-                    var ctd = new ChiTietDoan() { MaDoan = this.doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaKhachHang = SelectedItemKhach.MaKhachHang, VaiTro = AddVaiTro };
+                try
+                {
+                    var ctd = new ChiTietDoan() { MaDoan = doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaKhachHang = SelectedItemKhach.MaKhachHang, VaiTro = AddVaiTro };
                     if (chiTietDoanService.Create(ctd))
                     {
                         ctd.Khach = SelectedItemKhach;
+                        doanDuLichService.UpdateDoanhThu(SelectedItem.MaDoan);
                         CloseThemKH(p);
                         MessageBox.Show($"Bạn đã thêm khách hàng: Tên khách hàng {HoTen}");
-
-                        var ddl1 = doanDuLichService.Get(SelectedItem.MaDoan);
-                        ddl1.ChiTietDoans.Add(ctd);
-                        Show();
-
-                        int a = 0;
-                        foreach (var i in ListGroup)
-                        {
-                            if (i.MaDoan == ddl1.MaDoan)
-                            {
-                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
-                                SelectedItem = ddl1;
-                                SelectedItemKhach = null;
-                                break;
-                            }
-                            else
-                            {
-                                a++;
-                            }
-                        }
                     }
-                /*}
+                }
                 catch
                 {
                     MessageBox.Show("Lỗi ở thêm KHÁCH HÀNG - Đoàn Du Lịch");
-                }*/ 
+                }
             });
             AddKHn = new RelayCommand<DoanDuLich_ThemKhachHang>(p =>
             {
@@ -563,14 +523,15 @@ namespace TourDulich.ViewModel
                 }
             }, p =>
             {
-                /*try
-                {*/
+                try
+                {
                     var ctd = new ChiTietDoan() { MaDoan = this.doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaKhachHang = SelectedItemKhach.MaKhachHang, VaiTro = AddVaiTro };
                     if (chiTietDoanService.Create(ctd))
                     {
                         ctd.Khach = SelectedItemKhach;
+                        doanDuLichService.UpdateDoanhThu(SelectedItem.MaDoan);
                         MessageBox.Show($"Bạn đã thêm khách hàng: Tên khách hàng {HoTen}");
-                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
+                        /*var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
                         ddl1.ChiTietDoans.Add(ctd);
                         int a = 0;
                         foreach (var i in ListGroup)
@@ -588,20 +549,24 @@ namespace TourDulich.ViewModel
                             {
                                 a++;
                             }
-                        }
+                        }*/
                     }
-                /*}
+                }
                 catch
                 {
                     MessageBox.Show("Lỗi ở thêm KHÁCH HÀNG - Đoàn Du Lịch");
-                }*/
+                }
             });
         }
         private void DoanXoaKhachHang() { }
-        private void CloseThemKH(object obj) 
-        { 
-            DoanDuLich_ThemKhachHang x = obj as DoanDuLich_ThemKhachHang; 
+        private void CloseThemKH(object obj)
+        {
+            DoanDuLich_ThemKhachHang x = obj as DoanDuLich_ThemKhachHang;
             x.Close();
+            if (SelectedItemKhach != null)
+            {
+                SelectedPhanBoKhach = new ObservableCollection<Khach>(doanDuLichService.GetKhachsByDoan(SelectedItem.MaDoan).ToList());
+            }
             SelectedItemKhach = null;
         }
         #endregion
@@ -612,7 +577,7 @@ namespace TourDulich.ViewModel
             CloseChiTiet(p);
             DoanDuLich_ThemChiPhi x = new DoanDuLich_ThemChiPhi(); 
             x.DataContext = this;
-            listLoaiChiPhi = new ObservableCollection<LoaiChiPhi>(this.loaiChiPhiService.GetDTOs());
+            ListLoaiChiPhi = new ObservableCollection<LoaiChiPhi>(loaiChiPhiService.GetDTOs());
             x.ShowDialog(); 
         }
         private void DoanThemChiPhi()
@@ -628,26 +593,10 @@ namespace TourDulich.ViewModel
                     if (chiPhiService.Create(cp))
                     {
                         cp.LoaiChiPhi = SelectedItemLoaiChiPhi;
+                        doanDuLichService.UpdateDoanhThu(SelectedItem.MaDoan);
                         CloseThemCP(p);
                         MessageBox.Show($"Bạn đã thêm chi phí: Tên chi phí {cp.LoaiChiPhi.TenLoaiChiPhi} - Số tiền: {SoTien}");
                         Show();
-                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
-                        ddl1.ChiPhis.Add(cp);
-                        int a = 0;
-                        foreach (var i in ListGroup)
-                        {
-                            if (i.MaDoan == ddl1.MaDoan)
-                            {
-                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
-                                SelectedItem = ddl1;
-                                break;
-                            }
-                            else
-                            {
-                                a++;
-                            }
-                        }
                     }
                 }
                 catch
@@ -667,25 +616,8 @@ namespace TourDulich.ViewModel
                     if (chiPhiService.Create(cp))
                     {
                         cp.LoaiChiPhi = SelectedItemLoaiChiPhi;
+                        doanDuLichService.UpdateDoanhThu(SelectedItem.MaDoan);
                         MessageBox.Show($"Bạn đã thêm chi phí: Tên chi phí {cp.LoaiChiPhi.TenLoaiChiPhi} - Số tiền: {SoTien}");
-                        var ddl1 = this.doanDuLichService.Get(SelectedItem.MaDoan);
-                        ddl1.ChiPhis.Add(cp);
-                        int a = 0;
-                        foreach (var i in ListGroup)
-                        {
-                            if (i.MaDoan == ddl1.MaDoan)
-                            {
-                                ListGroup.Remove(this.doanDuLichService.Get(SelectedItem.MaDoan));
-                                SelectedItem = null;
-                                ListGroup.Insert(a, this.doanDuLichService.Get(ddl1.MaDoan));
-                                SelectedItem = ddl1;
-                                break;
-                            }
-                            else
-                            {
-                                a++;
-                            }
-                        }
                     }       
                 }
                 catch
@@ -707,27 +639,10 @@ namespace TourDulich.ViewModel
                     var cp = new Domain.Entities.ChiPhi() { MaChiPhi = SelectedChooseCP.MaChiPhi };
                     if (chiPhiService.Delete(cp.MaChiPhi))
                     {
+                        doanDuLichService.UpdateDoanhThu(SelectedItem.MaDoan);
                         //MessageBox.Show($"Bạn đã xóa chi phí: Tên chi phí {SelectedChooseCP.LoaiChiPhi.TenLoaiChiPhi} - Số tiền: {SelectedChooseCP.SoTien} ");
                         MessageBox.Show($"Bạn đã xóa chi phí !");
-                        SelectedChiPhi.Remove(cp);
-                        var ddl1 = SelectedItem;
-                        ddl1.ChiPhis.Remove(cp);
-                        int a = 0;
-                        foreach (var i in ListGroup)
-                        {
-                            if (i.MaDoan == ddl1.MaDoan)
-                            {
-                                ListGroup.Remove(i);
-                                SelectedItem = null;
-                                ListGroup.Insert(a, ddl1);
-                                SelectedItem = ddl1;
-                                break;
-                            }
-                            else
-                            {
-                                a++;
-                            }
-                        }
+                        
                     }
                 }
                 catch
@@ -741,6 +656,10 @@ namespace TourDulich.ViewModel
         { 
             DoanDuLich_ThemChiPhi x = obj as DoanDuLich_ThemChiPhi; 
             x.Close();
+            if(SelectedItemLoaiChiPhi != null)
+            {
+                SelectedChiPhi = new ObservableCollection<Domain.Entities.ChiPhi>(doanDuLichService.GetCPsByDoan(SelectedItem.MaDoan).ToList());
+            }
             SelectedItemLoaiChiPhi = null;
         }
         #endregion

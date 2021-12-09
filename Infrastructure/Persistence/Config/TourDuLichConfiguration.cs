@@ -10,6 +10,7 @@ namespace Infrastructure.Persistence
         {
             builder.ToTable("TourDuLich");
             builder.Ignore(tour => tour.TenLoaiHinh);
+            builder.Ignore(tour => tour.ThanhTien);
             builder.HasKey(tour => tour.MaTour);
             builder.HasOne(tour => tour.LoaiHinh).WithMany(lh => lh.TourDuLiches).HasForeignKey(tour => tour.MaLoaiHinh);
             builder.HasData(
