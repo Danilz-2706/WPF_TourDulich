@@ -134,7 +134,7 @@
                 <!--//List Tour//-->
                 <Grid Grid.Row="1" Grid.Column="0" Background="#eff0f3" >
 
-                    <ListView ItemsSource="{Binding ListGroup, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView ItemsSource="{Binding ListGroup, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedItem}">
                         <ListView.View>
                             <GridView>
                                 <GridView.Columns>
@@ -143,7 +143,7 @@
                                     <GridViewColumn Header="Tên Đoàn" DisplayMemberBinding="{Binding TenDoan}"></GridViewColumn>
                                     <GridViewColumn Header="Ngày đi" DisplayMemberBinding="{Binding NgayKhoiHanh, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                                     <GridViewColumn Header="Ngày về" DisplayMemberBinding="{Binding NgayKetThuc, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
-                                    <GridViewColumn Header="Doanh thu" DisplayMemberBinding="{Binding DoanhThu}"></GridViewColumn>
+                                    <GridViewColumn Header="Doanh thu" DisplayMemberBinding="{Binding DoanhThu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>

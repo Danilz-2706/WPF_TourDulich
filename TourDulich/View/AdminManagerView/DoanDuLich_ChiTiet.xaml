@@ -106,7 +106,7 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
                                 Margin="0 0 20 0"
-                                Command="{Binding iiiiiiiiiiiiiiiiiii}"
+                                Command="{Binding Undo, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="Trở lại">
                     <TextBlock Text="Hoàn tác"/>
                 </Button>
@@ -118,7 +118,7 @@
                                 BorderBrush="#C4C4C4"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Width="100"
-                                Command="{Binding kkkkkkkkkkkkkkkk}"
+                                Command="{Binding Agree, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTip="Xác nhận">
                     <TextBlock Text="Lưu"/>
                 </Button>
@@ -312,13 +312,13 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
-                                Command="{Binding DoanXoaKH}"
+                                Command="{Binding DoanXoaKH, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Xóa">
                         <TextBlock Text="Xóa"/>
                     </Button>
                 </Grid>
-                <ListView MaxHeight="463" ItemsSource="{Binding SelectedPhanBoKhach, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedChooseKH,UpdateSourceTrigger=PropertyChanged}">
+                <ListView MaxHeight="463" ItemsSource="{Binding SelectedPhanBoKhach, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" SelectedItem="{Binding SelectedChooseKH,UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView AllowsColumnReorder="True">
                             <GridView.ColumnHeaderContainerStyle>
@@ -381,15 +381,14 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
-                                Command="{Binding DoanXoaNV}"
-                                CommandParameter="{Binding ElementName=ViewChiTietDoan}"
+                                Command="{Binding DoanXoaNV, UpdateSourceTrigger=PropertyChanged}"
                             
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Xóa">
                             <TextBlock Text="Xóa"/>
                         </Button>
                     </Grid>
-                    <ListView ItemsSource="{Binding SelectedPhanBoNhanVienDoan, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" MaxHeight="140" SelectedItem="{Binding SelectedChooseNV, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView ItemsSource="{Binding SelectedPhanBoNhanVienDoan, UpdateSourceTrigger=PropertyChanged}" MaxHeight="140" SelectedItem="{Binding SelectedChooseNV, UpdateSourceTrigger=PropertyChanged}">
                             <ListView.View>
                             <GridView AllowsColumnReorder="True" >
                                 <GridView.ColumnHeaderContainerStyle>
@@ -444,7 +443,7 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
-                                Command="{Binding DoanXoaCP}"
+                                Command="{Binding DoanXoaCP, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Xóa">
                             <TextBlock Text="Xóa"/>
@@ -461,9 +460,9 @@
                                     </Style>
                                 </GridView.ColumnHeaderContainerStyle>
                                 <GridView.Columns>
-                                    <GridViewColumn Width="222" Header="Mã" DisplayMemberBinding="{Binding MaLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                    <GridViewColumn Width="222" Header="Loại" DisplayMemberBinding="{Binding TenLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
-                                    <GridViewColumn Width="222" Header="Số tiền" DisplayMemberBinding="{Binding SoTien}"></GridViewColumn>
+                                    <GridViewColumn Width="148" Header="Mã" DisplayMemberBinding="{Binding MaLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Width="148" Header="Loại" DisplayMemberBinding="{Binding TenLoaiChiPhi, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Width="148" Header="Số tiền" DisplayMemberBinding="{Binding SoTien}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
