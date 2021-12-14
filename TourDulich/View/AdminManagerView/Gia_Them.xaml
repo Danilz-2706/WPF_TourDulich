@@ -60,20 +60,15 @@
         <Grid.Effect>
             <DropShadowEffect BlurRadius="25" ShadowDepth="8" Direction="270" Color="#BBBBBB"/>
         </Grid.Effect>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.08*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="0.08*"></RowDefinition>
+            <RowDefinition Height="7*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--//header//-->
         <Grid 
                     Grid.Row="0"
-                    Grid.ColumnSpan="2"
                     Background="#ff8e3c">
 
             <TextBlock Text="T H Ê M -G I Á"
@@ -91,7 +86,7 @@
                             CommandParameter="{Binding ElementName=GiaThem}"/>
         </Grid>
         <!--//Footer//-->
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" Background="#fffaf7">
+        <Grid Grid.Row="3" Background="#fffaf7">
             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <!--//Trở lại//-->
                 <Button
@@ -132,6 +127,7 @@
                     <Grid Margin="0 8 0 8">
                         <TextBlock  Text="Chọn Tour"  Style="{StaticResource tbName}"/>
                         <ComboBox
+                                Name="listtour"
                                 ItemsSource="{Binding ListTour}"
                                 DisplayMemberPath="TenGoi"
                                 SelectedValue="{Binding AddSelectedTour ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"

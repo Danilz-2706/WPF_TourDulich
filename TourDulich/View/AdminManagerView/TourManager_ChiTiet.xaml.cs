@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace TourDulich.View.AdminManagerView
 {
     /// <summary>
-    /// Interaction logic for TourManagerEdit.xaml
+    /// Interaction logic for TourManager_ChiTiet.xaml
     /// </summary>
-    public partial class TourManagerEdit : Window
+    public partial class TourManager_ChiTiet : Window
     {
-        public TourManagerEdit()
+        public TourManager_ChiTiet()
         {
             InitializeComponent();
         }

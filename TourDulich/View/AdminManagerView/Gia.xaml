@@ -134,7 +134,7 @@
                             <GridView>
                                 <GridView.Columns>
                                     <GridViewColumn Header="Mã Giá" DisplayMemberBinding="{Binding MaGia}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên Tour" DisplayMemberBinding="{Binding TourDuLich.TenGoi}"></GridViewColumn>
+                                    <GridViewColumn Header="Tên Tour" DisplayMemberBinding="{Binding TenTour}"></GridViewColumn>
                                     <GridViewColumn Header="Thành tiền" DisplayMemberBinding="{Binding ThanhTien}"></GridViewColumn>
                                     <GridViewColumn Header="Thời gian kết thúc" DisplayMemberBinding="{Binding ThoiGianBatDau, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                                     <GridViewColumn Header="Thời gian bắt đầu" DisplayMemberBinding="{Binding ThoiGianKetThuc, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
@@ -177,6 +177,7 @@
                                                 SelectedItem="{Binding SelectedTour,UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedValue="{Binding SelectedTour.TenGoi,UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedValuePath="TenGoi"
+                                    
                                                 Style="{StaticResource CbblIfo1}"
                                                 materialDesign:HintAssist.HintOpacity=".26"/>
                             </Grid>

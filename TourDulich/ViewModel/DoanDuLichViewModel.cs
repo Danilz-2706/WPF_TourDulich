@@ -53,6 +53,9 @@ namespace TourDulich.ViewModel
         public NoiDungTour SelectedNoiDungTour { get; set; }
         #endregion
 
+        public string HanhTrinh { get; set; }
+        public string KhachSan { get; set; }
+        public string DiaDiemThamQuan { get; set; }
 
         #region Lấy giá trị     NHÂN VIÊN     được chọn tham chiếu qua các ô cần dùng
         public int MaNhanVien { get; set; }
@@ -132,8 +135,8 @@ namespace TourDulich.ViewModel
         public ICommand AddCP { get; set; }
         #endregion
 
-        public PhanBoNhanVienDoan SelectedChooseNV { get; set; }
-        public ChiTietDoan SelectedChooseKH { get; set; }
+        public NhanVien SelectedChooseNV { get; set; }
+        public Khach SelectedChooseKH { get; set; }
         public Domain.Entities.ChiPhi SelectedChooseCP { get; set; }
         public ObservableCollection<NhanVien> SelectedPhanBoNhanVienDoan { get; set; }
         public ObservableCollection<Khach> SelectedPhanBoKhach { get; set; }
@@ -176,6 +179,8 @@ namespace TourDulich.ViewModel
         public string AddDiemThamQuan { get; set; }
         public ICommand Reset { get; set; }
         public ICommand Save { get; set; }
+        private GiaTour _SelectedChoosedGia;
+        public GiaTour SelectedChoosedGia { get => _SelectedChoosedGia; set => _SelectedChoosedGia = value; }
         #endregion
 
 
@@ -188,6 +193,8 @@ namespace TourDulich.ViewModel
         public ObservableCollection<LoaiChiPhi> ListLoaiChiPhi { get; set; }
         public ObservableCollection<Khach> ListKhach { get; set; }
         public ObservableCollection<ChiTietDoan> ListChiTietDoan { get; set; }
+        private ObservableCollection<GiaTour> _ListGiaTour;
+        public ObservableCollection<GiaTour> ListGiaTour { get => _ListGiaTour; set { _ListGiaTour = value; } }
         #endregion
 
         #region Các biến dùng để mở và đóng các view con
@@ -248,17 +255,17 @@ namespace TourDulich.ViewModel
             // Hiện chi tiết - Thêm nhân viên //
             DoanThemNV = new RelayCommand<object>(p => { return true; }, p => { ShowThemNV(p); });
             DoanThemNhanVien();
-            Close_DoanThemNV = new RelayCommand<object>(p => { return true; }, p => { CloseThemNV(p); Show(); });
+            Close_DoanThemNV = new RelayCommand<object>(p => { return true; }, p => { CloseThemNV(p);  });
             
             // Hiện chi tiết - Thêm khách hàng //
             DoanThemKH = new RelayCommand<object>(p => { return true; }, p => { ShowThemKH(p); });
             DoanThemKhachHang();
-            Close_DoanThemKH = new RelayCommand<object>(p => { return true; }, p => { CloseThemKH(p); Show(); });
+            Close_DoanThemKH = new RelayCommand<object>(p => { return true; }, p => { CloseThemKH(p);});
 
             // Hiện chi tiết - Thêm chi phí //
             DoanThemCP = new RelayCommand<object>(p => { return true; }, p => { ShowThemCP(p); });
             DoanThemChiPhi();
-            Close_DoanThemCP = new RelayCommand<object>(p => { return true; }, p => { CloseThemCP(p); Show(); });
+            Close_DoanThemCP = new RelayCommand<object>(p => { return true; }, p => { CloseThemCP(p);});
 
             #endregion
         }
@@ -271,40 +278,38 @@ namespace TourDulich.ViewModel
         {
             DoanDuLich_Them x = new DoanDuLich_Them();
             x.DataContext = this;
+            ListTour = new ObservableCollection<TourDuLich>(tourDuLichService.GetDTOs());
             x.ShowDialog();
         }
         private void AddNew()
         {
-            //ViewChild
             //Reset
-            Reset = new RelayCommand<DoanDuLich_Them>(p => { return true; }, p => { AddTenDoan = null; AddSelectedTour = null; AddNgayKhoiHanh = null; AddNgayKetThuc = null; AddKhachSan = null; AddHanhTrinh = null; AddDiemThamQuan = null; });
+            Reset = new RelayCommand<DoanDuLich_Them>(p => { return true; }, p => { AddTenDoan = null; AddSelectedTour = null; AddNgayKhoiHanh = null; AddNgayKetThuc = null; AddKhachSan = null; AddHanhTrinh = null; AddDiemThamQuan = null; SelectedChoosedGia = null; });
 
             //Save
             Save = new RelayCommand<DoanDuLich_Them>(p =>
             {
-                return !string.IsNullOrEmpty(AddTenDoan) && AddSelectedTour != null && AddNgayKhoiHanh != null && AddNgayKetThuc != null && !string.IsNullOrEmpty(AddKhachSan) && !string.IsNullOrEmpty(AddHanhTrinh) && !string.IsNullOrEmpty(AddDiemThamQuan);
+                return !string.IsNullOrEmpty(AddTenDoan) && AddSelectedTour != null && AddNgayKhoiHanh != null && AddNgayKetThuc != null && SelectedChoosedGia != null && AddNgayKhoiHanh >= SelectedChoosedGia.ThoiGianBatDau && AddNgayKetThuc <= SelectedChoosedGia.ThoiGianKetThuc && AddNgayKetThuc >= AddNgayKhoiHanh;
             }, p =>
             {
-                //try
-                //{
+                try
+                {
                     var ddl = new DoanDuLich() { TenDoan = AddTenDoan, MaTour = AddSelectedTour.MaTour, NgayKhoiHanh = (DateTime)AddNgayKhoiHanh, NgayKetThuc = (DateTime)AddNgayKetThuc };
                     if (doanDuLichService.Create(ddl))
                     {
                         var ndt = new NoiDungTour() { KhachSan = AddKhachSan, HanhTrinh = AddHanhTrinh, DiaDiemThamQuan = AddDiemThamQuan, MaDoan = this.doanDuLichService.Get(ddl.MaDoan).MaDoan };
                         if (noiDungTourService.Create(ndt))
                         {
-                        //ddl.NoiDungTour = ndt;
-                            //ListGroup.Add(this.doanDuLichService.Get(ddl.MaDoan));
                             CloseThem(p);
                             MessageBox.Show($"Bạn đã thêm đoàn du lịch mới: Tên đoàn {ddl.TenDoan} - Ngày khởi hành: {ddl.NgayKhoiHanh} - Ngày kết thúc: {ddl.NgayKetThuc}");
                         }
                     }
-                //}
-                //catch
-                //{
-                //    MessageBox.Show("Lỗi ở thêm Đoàn Du Lịch");
-                //}
-                
+                }
+                catch
+                {
+                    MessageBox.Show("Lỗi ở thêm Đoàn Du Lịch");
+                }
+
             });
         }
         private void CloseThem(object obj) 
@@ -329,42 +334,78 @@ namespace TourDulich.ViewModel
         {
             DoanDuLich_ChiTiet x = new DoanDuLich_ChiTiet();
             x.DataContext = this;
+            ListTour = new ObservableCollection<TourDuLich>(tourDuLichService.GetDTOs());
             SelectedTour = tourDuLichService.Get(SelectedItem.MaTour);
             SelectedPhanBoKhach = new ObservableCollection<Khach>(doanDuLichService.GetKhachsByDoan(SelectedItem.MaDoan).ToList());
             SelectedChiPhi = new ObservableCollection<Domain.Entities.ChiPhi>(doanDuLichService.GetCPsByDoan(SelectedItem.MaDoan).ToList());
+            if(SelectedNoiDungTour != null)
+            {
+                HanhTrinh = SelectedNoiDungTour.HanhTrinh;
+                KhachSan = SelectedNoiDungTour.KhachSan;
+                DiaDiemThamQuan = SelectedNoiDungTour.DiaDiemThamQuan;
+            }
             x.ShowDialog();
         }
 
+        // từ từ check tiếp
         private void Undo_Agree()
         {
             Undo = new RelayCommand<DoanDuLich_ChiTiet>(p =>
             {
-                return false;
+                return SelectedItem != null && (SelectedItem.TenDoan != TenDoan || SelectedNoiDungTour.HanhTrinh != HanhTrinh || SelectedNoiDungTour.KhachSan != KhachSan || SelectedNoiDungTour.DiaDiemThamQuan != DiaDiemThamQuan || SelectedItem.TenTour != SelectedTour.TenGoi);
             }, p =>
             {
-
+                TenDoan = SelectedItem.TenDoan;
+                HanhTrinh = SelectedNoiDungTour.HanhTrinh;
+                KhachSan = SelectedNoiDungTour.KhachSan;
+                DiaDiemThamQuan = SelectedNoiDungTour.DiaDiemThamQuan;
+                SelectedTour = SelectedItem.Tour;
             });
 
             Agree = new RelayCommand<DoanDuLich_ChiTiet>(p =>
             {
-                return false;
+                return SelectedItem != null && (SelectedItem.TenDoan != TenDoan || SelectedNoiDungTour.HanhTrinh != HanhTrinh || SelectedNoiDungTour.KhachSan != KhachSan || SelectedNoiDungTour.DiaDiemThamQuan != DiaDiemThamQuan || SelectedItem.TenTour != SelectedTour.TenGoi);
             }, p =>
             {
+                try
+                {
+                    if (SelectedItem.TenDoan != TenDoan)
+                    {
+                        var ddl = new DoanDuLich() { MaDoan = SelectedItem.MaDoan, TenDoan = TenDoan, MaTour = SelectedItem.MaTour };
+                        doanDuLichService.Update(ddl);
+                    }
+                    if (SelectedNoiDungTour.HanhTrinh != HanhTrinh || SelectedNoiDungTour.KhachSan != KhachSan || SelectedNoiDungTour.DiaDiemThamQuan != DiaDiemThamQuan)
+                    {
+                        var ndt = new NoiDungTour() { HanhTrinh = HanhTrinh, KhachSan = KhachSan, DiaDiemThamQuan = DiaDiemThamQuan, MaDoan = SelectedItem.MaDoan };
+                        if (noiDungTourService.Update(ndt))
+                        {
+                            SelectedNoiDungTour.HanhTrinh = HanhTrinh;
+                            SelectedNoiDungTour.KhachSan = KhachSan;
+                            SelectedNoiDungTour.DiaDiemThamQuan = DiaDiemThamQuan;
+                        }
+                    }
+                    MessageBox.Show("Lưu thành công!");
+                }
+                catch
+                {
+                    MessageBox.Show("Lỗi ở hàm Undo_Agree!");
+
+                }
 
             });
         }
-
-        private void CloseChiTiet(object obj) 
+        private void CloseChiTiet(object obj)
         { 
             DoanDuLich_ChiTiet x = obj as DoanDuLich_ChiTiet;
             x.Close();
+            ListGroup = new ObservableCollection<DoanDuLich>(doanDuLichService.GetDTOs());
         }
         #endregion
 
         #region Thêm nhân viên vô đoàn
         private void ShowThemNV(object p) 
         {
-            CloseChiTiet(p);
+            //CloseChiTiet(p);
             DoanDuLich_ThemNhanVien x = new DoanDuLich_ThemNhanVien();
             x.DataContext = this;
             ListNhanvien = new ObservableCollection<NhanVien>(nhanVienService.GetDTOs());
@@ -397,7 +438,7 @@ namespace TourDulich.ViewModel
                         pbnv.NhanVien = SelectedItemNhanVien;
                         CloseThemNV(p);
                         MessageBox.Show($"Bạn đã thêm nhân viên: Tên nhân viên: {TenNhanVien} - Nhiệm vụ: {pbnv.NhiemVu} ");
-                        Show();
+                        //Show();
                     }
                 }
                 catch
@@ -478,7 +519,7 @@ namespace TourDulich.ViewModel
         #region Thêm khách hàng vô đoàn
         private void ShowThemKH(object p) 
         {
-            CloseChiTiet(p);
+            //CloseChiTiet(p);
             DoanDuLich_ThemKhachHang x = new DoanDuLich_ThemKhachHang();
             x.DataContext = this;
             ListKhach = new ObservableCollection<Khach>(khachService.GetDTOs());
@@ -512,7 +553,7 @@ namespace TourDulich.ViewModel
                         doanDuLichService.UpdateDoanhThu(SelectedItem.MaDoan);
                         CloseThemKH(p);
                         MessageBox.Show($"Bạn đã thêm khách hàng: Tên khách hàng {HoTen}");
-                        Show();
+                        //Show();
                     }
                 }
                 catch
@@ -592,7 +633,6 @@ namespace TourDulich.ViewModel
         #region Thêm chi phí vô đoàn
         private void ShowThemCP(object p) 
         {
-            CloseChiTiet(p);
             DoanDuLich_ThemChiPhi x = new DoanDuLich_ThemChiPhi(); 
             x.DataContext = this;
             ListLoaiChiPhi = new ObservableCollection<LoaiChiPhi>(loaiChiPhiService.GetDTOs());
@@ -614,7 +654,6 @@ namespace TourDulich.ViewModel
                         doanDuLichService.UpdateDoanhThu(SelectedItem.MaDoan);
                         CloseThemCP(p);
                         MessageBox.Show($"Bạn đã thêm chi phí: Tên chi phí {cp.LoaiChiPhi.TenLoaiChiPhi} - Số tiền: {SoTien}");
-                        Show();
                     }
                 }
                 catch
@@ -643,7 +682,6 @@ namespace TourDulich.ViewModel
                     MessageBox.Show("Lỗi ở thêm CHI PHÍ - Đoàn Du Lịch");
                 }
             });
-
         }
         private void DoanXoaChiPhi() 
         {

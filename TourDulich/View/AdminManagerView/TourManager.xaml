@@ -39,6 +39,15 @@
             <Setter Property="Margin" Value="0 0 10 0"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
+        <Style x:Key="CbblIfo1" TargetType="ComboBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="Background" Value="#fff"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
         <Style x:Key="tbName" TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Width" Value="111"/>
@@ -132,26 +141,12 @@
                                     <GridViewColumn Header="Mã Tour" DisplayMemberBinding="{Binding MaTour}"></GridViewColumn>
                                     <GridViewColumn Header="Tên Gọi" DisplayMemberBinding="{Binding TenGoi}"></GridViewColumn>
                                     <GridViewColumn Header="Đặc Điểm" DisplayMemberBinding="{Binding DacDiem}"></GridViewColumn>
-                                  
-                                    <GridViewColumn Header=" Mã Loại Hình" DisplayMemberBinding="{Binding MaLoaiHinh}"></GridViewColumn>
+
+                                    <GridViewColumn Header="Tên loại hình" DisplayMemberBinding="{Binding LoaiHinh.TenLoaiHinh}"></GridViewColumn>
                                 </GridView.Columns>
                             </GridView>
                         </ListView.View>
                     </ListView>
-
-                    <!--<ItemsControl Width="auto" Height="auto" ItemsSource="{Binding ListGroup}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <RadioButton Content="{Binding name}"
-                                             Style="{StaticResource GridButtonStyle}"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel></WrapPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>-->
                 </Grid>
 
 
@@ -189,7 +184,7 @@
 
                                     <TextBox
                                              
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                             IsEnabled="False"
                                               Style="{StaticResource tblIfo1}"
                                              Text="{Binding TenGoi,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
@@ -198,22 +193,26 @@
                                 <Grid Margin="0 5 0 8">
                                     <TextBlock  Text="Đặc Điểm"  Style="{StaticResource tbName}"/>
                                     <TextBox
-                                             
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                              Style="{StaticResource tblIfo1}"
+                                                
+                                             IsEnabled="False"
+                                                Style="{StaticResource tblIfo1}"
                                              Text="{Binding DacDiem,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
 
                                 <!--//Mã Loại Hình //-->
-
-                                <StackPanel Margin="0 5 0 8">
-                                    <TextBlock  Text="Mã Loại Hình : "  Style="{StaticResource tbName}"/>
-                                    <TextBox Text="{Binding MaLoaiHinh,UpdateSourceTrigger=PropertyChanged}"
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                              Style="{StaticResource tblIfo1}"></TextBox>
-
-
-                                </StackPanel>
+                                <Grid Margin="0 8 0 8">
+                                    <TextBlock  Text="Tên Loại Hình:"  Style="{StaticResource tbName}"/>
+                                    <ComboBox
+                                            ItemsSource="{Binding ListLHDL}"
+                                            DisplayMemberPath="TenLoaiHinh"
+                                            SelectedItem="{Binding SelectedLHDL ,UpdateSourceTrigger=PropertyChanged}"
+                                            SelectedValue="{Binding SelectedLHDL.TenLoaiHinh ,UpdateSourceTrigger=PropertyChanged}"
+                                            SelectedValuePath="TenLoaiHinh"
+                                            IsEditable="False"
+                                            Style="{StaticResource CbblIfo1}"
+                                            materialDesign:HintAssist.HintOpacity=".26">
+                                    </ComboBox>
+                                </Grid>
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>
@@ -250,7 +249,7 @@
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Margin="5 0 5 0"
-                                IsChecked="False"
+                                IsEnabled="False"
                                 Command="{Binding EditTour}"
                                 ToolTip="Sửa">
                                 <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
@@ -264,7 +263,7 @@
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Command="{Binding DeleteTour}"
+                                Command="{Binding DeleteTour}" IsEnabled="False"
                                 Margin="5 0 5 0"
                                 ToolTip="Xóa">
                                 <TextBlock Text="Xóa" Style="{StaticResource fontText}"/>
@@ -276,7 +275,7 @@
                                 Background="#C4C4C4"
                                 Foreground="#000"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
-                                Command="{Binding }"
+                                Command="{Binding ChiTietTour}"
                                 Margin="5 0 10 0"
                                 ToolTip="Chi tiết đoàn">
                                 <TextBlock Text="Chi Tiết Tour" Style="{StaticResource fontText}"/>

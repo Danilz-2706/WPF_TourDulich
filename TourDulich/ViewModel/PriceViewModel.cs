@@ -19,7 +19,7 @@ namespace TourDulich.ViewModel
 
         public int MaGia { get; set; }
         public int MaTour { get; set; }
-        public string TenTour { get; set; }
+        //public string TenTour { get; set; }
         public long ThanhTien { get; set; }
         public DateTime? ThoiGianBatDau { get; set; }
         public DateTime? ThoiGianKetThuc { get; set; }
@@ -48,6 +48,7 @@ namespace TourDulich.ViewModel
                     ThanhTien = SelectedItem.ThanhTien;
                     ThoiGianBatDau = SelectedItem.ThoiGianBatDau;
                     ThoiGianKetThuc = SelectedItem.ThoiGianKetThuc;
+                    //TenTour = SelectedItem.TourDuLich.TenGoi;
 
                     SelectedTour = SelectedItem.TourDuLich;
                 }
@@ -119,9 +120,8 @@ namespace TourDulich.ViewModel
                 {
                     var dd = new GiaTour() { MaTour= AddSelectedTour.MaTour, ThoiGianBatDau= (DateTime)AddThoiGianBatDau, ThoiGianKetThuc = (DateTime)AddThoiGianKetThuc, ThanhTien = AddThanhTien };
                     giaTourService.Create(dd);
-                    List.Add(dd);
                     CloseThem(p);
-                    MessageBox.Show($"Bạn đã thêm giá tour: Tour: {dd.TourDuLich.TenGoi} - Thời gian bắt đầu: {dd.ThoiGianBatDau} - Thời gian kết thúc: {dd.ThoiGianKetThuc} - Giá tiền: {dd.ThanhTien}");
+                    MessageBox.Show($"Bạn đã thêm giá tour: Tour: {dd.MaTour} - Thời gian bắt đầu: {dd.ThoiGianBatDau} - Thời gian kết thúc: {dd.ThoiGianKetThuc} - Giá tiền: {dd.ThanhTien}");
 
                 }
                 catch (Exception e)
@@ -209,13 +209,20 @@ namespace TourDulich.ViewModel
         {
             Gia_Them x = new Gia_Them();
             x.DataContext = this;
-            x.ShowDialog();
+            ListTour = new ObservableCollection<TourDuLich>(tourDuLichService.GetDTOs());
             MaGia = 0;
             ThoiGianBatDau = null;
             ThoiGianKetThuc = null;
             ThanhTien = 0;
             SelectedTour = null;
+            x.ShowDialog();
+
         }
-        private void CloseThem(object obj) { Gia_Them x = obj as Gia_Them; x.Close(); }
+        private void CloseThem(object obj) 
+        { 
+            Gia_Them x = obj as Gia_Them; 
+            List = new ObservableCollection<GiaTour>(giaTourService.GetDTOs());
+            x.Close();
+        }
     }
 }

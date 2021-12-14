@@ -48,11 +48,12 @@
             <Setter Property="FontSize" Value="12"/>
         </Style>
         <Style x:Key="tbName" TargetType="TextBlock">
+            <Setter Property="Width" Value="160"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Width" Value="120"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Margin" Value="10 0 0 0"/>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
         <!--//End//-->
     </Window.Resources>
@@ -164,7 +165,25 @@
                                 materialDesign:HintAssist.HintOpacity=".26">
                         </ComboBox>
                     </Grid>
+                    <ListView ItemsSource="{Binding AddSelectedTour.GiaTours}" SelectedItem="{Binding SelectedChoosedGia,UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="True">
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="GridViewColumnHeader">
+                                        <Setter Property="Height" Value="30"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
+                                <GridView.Columns>
+                                    <GridViewColumn Width="138" Header="Thời gian bắt đầu" DisplayMemberBinding="{Binding ThoiGianBatDau, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Width="138" Header="Thời gian kết thúc" DisplayMemberBinding="{Binding ThoiGianKetThuc, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                                    <GridViewColumn Width="135" Header="Thành tiền" DisplayMemberBinding="{Binding ThanhTien}"></GridViewColumn>
 
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                     <!--//NGÀY ĐI - NGÀY VỀ//-->
                     <Grid Margin="0 8 0 8">
                         <Grid.ColumnDefinitions>

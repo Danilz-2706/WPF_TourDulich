@@ -267,7 +267,7 @@
                                                 IsEnabled="False"
                                                 AcceptsReturn="True"
                                                 Margin="10 5 10 0"
-                                                Text="{Binding SelectedNoiDungTour.HanhTrinh,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                Text="{Binding SelectedNoiDungTour.HanhTrinh,UpdateSourceTrigger=PropertyChanged}"
                                                 FontSize="14"
                                                 materialDesign:HintAssist.Hint="Hành trình đang trống"
                                                 >
