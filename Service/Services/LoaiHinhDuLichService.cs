@@ -35,9 +35,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int maLH)
+        public bool Delete(params object[] keyValues)
         {
-            var lh = loaiHinhDuLichRepository.GetBy(maLH);
+            var lh = loaiHinhDuLichRepository.GetBy(keyValues);
             loaiHinhDuLichRepository.Delete(lh);
             return true;
         }

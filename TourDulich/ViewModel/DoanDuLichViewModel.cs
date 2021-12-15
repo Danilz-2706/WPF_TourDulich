@@ -487,20 +487,18 @@ namespace TourDulich.ViewModel
                 return SelectedChooseNV != null;
             }, p =>
             {
-                MessageBox.Show("làm thêm chức năng xóa");
-                //try
-                //{
-                //    var ctd = new PhanBoNhanVienDoan() { MaDoan = doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaNhanVien = SelectedChooseNV.MaNhanVien, NhiemVu = SelectedChooseNV.NhiemVu };
-
-                //    //if (.Delete(...))
-                //    //{
-
-                //    //}
-                //}
-                //catch
-                //{
-
-                //}
+                try
+                {
+                    if(phanBoNhanVienDoanService.Delete(SelectedItem.MaDoan, SelectedChooseNV.MaNhanVien))
+                    {
+                        MessageBox.Show($"Bạn đã xoá nhân viên: Tên nhân viên {SelectedChooseNV.TenNhanVien}");
+                        SelectedPhanBoNhanVienDoan = new ObservableCollection<NhanVien>(doanDuLichService.GetNVsByDoan(SelectedItem.MaDoan).ToList());
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Lỗi ở xoá NHÂN VIÊN - Đoàn Du Lịch");
+                }
             });
         }
         private void CloseThemNV(object obj) 
@@ -601,21 +599,20 @@ namespace TourDulich.ViewModel
                 return SelectedChooseKH != null;
             }, p =>
             {
-                MessageBox.Show("làm thêm chức năng xóa");
-
-                //try
-                //{
-                //    var ctd = new ChiTietDoan() { MaDoan = doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaKhachHang = SelectedChooseKH.MaKhachHang, VaiTro = SelectedChooseKH.VaiTro };
-
-                //    if (chiTietDoanService.Delete(...))
-                //    {
-                        
-                //    }
-                //}
-                //catch
-                //{
-
-                //}
+                try
+                {
+                    var ctd = new ChiTietDoan() { MaDoan = doanDuLichService.Get(SelectedItem.MaDoan).MaDoan, MaKhachHang = SelectedChooseKH.MaKhachHang, VaiTro = SelectedChooseKH.VaiTro };
+                    if(chiTietDoanService.Delete(SelectedItem.MaDoan, SelectedChooseKH.MaKhachHang))
+                    {
+                        doanDuLichService.UpdateDoanhThu(SelectedItem.MaDoan);
+                        MessageBox.Show($"Bạn đã xoá khách hàng: Tên khách hàng {SelectedChooseKH.HoTen}");
+                        SelectedPhanBoKhach = new ObservableCollection<Khach>(doanDuLichService.GetKhachsByDoan(SelectedItem.MaDoan).ToList());
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Lỗi ở xoá KHÁCH HÀNG - Đoàn Du Lịch");
+                }
             });
         }
         private void CloseThemKH(object obj)

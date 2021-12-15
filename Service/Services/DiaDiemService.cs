@@ -35,9 +35,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int maDD)
+        public bool Delete(params object[] keyValues)
         {
-            var dd = diaDiemRepository.GetBy(maDD);
+            var dd = diaDiemRepository.GetBy(keyValues);
             diaDiemRepository.Delete(dd);
             return true;
         }

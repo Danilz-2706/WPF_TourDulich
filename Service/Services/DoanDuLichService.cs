@@ -37,9 +37,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int maDoan)
+        public bool Delete(params object[] keyValues)
         {
-            var doan = doanDuLichRepository.GetBy(maDoan);
+            var doan = doanDuLichRepository.GetBy(keyValues);
             doanDuLichRepository.Delete(doan);
             return true;
         }

@@ -35,9 +35,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int maNV)
+        public bool Delete(params object[] keyValues)
         {
-            var nv = nhanVienRepository.GetBy(maNV);
+            var nv = nhanVienRepository.GetBy(keyValues);
             nhanVienRepository.Delete(nv);
             return true;
         }

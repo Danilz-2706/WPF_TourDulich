@@ -34,9 +34,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int maCP)
+        public bool Delete(params object[] keyValues)
         {
-            var chiPhi = chiPhiRepository.GetBy(maCP);
+            var chiPhi = chiPhiRepository.GetBy(keyValues);
             chiPhiRepository.Delete(chiPhi);
             return true;
         }

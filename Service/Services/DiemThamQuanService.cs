@@ -33,9 +33,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int id)
+        public bool Delete(params object[] keyValues)
         {
-            var dtq = diemThamQuanRepository.GetBy(id);
+            var dtq = diemThamQuanRepository.GetBy(keyValues);
             diemThamQuanRepository.Delete(dtq);
             return true;
         }

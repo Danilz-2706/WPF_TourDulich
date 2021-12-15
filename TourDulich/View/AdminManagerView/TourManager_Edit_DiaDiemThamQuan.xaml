@@ -168,7 +168,7 @@
                             </GridView.ColumnHeaderContainerStyle>
                             <GridView.Columns>
                                 <GridViewColumn Width="100" Header="Thứ tự" DisplayMemberBinding="{Binding ThuTu}"></GridViewColumn>
-                                <GridViewColumn Width="150" Header="Tên địa điểm" DisplayMemberBinding="{Binding DiaDiem.TenDiaDiem}"></GridViewColumn>
+                                <GridViewColumn Width="150" Header="Tên địa điểm" DisplayMemberBinding="{Binding TenDiaDiem}"></GridViewColumn>
 
                             </GridView.Columns>
                         </GridView>

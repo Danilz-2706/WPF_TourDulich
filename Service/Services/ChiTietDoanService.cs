@@ -33,9 +33,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int id)
+        public bool Delete(params object[] keyValues)
         {
-            var ctd = chiTietDoanRepository.GetBy(id);
+            var ctd = chiTietDoanRepository.GetBy(keyValues);
             chiTietDoanRepository.Delete(ctd);
             return true;
         }

@@ -9,5 +9,6 @@ namespace Service.Interfaces
 {
     public interface ITourDuLichService : IService<TourDuLich>
     {
+        IEnumerable<DiaDiem> GetDiaDiemsByTour(int id);
     }
 }

@@ -36,9 +36,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int id)
+        public bool Delete(params object[] keyValues)
         {
-            var kh = khachRepository.GetBy(id);
+            var kh = khachRepository.GetBy(keyValues);
             khachRepository.Delete(kh);
             return true;
         }

@@ -34,9 +34,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int id)
+        public bool Delete(params object[] keyValues)
         {
-            var gia = giaTourRepository.GetBy(id);
+            var gia = giaTourRepository.GetBy(keyValues);
             giaTourRepository.Delete(gia);
             return true;
         }

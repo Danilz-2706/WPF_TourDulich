@@ -30,15 +30,7 @@ namespace TourDulich.ViewModel
         public string DacDiem { get; set; }
         public int MaLoaiHinh { get; set; }
         public string TenLoaiHinh { get; set; }
-        private LoaiHinhDuLich _SelectedLHDL;
-        public LoaiHinhDuLich SelectedLHDL
-        {
-            get => _SelectedLHDL;
-            set
-            {
-                _SelectedLHDL = value;
-            }
-        }
+        public LoaiHinhDuLich SelectedLHDL { get; set; }
 
         private TourDuLich _SelectedItem;
         public TourDuLich SelectedItem
@@ -63,20 +55,13 @@ namespace TourDulich.ViewModel
 
 
 
-        private ObservableCollection<TourDuLich> _List;
-        public ObservableCollection<TourDuLich> ListTour { get => _List; set { _List = value; } }
-        private ObservableCollection<LoaiHinhDuLich> _ListLHDL;
-        public ObservableCollection<LoaiHinhDuLich> ListLHDL { get => _ListLHDL; set { _ListLHDL = value; } }
-        private ObservableCollection<GiaTour> _ListGiaTour;
-        public ObservableCollection<GiaTour>  ListGiaTour { get => _ListGiaTour; set { _ListGiaTour = value; } }
-        private ObservableCollection<GiaTour> _ListGias;
-        public ObservableCollection<GiaTour> ListGias { get => _ListGias; set { _ListGias = value; } }
-        private ObservableCollection<DiemThamQuan> _ListDiaDiemThamQuan;
-        public ObservableCollection<DiemThamQuan> ListDiaDiemThamQuan { get => _ListDiaDiemThamQuan; set { _ListDiaDiemThamQuan = value; } }
-        private ObservableCollection<DiemThamQuan> _ListDiaDiemThamQuans_Temp;
-        public ObservableCollection<DiemThamQuan> ListDiaDiemThamQuans_Temp { get => _ListDiaDiemThamQuans_Temp; set { _ListDiaDiemThamQuans_Temp = value; } }
-        private ObservableCollection<DiaDiem> _ListDiaDiem;
-        public ObservableCollection<DiaDiem> ListDiaDiem { get => _ListDiaDiem; set { _ListDiaDiem = value; } }
+        public ObservableCollection<TourDuLich> ListTour { get; set; }
+        public ObservableCollection<LoaiHinhDuLich> ListLHDL { get; set; }
+        public ObservableCollection<GiaTour>  ListGiaTour { get; set; }
+        public ObservableCollection<GiaTour> ListGias { get; set; }
+        public ObservableCollection<DiaDiem> ListDiaDiemThamQuan { get; set; }
+        public ObservableCollection<DiaDiem> ListDiaDiemThamQuans_Temp { get; set; }
+        public ObservableCollection<DiaDiem> ListDiaDiem { get; set; }
 
 
 
@@ -87,16 +72,7 @@ namespace TourDulich.ViewModel
         public ICommand SaveNew { get; set; }
         public string AddTenTour { get; set; }
         public string AddDacDiem { get; set; }
-
-        private LoaiHinhDuLich _AddSelectedLHDL;
-        public LoaiHinhDuLich AddSelectedLHDL
-        {
-            get => _AddSelectedLHDL;
-            set
-            {
-                _AddSelectedLHDL = value;
-            }
-        }
+        public LoaiHinhDuLich AddSelectedLHDL{ get; set; }
         #endregion
 
         #region Chức năng chi tiết Tour
@@ -107,36 +83,16 @@ namespace TourDulich.ViewModel
         public ICommand TourXoaGia { get; set; }
         public ICommand EditDiaDiem { get; set; }
         public ICommand CloseEditDiaDiem { get; set; }
-        private GiaTour _SelectedChooseGia;
-        public GiaTour SelectedChooseGia { get => _SelectedChooseGia; set => _SelectedChooseGia = value; }
+        public GiaTour SelectedChooseGia { get; set; }
         public ICommand Undo { get; set; }
         public ICommand Agree { get; set; }
-        private LoaiHinhDuLich _SelectedLHDLCT;
-        public LoaiHinhDuLich SelectedLHDLCT
-        {
-            get => _SelectedLHDLCT;
-            set
-            {
-                _SelectedLHDLCT = value;
-            }
-        }
+        public LoaiHinhDuLich SelectedLHDLCT { get; set; }
 
         #region Chức năng thêm giá
-        private TourDuLich _AddSelectedTour;
-        public TourDuLich AddSelectedTour
-        {
-            get => _AddSelectedTour;
-            set
-            {
-                _AddSelectedTour = value;
-            }
-        }
-        private long _AddThanhTien;
-        public long AddThanhTien { get => _AddThanhTien; set { _AddThanhTien = value; } }
-        private DateTime? _AddThoiGianBatDau;
-        public DateTime? AddThoiGianBatDau { get => _AddThoiGianBatDau; set { _AddThoiGianBatDau = value; } }
-        private DateTime? _AddThoiGianKetThuc;
-        public DateTime? AddThoiGianKetThuc { get => _AddThoiGianKetThuc; set { _AddThoiGianKetThuc = value; } }
+        public TourDuLich AddSelectedTour { get; set; }
+        public long AddThanhTien { get; set; }
+        public DateTime? AddThoiGianBatDau { get; set; }
+        public DateTime? AddThoiGianKetThuc { get; set; }
         public ICommand Save { get; set; }
         public ICommand Reset { get; set; }
         #endregion
@@ -146,25 +102,8 @@ namespace TourDulich.ViewModel
         public ICommand RemoveLocation { get; set; }
         public ICommand ResetLocations { get; set; }
         public ICommand SaveLocations { get; set; }
-
-        private DiaDiem _SelectedChoosedDiaDiem;
-        public DiaDiem SelectedChoosedDiaDiem
-        {
-            get => _SelectedChoosedDiaDiem;
-            set
-            {
-                _SelectedChoosedDiaDiem = value;
-            }
-        }
-        private DiemThamQuan _SelectedChoosedDiaDiemThamQuans;
-        public DiemThamQuan SelectedChoosedDiaDiemThamQuans
-        {
-            get => _SelectedChoosedDiaDiemThamQuans;
-            set
-            {
-                _SelectedChoosedDiaDiemThamQuans = value;
-            }
-        }
+        public DiaDiem SelectedChoosedDiaDiem { get; set; }
+        public DiemThamQuan SelectedChoosedDiaDiemThamQuans { get; set; }
         #endregion
         #endregion
         public TourViewModel() { }
@@ -253,7 +192,7 @@ namespace TourDulich.ViewModel
             TourManager_ChiTiet x = new TourManager_ChiTiet();
             x.DataContext = this;
             ListGiaTour = new ObservableCollection<GiaTour>(giaTourService.GetDTOsByMaTour(SelectedItem.MaTour).ToList());
-            //ListDiaDiemThamQuan = new ObservableCollection<DiemThamQuan>(...);
+            ListDiaDiemThamQuan = new ObservableCollection<DiaDiem>(tourDuLichService.GetDiaDiemsByTour(SelectedItem.MaTour));
             SelectedLHDLCT = SelectedItem.LoaiHinh;
             x.ShowDialog();
             
@@ -377,12 +316,12 @@ namespace TourDulich.ViewModel
                 return false;
             }, p => 
             {
-                //if (ListDiaDiemThamQuans_Temp.Count() > 0) SelectedChoosedDiaDiemThamQuans = null;
+                if (ListDiaDiemThamQuans_Temp.Count() > 0) SelectedChoosedDiaDiemThamQuans = null;
                 
                 //Khởi tạo đối tượng mới không được
 
-                //var ddtq = new DiemThamQuan(MaTour = SelectedItem.MaTour, MaDiaDiem = SelectedChoosedDiaDiem.MaDiaDiem, ThuTu = ListDiaDiemThamQuans_Temp.Count()+1);
-                //ListDiaDiemThamQuans_Temp.Add(ddtq);
+                var ddtq = new DiaDiem { MaDiaDiem = SelectedChoosedDiaDiem.MaDiaDiem, TenDiaDiem = SelectedChoosedDiaDiem.TenDiaDiem, ThuTu = ListDiaDiemThamQuans_Temp.Count() + 1 };
+                ListDiaDiemThamQuans_Temp.Add(ddtq);
             });
             RemoveLocation = new RelayCommand<object>(p =>
             {
@@ -393,8 +332,8 @@ namespace TourDulich.ViewModel
                 SelectedChoosedDiaDiem = null;
                 //Khởi tạo đối tượng mới không được
 
-                //var ddtq = new DiemThamQuan(MaTour = SelectedItem.MaTour, MaDiaDiem = SelectedChoosedDiaDiem.MaDiaDiem);
-                //ListDiaDiemThamQuans_Temp.Remove(ddtq);
+                var ddtq = ListDiaDiemThamQuans_Temp.SingleOrDefault(x => x.MaDiaDiem == SelectedChoosedDiaDiem.MaDiaDiem);
+                ListDiaDiemThamQuans_Temp.Remove(ddtq);
 
             });
             //Load danh sách lại như ban đầu
@@ -416,7 +355,10 @@ namespace TourDulich.ViewModel
                 //foreach (var i in ListDiaDiemThamQuan) diemThamQuanService.Delete(i);
                 if (ListDiaDiemThamQuans_Temp.Count() > 0)
                 {
-                    foreach (var i in ListDiaDiemThamQuans_Temp) diemThamQuanService.Create(i);
+                    foreach (var i in ListDiaDiemThamQuans_Temp) {
+
+                        diemThamQuanService.Create(new DiemThamQuan {MaTour = SelectedItem.MaTour,MaDiaDiem = i.MaDiaDiem,ThuTu = i.ThuTu });
+                    }
                 }
                 MessageBox.Show("Danh sách các địa điểm tham quan đã được lưu thành công!");
             });
@@ -424,7 +366,7 @@ namespace TourDulich.ViewModel
         private void CloseDDTQ(object obj) 
         {
             TourManager_Edit_DiaDiemThamQuan x = obj as TourManager_Edit_DiaDiemThamQuan;
-            //ListDiaDiemThamQuan = new ObservableCollection<DiemThamQuan>(...);
+            ListDiaDiemThamQuan = new ObservableCollection<DiaDiem>(tourDuLichService.GetDiaDiemsByTour(SelectedItem.MaTour));
             x.Close();
             SelectedChoosedDiaDiem = null;
             SelectedChoosedDiaDiemThamQuans = null;

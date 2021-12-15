@@ -35,9 +35,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int maLCP)
+        public bool Delete(params object[] keyValues)
         {
-            var lcp = loaiChiPhiRepository.GetBy(maLCP);
+            var lcp = loaiChiPhiRepository.GetBy(keyValues);
             loaiChiPhiRepository.Delete(lcp);
             return true;
         }

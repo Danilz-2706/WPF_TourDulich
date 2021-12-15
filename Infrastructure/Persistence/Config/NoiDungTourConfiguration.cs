@@ -1,4 +1,4 @@
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,7 +10,7 @@ namespace Infrastructure.Persistence
         {
             builder.ToTable("NoiDungTour");
             builder.HasKey(ndt => ndt.MaDoan);
-            //builder.HasOne(pm => pm.PhieuMuon).WithMany(ctpm => ctpm.ChiTietPhieuMuons).HasForeignKey(pm => pm.MaPM);
+            builder.HasData(new NoiDungTour {MaDoan=1,DiaDiemThamQuan="Ai biết",KhachSan="5 sao",HanhTrinh="Siêu cấp" });
         }
     }
 }

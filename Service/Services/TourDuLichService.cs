@@ -34,9 +34,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int id)
+        public bool Delete(params object[] keyValues)
         {
-            var tour = tourDuLichRepository.GetBy(id);
+            var tour = tourDuLichRepository.GetBy(keyValues);
             tourDuLichRepository.Delete(tour);
             return true;
         }
@@ -44,6 +44,11 @@ namespace Service.Services
         public IEnumerable<TourDuLich> GetDTOs()
         {
             return tourDuLichRepository.GetAll();
+        }
+
+        public IEnumerable<DiaDiem> GetDiaDiemsByTour(int id)
+        {
+            return tourDuLichRepository.GetDiaDiemsByTour(id);
         }
     }
 }

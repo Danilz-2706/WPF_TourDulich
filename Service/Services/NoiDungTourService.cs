@@ -35,9 +35,9 @@ namespace Service.Services
             return true;
         }
 
-        public bool Delete(int id)
+        public bool Delete(params object[] keyValues)
         {
-            var ndt = noiDungTourRepository.GetBy(id);
+            var ndt = noiDungTourRepository.GetBy(keyValues);
             noiDungTourRepository.Delete(ndt);
             return true;
         }

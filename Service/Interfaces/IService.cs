@@ -8,6 +8,6 @@ namespace Service.Interfaces
         bool Create(T dto);
         T Get(params object[] keyValues);
         bool Update(T dto);
-        bool Delete(int id);
+        bool Delete(params object[] keyValues);
     }
 }
