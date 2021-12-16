@@ -39,6 +39,8 @@ namespace TourDulich.ViewModel
         public DateTime? NgayKhoiHanh { get; set; }
         public DateTime? NgayKetThuc { get; set; }
         public string TenTour { get; set; }
+        public long ThanhTien { get; set; }
+
         public long DoanhThu { get; set; }
         public TourDuLich _SelectedTour;
         public TourDuLich SelectedTour {
@@ -160,6 +162,7 @@ namespace TourDulich.ViewModel
                     NgayKetThuc = SelectedItem.NgayKetThuc;
                     DoanhThu = SelectedItem.DoanhThu;
                     TenTour = SelectedItem.TenTour;
+                    
                     SelectedPhanBoNhanVienDoan = new ObservableCollection<NhanVien>(doanDuLichService.GetNVsByDoan(SelectedItem.MaDoan).ToList());
 
                     SelectedNoiDungTour = SelectedItem.NoiDungTour;
@@ -323,6 +326,7 @@ namespace TourDulich.ViewModel
             AddKhachSan = null;
             AddHanhTrinh = null;
             AddDiemThamQuan = null;
+            SelectedChoosedGia = null;
             ListGroup = new ObservableCollection<DoanDuLich>(doanDuLichService.GetDTOs());
         }
         #endregion
@@ -336,6 +340,10 @@ namespace TourDulich.ViewModel
             x.DataContext = this;
             ListTour = new ObservableCollection<TourDuLich>(tourDuLichService.GetDTOs());
             SelectedTour = tourDuLichService.Get(SelectedItem.MaTour);
+
+            ThanhTien = giaTourService.GetDTOs().Where(x => (SelectedItem.MaTour == x.MaTour) && SelectedItem.NgayKhoiHanh >= x.ThoiGianBatDau &&
+            SelectedItem.NgayKhoiHanh <= x.ThoiGianKetThuc).Select(x => x.ThanhTien).FirstOrDefault();
+
             SelectedPhanBoKhach = new ObservableCollection<Khach>(doanDuLichService.GetKhachsByDoan(SelectedItem.MaDoan).ToList());
             SelectedChiPhi = new ObservableCollection<Domain.Entities.ChiPhi>(doanDuLichService.GetCPsByDoan(SelectedItem.MaDoan).ToList());
             if(SelectedNoiDungTour != null)
@@ -352,27 +360,31 @@ namespace TourDulich.ViewModel
         {
             Undo = new RelayCommand<DoanDuLich_ChiTiet>(p =>
             {
-                return SelectedItem != null && (SelectedItem.TenDoan != TenDoan || SelectedNoiDungTour.HanhTrinh != HanhTrinh || SelectedNoiDungTour.KhachSan != KhachSan || SelectedNoiDungTour.DiaDiemThamQuan != DiaDiemThamQuan || SelectedItem.TenTour != SelectedTour.TenGoi);
+                return SelectedItem != null && 
+                    (SelectedItem.TenDoan != TenDoan || SelectedNoiDungTour.HanhTrinh != HanhTrinh || SelectedNoiDungTour.KhachSan != KhachSan || SelectedNoiDungTour.DiaDiemThamQuan != DiaDiemThamQuan);
             }, p =>
             {
                 TenDoan = SelectedItem.TenDoan;
                 HanhTrinh = SelectedNoiDungTour.HanhTrinh;
                 KhachSan = SelectedNoiDungTour.KhachSan;
                 DiaDiemThamQuan = SelectedNoiDungTour.DiaDiemThamQuan;
-                SelectedTour = SelectedItem.Tour;
             });
 
             Agree = new RelayCommand<DoanDuLich_ChiTiet>(p =>
             {
-                return SelectedItem != null && (SelectedItem.TenDoan != TenDoan || SelectedNoiDungTour.HanhTrinh != HanhTrinh || SelectedNoiDungTour.KhachSan != KhachSan || SelectedNoiDungTour.DiaDiemThamQuan != DiaDiemThamQuan || SelectedItem.TenTour != SelectedTour.TenGoi);
+                return SelectedItem != null && 
+                (SelectedItem.TenDoan != TenDoan || SelectedNoiDungTour.HanhTrinh != HanhTrinh || SelectedNoiDungTour.KhachSan != KhachSan || SelectedNoiDungTour.DiaDiemThamQuan != DiaDiemThamQuan);
             }, p =>
             {
                 try
                 {
                     if (SelectedItem.TenDoan != TenDoan)
                     {
-                        var ddl = new DoanDuLich() { MaDoan = SelectedItem.MaDoan, TenDoan = TenDoan, MaTour = SelectedItem.MaTour };
-                        doanDuLichService.Update(ddl);
+                        var ddl = new DoanDuLich() { MaDoan = SelectedItem.MaDoan, TenDoan = TenDoan, NgayKhoiHanh = (DateTime)NgayKhoiHanh, NgayKetThuc = (DateTime)NgayKetThuc, MaTour = SelectedItem.MaTour };
+                        if (doanDuLichService.Update(ddl))
+                        {
+                            doanDuLichService.UpdateDoanhThu(SelectedItem.MaDoan);
+                        }
                     }
                     if (SelectedNoiDungTour.HanhTrinh != HanhTrinh || SelectedNoiDungTour.KhachSan != KhachSan || SelectedNoiDungTour.DiaDiemThamQuan != DiaDiemThamQuan)
                     {

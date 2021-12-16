@@ -289,143 +289,15 @@
                                 Margin="5 0 5 0"
                                 ToolTip="Sửa">
                                 <TextBlock x:Name="sua" Text="Sửa" Style="{StaticResource fontText}"/>
-                                <!--<ToggleButton.Triggers>
-                                    
-                                    --><!--// Checked //--><!--
-                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                
-                                                <DoubleAnimation Storyboard.TargetName ="Luu"
-                                                                Storyboard.TargetProperty="Width"
-                                                                BeginTime="0:0:0"
-                                                                From="0" To="65"
-                                                                Duration="0:0:0.2">
-
-                                                </DoubleAnimation>
-
-                                                <DoubleAnimation Storyboard.TargetName ="Khoiphuc"
-                                                                Storyboard.TargetProperty="Width"
-                                                                BeginTime="0:0:0"
-                                                                From="0" To="65"
-                                                                Duration="0:0:0.2">
-                                                </DoubleAnimation>
-                                                <DoubleAnimation Storyboard.TargetName ="edit"
-                                                                Storyboard.TargetProperty="Width"
-                                                                BeginTime="0:0:0"
-                                                                From="65" To="0"
-                                                                Duration="0:0:0.2">
-                                                </DoubleAnimation>
-                                                
-                                                
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                    
-                                </ToggleButton.Triggers>-->
                             </ToggleButton>
-                            <!--//Lưu//--><!--
-                            <ToggleButton 
-                                x:Name="Luu"
-                                Grid.Column="1"
-                                HorizontalAlignment="Right"
-                                Width="0"
-                                BorderBrush="#C4C4C4"
-                                Background="#C4C4C4"
-                                Foreground="#000"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                Margin="2.5 0 5 0"
-                                IsChecked="False"
-                                Command="{Binding EditSaveCommand, UpdateSourceTrigger=PropertyChanged}"
-                                ToolTip="Sửa">
-                                <TextBlock Text="Lưu" Style="{StaticResource fontText}"/>
-                                <ToggleButton.Triggers>
-
-                                    --><!--// Checked //--><!--
-                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName ="Luu"
-                                                                Storyboard.TargetProperty="Width"
-                                                                BeginTime="0:0:0"
-                                                                From="65" To="0"
-                                                                Duration="0:0:0.2">
-
-                                                </DoubleAnimation>
-                                                <DoubleAnimation Storyboard.TargetName ="Khoiphuc"
-                                                                Storyboard.TargetProperty="Width"
-                                                                BeginTime="0:0:0"
-                                                                From="65" To="0"
-                                                                Duration="0:0:0.2">
-
-                                                </DoubleAnimation>
-                                                <DoubleAnimation Storyboard.TargetName ="edit"
-                                                                Storyboard.TargetProperty="Width"
-                                                                BeginTime="0:0:0"
-                                                                From="0" To="65"
-                                                                Duration="0:0:0.2">
-
-                                                </DoubleAnimation>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </ToggleButton.Triggers>
-                            </ToggleButton>
-                            --><!--//Khôi phục//--><!--
-                            <ToggleButton 
-                                x:Name="Khoiphuc"
-                                HorizontalAlignment="Left"
-                                Width="0"
-                                Grid.Column="1"   
-                                BorderBrush="#C4C4C4"
-                                Background="#C4C4C4"
-                                Foreground="#000"
-                                IsEnabled="False"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                Margin="5 0 2.5 0"
-                                Command="{Binding EditResetCommand, UpdateSourceTrigger=PropertyChanged}"
-                                CommandParameter="{Binding ElementName=edit}"
-                                ToolTip="Sửa">
-                                <TextBlock Text="Hủy" Style="{StaticResource fontText}"/>
-                                <ToggleButton.Triggers>
-
-                                    --><!--// Checked //--><!--
-                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName ="Luu"
-                                                                Storyboard.TargetProperty="Width"
-                                                                BeginTime="0:0:0"
-                                                                From="65" To="0"
-                                                                Duration="0:0:0.2">
-
-                                                </DoubleAnimation>
-                                                <DoubleAnimation Storyboard.TargetName ="Khoiphuc"
-                                                                Storyboard.TargetProperty="Width"
-                                                                BeginTime="0:0:0"
-                                                                From="65" To="0"
-                                                                Duration="0:0:0.2">
-
-                                                </DoubleAnimation>
-                                                <DoubleAnimation Storyboard.TargetName ="edit"
-                                                                Storyboard.TargetProperty="Width"
-                                                                BeginTime="0:0:0"
-                                                                From="0" To="65"
-                                                                Duration="0:0:0.2">
-
-                                                </DoubleAnimation>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </ToggleButton.Triggers>
-                            </ToggleButton>-->
-
+                            
                             <!--//Xóa//-->
                             <Button
                                 Grid.Column="2"
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
+                                IsEnabled="False"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Command="{Binding DeleteCommand, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="5 0 5 0"

@@ -233,6 +233,7 @@
                                 Foreground="#000"
                                 BorderBrush="#C4C4C4"
                                 Margin="5 0 5 0"
+                                IsEnabled="False"
                                 Command="{Binding TourXoaGia, UpdateSourceTrigger=PropertyChanged}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="Xóa">

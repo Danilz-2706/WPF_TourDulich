@@ -63,11 +63,6 @@
                 <adminmanagerview:TypeManager></adminmanagerview:TypeManager>
             </TabItem>
 
-            <!--//Price - manager//-->
-            <TabItem Header="GIÁ" Style="{StaticResource TabItem}">
-                <adminmanagerview:Gia></adminmanagerview:Gia>
-            </TabItem>
-            
             <!--//Cost - manager//-->
             <TabItem Header="CHI PHÍ" Style="{StaticResource TabItem}">
                 <adminmanagerview:ChiPhi></adminmanagerview:ChiPhi>
@@ -81,10 +76,6 @@
             <!--//Staff - manager//-->
             <TabItem Header="NHÂN VIÊN" Style="{StaticResource TabItem}">
                 <adminmanager:NhanVien></adminmanager:NhanVien>
-            </TabItem>
-            <!--//Statistics - manager//-->
-            <TabItem Header="THỐNG KÊ" Style="{StaticResource TabItem}">
-                <adminmanager:StatisticsManager></adminmanager:StatisticsManager>
             </TabItem>
         </TabControl>
         

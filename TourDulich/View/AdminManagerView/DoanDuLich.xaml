@@ -182,7 +182,7 @@
 
                                     <TextBox Style="{StaticResource tblIfo1}"
                                              
-                                             IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                             IsEnabled="False"
                                              
                                              Text="{Binding TenDoan,UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
@@ -197,8 +197,8 @@
                                                 SelectedItem="{Binding TenTour,UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedValue="{Binding TenTour,UpdateSourceTrigger=PropertyChanged}"
                                                 SelectedValuePath="TenGoi"
-                                                IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
-                                                IsEditable="{Binding ElementName=edit, Path=IsChecked}"
+                                                IsEnabled="False"
+                                                IsEditable="False"
                                                 Style="{StaticResource CbblIfo1}"
                                                 materialDesign:HintAssist.HintOpacity=".26"/>
                                 </Grid>
@@ -229,14 +229,14 @@
                                     </Grid.ColumnDefinitions>
                                     <DatePicker
                                         Margin="10 0 5 0"
-                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                        IsEnabled="False"
                                         SelectedDate="{Binding NgayKhoiHanh, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
                                                 Grid.Column="0"
                                                 materialDesign:HintAssist.Hint="Ngày đi"
                                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
                                     <DatePicker
                                         Margin="5 0 10 0"
-                                        IsEnabled="{Binding ElementName=edit, Path=IsChecked}"
+                                        IsEnabled="False"
                                         SelectedDate="{Binding NgayKetThuc, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
 
                                                 Grid.Column="1"
@@ -314,7 +314,6 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <!--//Thêm//-->
 
@@ -331,25 +330,9 @@
                                 <TextBlock Text="Thêm" Style="{StaticResource fontText}"/>
                             </Button>
 
-                            <!--//Sửa//-->
-                            <ToggleButton x:Name="edit"
-                                Grid.Column="1"   
-                                BorderBrush="#C4C4C4"
-                                Background="#C4C4C4"
-                                Foreground="#000"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                Margin="5 0 5 0"
-                                IsEnabled="False"
-                                          
-                                IsChecked="False"
-                                ToolTip="Sửa">
-                                <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
-
-                            </ToggleButton>
-
                             <!--//Xóa//-->
                             <Button
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
@@ -362,7 +345,7 @@
                             </Button>
                             <!--//Xem chi tiết//-->
                             <Button
-                                Grid.Column="3"
+                                Grid.Column="2"
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
@@ -370,7 +353,7 @@
                                 Command="{Binding ShowCommand}"
                                 Margin="5 0 10 0"
                                 ToolTip="Chi tiết đoàn">
-                                <TextBlock Text="Chi tiết đoàn" Style="{StaticResource fontText}"/>
+                                <TextBlock Text="Chi Tiết Đoàn" Style="{StaticResource fontText}"/>
                             </Button>
                         </Grid>
 

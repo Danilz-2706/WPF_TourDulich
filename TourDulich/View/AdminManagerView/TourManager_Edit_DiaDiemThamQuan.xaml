@@ -167,8 +167,7 @@
                                 </Style>
                             </GridView.ColumnHeaderContainerStyle>
                             <GridView.Columns>
-                                <GridViewColumn Width="100" Header="Thứ tự" DisplayMemberBinding="{Binding ThuTu}"></GridViewColumn>
-                                <GridViewColumn Width="150" Header="Tên địa điểm" DisplayMemberBinding="{Binding TenDiaDiem}"></GridViewColumn>
+                                <GridViewColumn Width="250" Header="Tên địa điểm" DisplayMemberBinding="{Binding TenDiaDiem}"></GridViewColumn>
 
                             </GridView.Columns>
                         </GridView>
@@ -207,6 +206,7 @@
                     BorderBrush="#C4C4C4"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="68"
+                    IsEnabled="False"
                     Command="{Binding InsertLocation , UpdateSourceTrigger=PropertyChanged}"
                     CommandParameter="{Binding ElementName=ViewEditLocations}"
                     ToolTip="Xác nhận">

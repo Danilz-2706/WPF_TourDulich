@@ -183,7 +183,6 @@
                                     <TextBlock  Text="Tên Gọi"  Style="{StaticResource tbName}"/>
 
                                     <TextBox
-                                             
                                              IsEnabled="False"
                                               Style="{StaticResource tblIfo1}"
                                              Text="{Binding TenGoi,UpdateSourceTrigger=PropertyChanged}"/>
@@ -224,7 +223,6 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <!--//Thêm//-->
 
@@ -241,24 +239,9 @@
                                 <TextBlock Text="Thêm" Style="{StaticResource fontText}"/>
                             </Button>
 
-                            <!--//Sửa//-->
-                            <ToggleButton x:Name="edit"
-                                Grid.Column="1"   
-                                BorderBrush="#C4C4C4"
-                                Background="#C4C4C4"
-                                Foreground="#000"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                Margin="5 0 5 0"
-                                IsEnabled="False"
-                                Command="{Binding EditTour}"
-                                ToolTip="Sửa">
-                                <TextBlock Text="Sửa" Style="{StaticResource fontText}"/>
-
-                            </ToggleButton>
-
                             <!--//Xóa//-->
                             <Button
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
@@ -270,7 +253,7 @@
                             </Button>
                             <!--//Xem chi tiết//-->
                             <Button
-                                Grid.Column="3"
+                                Grid.Column="2"
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"

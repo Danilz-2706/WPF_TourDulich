@@ -214,6 +214,7 @@
                                 BorderBrush="#C4C4C4"
                                 Background="#C4C4C4"
                                 Foreground="#000"
+                                IsEnabled="False"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 Command="{Binding DeleteCommand, UpdateSourceTrigger=PropertyChanged}"
                                 Margin="5 0 5 0"

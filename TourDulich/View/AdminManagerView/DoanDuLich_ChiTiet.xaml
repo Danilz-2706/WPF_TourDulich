@@ -161,18 +161,16 @@
                         <TextBlock  Text="Chọn Tour"  Style="{StaticResource tbName}"/>
                         <ComboBox
                                 ItemsSource="{Binding ListTour}"
-                                                DisplayMemberPath="TenGoi"
-                                        
-                                                SelectedItem="{Binding SelectedTour,UpdateSourceTrigger=PropertyChanged}"
-                                                SelectedValue="{Binding SelectedTour.TenGoi,UpdateSourceTrigger=PropertyChanged}"
-                                                SelectedValuePath="TenGoi"
-                                IsEditable="False"
+                                DisplayMemberPath="TenGoi"
+                                SelectedItem="{Binding SelectedTour,UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValue="{Binding SelectedTour.TenGoi,UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="TenGoi"
                                 IsEnabled="False"
                                 Style="{StaticResource CbblIfo1}"
                                 materialDesign:HintAssist.HintOpacity=".26">
                         </ComboBox>
                     </Grid>
-
+                    
                     <!--//NGÀY ĐI - NGÀY VỀ//-->
                     <Grid Margin="0 5 0 8">
                         <Grid.ColumnDefinitions>
@@ -180,27 +178,26 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <DatePicker
-                                        Margin="10 0 5 0" 
-                        IsEnabled="False"
-                                        SelectedDate="{Binding NgayKhoiHanh, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
-                                                Grid.Column="0"
-                                                materialDesign:HintAssist.Hint="Ngày đi"
-                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
+                                Margin="10 0 5 0" 
+                                SelectedDate="{Binding NgayKhoiHanh, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                Grid.Column="0"
+                                IsEnabled="False"
+                                materialDesign:HintAssist.Hint="Ngày đi"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" IsTodayHighlighted="False" />
                         <DatePicker
-                                        Margin="5 0 10 0"
-                                        IsEnabled="False"
-                                        SelectedDate="{Binding NgayKetThuc, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
-
-                                                Grid.Column="1"
-                                                materialDesign:HintAssist.Hint="Ngày về"
-                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                Margin="5 0 10 0"
+                                SelectedDate="{Binding NgayKetThuc, StringFormat='dd/MM/yyyy',UpdateSourceTrigger=PropertyChanged}"
+                                Grid.Column="1"
+                                IsEnabled="False"
+                                materialDesign:HintAssist.Hint="Ngày về"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </Grid>
 
                     <!--//Giá//-->
                     <Grid Margin="0 5 0 8">
                         <TextBlock  Text="Giá"  Style="{StaticResource tbName}"/>
                         <TextBox Style="{StaticResource tblIfo1}"
-                             Text="{Binding SelectedTour.ThanhTien,UpdateSourceTrigger = PropertyChanged}" 
+                             Text="{Binding ThanhTien,UpdateSourceTrigger = PropertyChanged}" 
                              IsEnabled="False" 
                              />
                     </Grid>
@@ -474,3 +471,78 @@
 
     </Grid>
 </Window>
+    <!--Đoàn đổi thời gian chạy-->
+<!--<Grid Margin="0 5 0 8">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"></ColumnDefinition>
+        <ColumnDefinition Width="6*"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <ToggleButton
+                            Name="checkDay"
+                            Style="{StaticResource MaterialDesignActionToggleButton}" 
+                            HorizontalAlignment="Left"
+                            Height="24"
+                            Width="24"
+                            Margin="10 0 0 0">
+
+        <ToggleButton.Content>
+            <materialDesign:PackIcon
+                                        Kind="CheckboxBlankCircleOutline"/>
+        </ToggleButton.Content>
+        <materialDesign:ToggleButtonAssist.OnContent>
+            <materialDesign:PackIcon
+                                        Kind="CheckboxMarkedCircle" />
+        </materialDesign:ToggleButtonAssist.OnContent>
+
+        <ToggleButton.Triggers>
+            --><!--// Unchecked //--><!--
+            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                <BeginStoryboard>
+                    <Storyboard x:Name="HideStackPanel">
+                        <DoubleAnimation Storyboard.TargetName ="listDay"
+                                                                Storyboard.TargetProperty="Height"
+                                                                BeginTime="0:0:0"
+                                                                From="150" To="0"
+                                                                Duration="0:0:0.2">
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
+            --><!--// Checked //--><!--
+            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                <BeginStoryboard>
+                    <Storyboard x:Name="ShowStackPanel">
+                        <DoubleAnimation Storyboard.TargetName ="listDay"
+                                                                Storyboard.TargetProperty="Height"
+                                                                BeginTime="0:0:0"
+                                                                From="0" To="150"
+                                                                Duration="0:0:0.3">
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
+        </ToggleButton.Triggers>
+    </ToggleButton>
+    <TextBlock IsEnabled="{Binding Path=IsChecked, ElementName=checkDay}" Grid.Column="1" Text="Đổi ngày khởi hành - kết thúc của đoàn" VerticalAlignment="Center"/>
+</Grid>
+
+<ListView Name="listDay" ItemsSource="{Binding SelectedTour.GiaTours}" Height="0" MaxHeight="150" SelectedItem="{Binding SelectedChoosedGia,UpdateSourceTrigger=PropertyChanged}">
+    <ListView.View>
+        <GridView AllowsColumnReorder="True">
+            <GridView.ColumnHeaderContainerStyle>
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="Height" Value="24"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                </Style>
+            </GridView.ColumnHeaderContainerStyle>
+            <GridView.Columns>
+                <GridViewColumn Width="92" Header="Bắt đầu" DisplayMemberBinding="{Binding ThoiGianBatDau, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                <GridViewColumn Width="92" Header="Kết thúc" DisplayMemberBinding="{Binding ThoiGianKetThuc, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                <GridViewColumn Width="92" Header="Thành tiền" DisplayMemberBinding="{Binding ThanhTien}"></GridViewColumn>
+            </GridView.Columns>
+        </GridView>
+    </ListView.View>
+</ListView>-->
