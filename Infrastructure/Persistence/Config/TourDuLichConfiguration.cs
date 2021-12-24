@@ -14,7 +14,7 @@ namespace Infrastructure.Persistence
             builder.HasKey(tour => tour.MaTour);
             builder.HasOne(tour => tour.LoaiHinh).WithMany(lh => lh.TourDuLiches).HasForeignKey(tour => tour.MaLoaiHinh);
             builder.HasData(
-                new TourDuLich { MaTour = 1, TenGoi = "Sài Gòn - Ninh Thuận", DacDiem = "Vui", MaLoaiHinh = 1  }
+                new TourDuLich { MaTour = 1, TenGoi = "Sài Gòn - Hà Nội", DacDiem = "Vui", MaLoaiHinh = 1 }
                 );
 
             //Many-to-Many with Địa Điểm

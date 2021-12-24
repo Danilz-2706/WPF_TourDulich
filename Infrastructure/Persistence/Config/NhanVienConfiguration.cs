@@ -12,10 +12,10 @@ namespace Infrastructure.Persistence
             builder.HasKey(nv => nv.MaNhanVien);
             builder.Ignore(nv => nv.NhiemVu);
             builder.HasData(
-                new NhanVien { MaNhanVien = 1, TenNhanVien = "An" },
-                new NhanVien { MaNhanVien = 2, TenNhanVien = "Đạt" },
-                new NhanVien { MaNhanVien = 3, TenNhanVien = "Nhân" },
-                new NhanVien { MaNhanVien = 4, TenNhanVien = "Lâm" }
+                new NhanVien { MaNhanVien = 1, TenNhanVien = "Trần Phước An" },
+                new NhanVien { MaNhanVien = 2, TenNhanVien = "Đinh Nguyễn Tấn Đạt" },
+                new NhanVien { MaNhanVien = 3, TenNhanVien = "Trương Đạt Nhân" },
+                new NhanVien { MaNhanVien = 4, TenNhanVien = "Lương Vĩ Lâm" }
                 ); ;
         }
     }

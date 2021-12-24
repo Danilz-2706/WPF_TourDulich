@@ -10,7 +10,7 @@ namespace Infrastructure.Persistence
         {
             builder.ToTable("NoiDungTour");
             builder.HasKey(ndt => ndt.MaDoan);
-            builder.HasData(new NoiDungTour {MaDoan=1,DiaDiemThamQuan="Ai biết",KhachSan="5 sao",HanhTrinh="Siêu cấp" });
+            builder.HasData(new NoiDungTour { MaDoan = 1, DiaDiemThamQuan = "Danh lam thắng cảnh", KhachSan = "Khách sạn Hồ Thị Điểm", HanhTrinh = "Xuyên Việt" });
         }
     }
 }
